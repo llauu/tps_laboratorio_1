@@ -5,19 +5,16 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/TP_1.c \
-../src/biblioteca.c \
 ../src/ingresosDeDatos.c \
 ../src/menu.c 
 
 C_DEPS += \
 ./src/TP_1.d \
-./src/biblioteca.d \
 ./src/ingresosDeDatos.d \
 ./src/menu.d 
 
 OBJS += \
 ./src/TP_1.o \
-./src/biblioteca.o \
 ./src/ingresosDeDatos.o \
 ./src/menu.o 
 
@@ -34,7 +31,7 @@ src/%.o: ../src/%.c src/subdir.mk
 clean: clean-src
 
 clean-src:
-	-$(RM) ./src/TP_1.d ./src/TP_1.o ./src/biblioteca.d ./src/biblioteca.o ./src/ingresosDeDatos.d ./src/ingresosDeDatos.o ./src/menu.d ./src/menu.o
+	-$(RM) ./src/TP_1.d ./src/TP_1.o ./src/ingresosDeDatos.d ./src/ingresosDeDatos.o ./src/menu.d ./src/menu.o
 
 .PHONY: clean-src
 

@@ -10,10 +10,8 @@ DIV C
 #include <stdlib.h>
 #include "ingresosDeDatos.h"
 #include "menu.h"
-#define SIZE 10
 
 int main(void) {
-	char liga[SIZE];
 	int opcion;
 
 	float gastoHospedaje;
@@ -37,7 +35,6 @@ int main(void) {
 
 		EjecutarOpcionElegida(opcion, &gastoHospedaje, &gastoComida, &gastoTransporte, &arqueros, &defensas, &mediocampistas, &delanteros);
 	}while(opcion != 5);
-
 
 	return EXIT_SUCCESS;
 }

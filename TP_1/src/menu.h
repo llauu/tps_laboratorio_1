@@ -16,5 +16,10 @@ int ImprimirJugadores(int arqueros, int defensas, int mediocampistas, int delant
 void EjecutarOpcionElegida(int opcion, float* gastoHospedaje, float* gastoComida, float* gastoTransporte, int* arqueros, int* defensas, int* mediocampistas, int* delanteros);
 
 void CargarCostosMantenimiento(float* gastoHospedaje, float* gastoComida, float* gastoTransporte);
+void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int* pDelanteros);
+
+void PedirDatosDelJugador(int* numeroCamiseta, char confederacion[], int tam);
+int PedirConfederacion(void);
+void ContadorConfederaciones(int confederacion, int* pAFC, int* pCAF, int* pCONCACAF, int* pCONMEBOL, int* pUEFA, int* pOFC);
 
 #endif /* MENU_H_ */
