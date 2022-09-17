@@ -21,6 +21,12 @@ int main(void) {
 	int defensas;
 	int mediocampistas;
 	int delanteros;
+	int contadorAFC;
+	int contadorCAF;
+	int contadorCONCACAF;
+	int contadorCONMEBOL;
+	int contadorUEFA;
+	int contadorOFC;
 
 	gastoHospedaje = 0;
 	gastoComida = 0;
