@@ -4,21 +4,12 @@
 #include "menu.h"
 #include "ingresosDeDatos.h"
 
-/// @brief
-///
-/// @param gastoHospedaje
-/// @param gastoComida
-/// @param gastoTransporte
-/// @param arqueros
-/// @param defensas
-/// @param mediocampistas
-/// @param delanteros
-/// @return
+
 int Menu(float gastoHospedaje, float gastoComida, float gastoTransporte, int arqueros, int defensas, int mediocampistas, int delanteros){
 	int opcion;
 
 	printf("\n             Menu Principal\n");
-	printf("\n1.Ingreso de los costos de Mantenimiento");
+	printf("\n1.Ingreso de los costos de mantenimiento");
 	ImprimirCostosMantenimiento(gastoHospedaje, gastoComida, gastoTransporte);
 
 	printf("\n2.Carga de jugadores");
@@ -55,14 +46,14 @@ int ImprimirJugadores(int arqueros, int defensas, int mediocampistas, int delant
 }
 
 
-void EjecutarOpcionElegida(int opcion, float* gastoHospedaje, float* gastoComida, float* gastoTransporte, int* arqueros, int* defensas, int* mediocampistas, int* delanteros){
+void EjecutarOpcionElegida(int opcion, float* gastoHospedaje, float* gastoComida, float* gastoTransporte, int* arqueros, int* defensas, int* mediocampistas, int* delanteros, int* confederacion){
 	switch(opcion){
 		case 1:
 			CargarCostosMantenimiento(gastoHospedaje, gastoComida, gastoTransporte);
 			break;
 
 		case 2:
-			CargaDeJugadores(arqueros, defensas, mediocampistas, delanteros);
+			CargaDeJugadores(arqueros, defensas, mediocampistas, delanteros, confederacion);
 			break;
 
 		case 3:
@@ -82,77 +73,105 @@ void EjecutarOpcionElegida(int opcion, float* gastoHospedaje, float* gastoComida
 }
 
 
-void CargarCostosMantenimiento(float* gastoHospedaje, float* gastoComida, float* gastoTransporte){
+void CargarCostosMantenimiento(float* pGastoHospedaje, float* pGastoComida, float* pGastoTransporte){
 	int opcion;
+	float gastoHospedaje = *pGastoHospedaje;
+	float gastoComida = *pGastoComida;
+	float gastoTransporte = *pGastoTransporte;
 
-	printf("\nIngreso de los costos de Mantenimiento");
-	printf("\n 1.Costo de Hospedaje");
-	printf("\n 2.Costo de Comida");
-	printf("\n 3.Costo de Transporte");
-	printf("\n 4.Salir");
+	do{
+		printf("\nIngreso de los costos de mantenimiento");
+		printf("\n 1.Costo de Hospedaje -> $%.2f", gastoHospedaje);
+		printf("\n 2.Costo de Comida -> $%.2f", gastoComida);
+		printf("\n 3.Costo de Transporte -> $%.2f", gastoTransporte);
+		printf("\n 4.Volver al menu principal");
 
-	getInt(&opcion, "\n\nIngrese el costo que desea cargar: ", "\n[ERROR] La opcion que ingreso no es valida.", 1, 4);
+		getInt(&opcion, "\n\nIngrese el costo que desea cargar: ", "\n[ERROR] La opcion que ingreso no es valida.", 1, 4);
 
-	switch(opcion){
-		case 1:
-			getFloat(*(&gastoHospedaje), "\nIngrese el costo de hospedaje: ", "\n[ERROR] El costo que ingreso no es valido.", 0, 715000000);
-			break;
+		switch(opcion){
+			case 1:
+				getFloat(&gastoHospedaje, "\nIngrese el costo de hospedaje: ", "\n[ERROR] El costo que ingreso no es valido.", 0, 715000000);
+				break;
 
-		case 2:
-			getFloat(*(&gastoComida), "\nIngrese el costo de comida: ", "\n[ERROR] El costo que ingreso no es valido.", 0, 715000000);
-			break;
+			case 2:
+				getFloat(&gastoComida, "\nIngrese el costo de comida: ", "\n[ERROR] El costo que ingreso no es valido.", 0, 715000000);
+				break;
 
-		case 3:
-			getFloat(*(&gastoTransporte), "\nIngrese el costo de transporte: ", "\n[ERROR] El costo que ingreso no es valido.", 0, 715000000);
-			break;
+			case 3:
+				getFloat(&gastoTransporte, "\nIngrese el costo de transporte: ", "\n[ERROR] El costo que ingreso no es valido.", 0, 715000000);
+				break;
+		}
 
-		case 4:
-			printf("\nSaliendo...");
-			break;
-	}
+		if(gastoHospedaje != 0 && gastoComida != 0 && gastoTransporte != 0){
+			printf("\nTodos los costos de mantenimiento fueron ingresados con exito!");
+			printf("\nVolviendo al menu principal...\n");
 
+			opcion = 4;
+		}
+
+	}while(opcion != 4);
+
+	*pGastoHospedaje = gastoHospedaje;
+	*pGastoComida = gastoComida;
+	*pGastoTransporte = gastoTransporte;
 }
 
 
-void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int* pDelanteros){
+void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int* pDelanteros, int* confederacion){
 	int opcion;
 
-	printf("\nCarga de jugadores");
-	printf("\n 1.Arqueros");
-	printf("\n 2.Defensores");
-	printf("\n 3.Mediocampistas");
-	printf("\n 4.Delanteros");
-	printf("\n 5.Salir");
+	int contadorArqueros = 0;
+	int contadorDefensas = 0;
+	int contadorMediocampistas = 0;
+	int contadorDelanteros = 0;
 
-	getInt(&opcion, "\n\nIngrese la posicion del jugador que desea cargar: ", "\n[ERROR] La opcion que ingreso no es valida.", 1, 5);
+	do{
+		printf("\nCarga de jugadores");
+		printf("\n 1.Arqueros -> %d", contadorArqueros);
+		printf("\n 2.Defensores -> %d", contadorDefensas);
+		printf("\n 3.Mediocampistas -> %d", contadorMediocampistas);
+		printf("\n 4.Delanteros -> %d", contadorDelanteros);
+		printf("\n 5.Volver al menu principal");
 
-	switch(opcion){
-		case 1:
-			*pArqueros += 1;
-			break;
+		getInt(&opcion, "\n\nIngrese la posicion del jugador que desea cargar: ", "\n[ERROR] La opcion que ingreso no es valida.", 1, 5);
 
-		case 2:
-			*pDefensas += 1;
-			break;
+		switch(opcion){
+			case 1:
+				contadorArqueros++;
+				PedirDatosDelJugador(confederacion);
+				break;
 
-		case 3:
-			*pMediocampistas += 1;
-			break;
+			case 2:
+				contadorDefensas++;
+				PedirDatosDelJugador(confederacion);
+				break;
 
-		case 4:
-			*pDelanteros += 1;
-			break;
+			case 3:
+				contadorMediocampistas++;
+				PedirDatosDelJugador(confederacion);
+				break;
 
-		case 5:
-			printf("\nSaliendo...");
-			break;
-	}
+			case 4:
+				contadorDelanteros++;
+				PedirDatosDelJugador(confederacion);
+				break;
+		}
+	}while(opcion != 5);
+
+	*pArqueros = contadorArqueros;
+	*pDefensas = contadorDefensas;
+	*pMediocampistas = contadorMediocampistas;
+	*pDelanteros = contadorDelanteros;
 }
 
 
-void PedirDatosDelJugador(int* numeroCamiseta){
+void PedirDatosDelJugador(int* confederacion){
+	int numeroCamiseta;
 	getInt(&numeroCamiseta, "\nIngrese el numero de camiseta del jugador: ", "\n[ERROR] El numero que ingreso no es valido.", 1, 99);
+
+	*confederacion = PedirConfederacion();
 }
+
 
 int PedirConfederacion(void){
 	int opcion;
@@ -198,9 +217,6 @@ void ContadorConfederaciones(int confederacion, int* pAFC, int* pCAF, int* pCONC
 		break;
 	}
 }
-
-
-
 
 
 

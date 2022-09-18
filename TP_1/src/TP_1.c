@@ -21,6 +21,7 @@ int main(void) {
 	int defensas;
 	int mediocampistas;
 	int delanteros;
+	int confederacion;
 	int contadorAFC;
 	int contadorCAF;
 	int contadorCONCACAF;
@@ -39,7 +40,7 @@ int main(void) {
 	do{
 		opcion = Menu(gastoHospedaje, gastoComida, gastoTransporte, arqueros, defensas, mediocampistas, delanteros);
 
-		EjecutarOpcionElegida(opcion, &gastoHospedaje, &gastoComida, &gastoTransporte, &arqueros, &defensas, &mediocampistas, &delanteros);
+		EjecutarOpcionElegida(opcion, &gastoHospedaje, &gastoComida, &gastoTransporte, &arqueros, &defensas, &mediocampistas, &delanteros, &confederacion);
 	}while(opcion != 5);
 
 	return EXIT_SUCCESS;
