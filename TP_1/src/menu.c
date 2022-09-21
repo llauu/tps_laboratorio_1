@@ -3,10 +3,7 @@
 #include <stdlib.h>
 #include "menu.h"
 #include "ingresosDeDatos.h"
-#define MAX_ARQUEROS 1
-#define MAX_DEFENSAS 1
-#define MAX_MEDIOS 1
-#define MAX_DELANTEROS 1
+#include "calculos.h"
 
 
 int Menu(float gastoHospedaje, float gastoComida, float gastoTransporte, int arqueros, int defensas, int mediocampistas, int delanteros){
@@ -80,17 +77,33 @@ int ValidarOpcionElegida(int opcion, float gastoHospedaje, float gastoComida, fl
 }
 
 
-void EjecutarOpcionElegida(int opcion, float* pGastoHospedaje, float* pGastoComida, float* pGastoTransporte, int* pArqueros, int* pDefensas, int* pMediocampistas, int* pDelanteros, int* pAFC, int* pCAF, int* pCONCACAF, int* pCONMEBOL, int* pUEFA, int* pOFC, int* pCalculosHechos){
+void EjecutarOpcionElegida(int opcion, float* pGastoHospedaje, float* pGastoComida, float* pGastoTransporte, int* pArqueros, int* pDefensas, int* pMediocampistas, int* pDelanteros, int* pAFC, int* pCAF, int* pCONCACAF, int* pCONMEBOL, int* pUEFA, int* pOFC, int* pCalculosHechos, float* pPromedioAFC, float* pPromedioCAF, float* pPromedioCONCACAF, float* pPromedioCONMEBOL, float* pPromedioUEFA, float* pPromedioOFC, float* pCostoMantenimiento){
 	int puedeContinuar;
 
 	int calculosHechos = *pCalculosHechos;
 	float gastoHospedaje = *pGastoHospedaje;
 	float gastoComida = *pGastoComida;
 	float gastoTransporte = *pGastoTransporte;
+
 	int arqueros = *pArqueros;
 	int defensas = *pDefensas;
 	int mediocampistas = *pMediocampistas;
 	int delanteros = *pDelanteros;
+
+	int contadorAFC = *pAFC;
+	int contadorCAF = *pCAF;
+	int contadorCONCACAF = *pCONCACAF;
+	int contadorCONMEBOL = *pCONMEBOL;
+	int contadorUEFA = *pUEFA;
+	int contadorOFC = *pOFC;
+	float promedioAFC = *pPromedioAFC;
+	float promedioCAF = *pPromedioCAF;
+	float promedioCONCACAF = *pPromedioCONCACAF;
+	float promedioCONMEBOL = *pPromedioCONMEBOL;
+	float promedioUEFA = *pPromedioUEFA;
+	float promedioOFC = *pPromedioOFC;
+
+	float costoMantenimiento = *pCostoMantenimiento;
 
 	puedeContinuar = ValidarOpcionElegida(opcion, gastoHospedaje, gastoComida, gastoTransporte, arqueros, defensas, mediocampistas, delanteros, calculosHechos);
 
@@ -104,17 +117,27 @@ void EjecutarOpcionElegida(int opcion, float* pGastoHospedaje, float* pGastoComi
 			break;
 
 		case 3:
-			*pCalculosHechos = 1;
-
 			if(puedeContinuar == 1){
-				printf("\nEntraste al 3");
+				CalcularTodasConfederaciones(MAX_JUGADORES, contadorAFC, contadorCAF, contadorCONCACAF, contadorCONMEBOL, contadorUEFA, contadorOFC, &promedioAFC, &promedioCAF, &promedioCONCACAF, &promedioCONMEBOL, &promedioUEFA, &promedioOFC);
+
+				costoMantenimiento = CalcularCostoMantenimiento(gastoHospedaje, gastoComida, gastoTransporte);
+
+				printf("\nLos calculos fueron realizados con exito!\n");
+				*pCalculosHechos = 1;
 			}
 
 			break;
 
 		case 4:
 			if(puedeContinuar == 1){
-				printf("\nEntraste al 4");
+				printf("\nPromedio de jugadores en AFC: %.2f", promedioAFC);
+				printf("\nPromedio de jugadores en CAF: %.2f", promedioCAF);
+				printf("\nPromedio de jugadores en CONCACAF: %.2f", promedioCONCACAF);
+				printf("\nPromedio de jugadores en CONMEBOL: %.2f", promedioCONMEBOL);
+				printf("\nPromedio de jugadores en UEFA: %.2f", promedioUEFA);
+				printf("\nPromedio de jugadores en OFC: %.2f", promedioOFC);
+
+				printf("\nEl costo de mantenimiento es de: $%.2f\n", costoMantenimiento);
 			}
 
 			break;
@@ -123,6 +146,14 @@ void EjecutarOpcionElegida(int opcion, float* pGastoHospedaje, float* pGastoComi
 			printf("Saliendo...");
 			break;
 	}
+
+	*pPromedioAFC = promedioAFC;
+	*pPromedioCAF = promedioCAF;
+	*pPromedioCONCACAF = promedioCONCACAF;
+	*pPromedioCONMEBOL = promedioCONMEBOL;
+	*pPromedioUEFA = promedioUEFA;
+	*pPromedioOFC = promedioOFC;
+	*pCostoMantenimiento = costoMantenimiento;
 }
 
 
@@ -287,7 +318,6 @@ int ValidarCantidadJugadores(int contador, int maximo){
 
 	return retorno;
 }
-
 
 
 void PedirDatosDelJugador(int* pConfederacion){

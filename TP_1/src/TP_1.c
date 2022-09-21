@@ -8,7 +8,6 @@ DIV C
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "ingresosDeDatos.h"
 #include "menu.h"
 
 int main(void) {
@@ -16,14 +15,13 @@ int main(void) {
 	int opcion;
 	int calculosHechos = 0;
 
-	float gastoHospedaje;
-	float gastoComida;
-	float gastoTransporte;
-	int arqueros;
-	int defensas;
-	int mediocampistas;
-	int delanteros;
-
+	float gastoHospedaje = 0;
+	float gastoComida = 0;
+	float gastoTransporte = 0;
+	int arqueros = 0;
+	int defensas = 0;
+	int mediocampistas = 0;
+	int delanteros = 0;
 
 	int contadorAFC = 0;
 	int contadorCAF = 0;
@@ -32,22 +30,23 @@ int main(void) {
 	int contadorUEFA = 0;
 	int contadorOFC = 0;
 
-	gastoHospedaje = 0;
-	gastoComida = 0;
-	gastoTransporte = 0;
-	arqueros = 0;
-	defensas= 0;
-	mediocampistas = 0;
-	delanteros = 0;
+	float promedioAFC;
+	float promedioCAF;
+	float promedioCONCACAF;
+	float promedioCONMEBOL;
+	float promedioUEFA;
+	float promedioOFC;
+
+	float costoMantenimiento;
 
 	do{
 		opcion = Menu(gastoHospedaje, gastoComida, gastoTransporte, arqueros, defensas, mediocampistas, delanteros);
 
-		EjecutarOpcionElegida(opcion, &gastoHospedaje, &gastoComida, &gastoTransporte, &arqueros, &defensas, &mediocampistas, &delanteros, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC, &calculosHechos);
+		EjecutarOpcionElegida(opcion, &gastoHospedaje, &gastoComida, &gastoTransporte, &arqueros, &defensas, &mediocampistas, &delanteros, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC, &calculosHechos, &promedioAFC, &promedioCAF, &promedioCONCACAF, &promedioCONMEBOL, &promedioUEFA, &promedioOFC, &costoMantenimiento);
 
 	}while(opcion != 5);
 
-	printf("\nAFC: %d\nCAF: %d\nCONCACAF: %d\nCONMEBOL: %d\nUEFA: %d\nOFC: %d", contadorAFC, contadorCAF, contadorCONCACAF, contadorCONMEBOL, contadorUEFA, contadorOFC);
+//	printf("\nAFC: %d\nCAF: %d\nCONCACAF: %d\nCONMEBOL: %d\nUEFA: %d\nOFC: %d", contadorAFC, contadorCAF, contadorCONCACAF, contadorCONMEBOL, contadorUEFA, contadorOFC);
 
 
 	return EXIT_SUCCESS;
