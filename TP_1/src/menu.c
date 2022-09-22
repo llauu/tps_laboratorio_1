@@ -1,9 +1,7 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "menu.h"
 #include "ingresosDeDatos.h"
-#include "calculos.h"
 
 
 int Menu(float gastoHospedaje, float gastoComida, float gastoTransporte, int arqueros, int defensas, int mediocampistas, int delanteros){
@@ -47,113 +45,22 @@ int ImprimirJugadores(int arqueros, int defensas, int mediocampistas, int delant
 }
 
 
-int ValidarOpcionElegida(int opcion, float gastoHospedaje, float gastoComida, float gastoTransporte, int arqueros, int defensas, int mediocampistas, int delanteros, int calculosHechos){
+int ValidarOpcionElegida(float gastoHospedaje, float gastoComida, float gastoTransporte, int arqueros, int defensas, int mediocampistas, int delanteros){
 	int puedeContinuar = 0;
 
-	if(opcion == 3){
-		if(gastoHospedaje != 0 && gastoComida != 0 && gastoTransporte != 0){
-			if(arqueros == MAX_ARQUEROS && defensas == MAX_DEFENSAS && mediocampistas == MAX_MEDIOS && delanteros == MAX_DELANTEROS){
-				puedeContinuar = 1;
-			}
-			else{
-				printf("\n[ERROR] Tenes que cargar a todos los jugadores antes de realizar los calculos.\n");
-			}
-		}
-		else{
-			printf("\n[ERROR] Tenes que cargar los gastos antes de realizar los calculos.\n");
-		}
-	}
-
-	if(opcion == 4){
-		if(calculosHechos == 1){
+	if(gastoHospedaje != 0 && gastoComida != 0 && gastoTransporte != 0){
+		if(arqueros == MAX_ARQUEROS && defensas == MAX_DEFENSAS && mediocampistas == MAX_MEDIOS && delanteros == MAX_DELANTEROS){
 			puedeContinuar = 1;
 		}
 		else{
-			printf("\n[ERROR] Tenes que realizar los calculos antes de informar los resultados.\n");
+			printf("\n[ERROR] Tenes que cargar a todos los jugadores antes de realizar los calculos.\n");
 		}
+	}
+	else{
+		printf("\n[ERROR] Tenes que cargar los gastos antes de realizar los calculos.\n");
 	}
 
 	return puedeContinuar;
-}
-
-
-void EjecutarOpcionElegida(int opcion, float* pGastoHospedaje, float* pGastoComida, float* pGastoTransporte, int* pArqueros, int* pDefensas, int* pMediocampistas, int* pDelanteros, int* pAFC, int* pCAF, int* pCONCACAF, int* pCONMEBOL, int* pUEFA, int* pOFC, int* pCalculosHechos, float* pPromedioAFC, float* pPromedioCAF, float* pPromedioCONCACAF, float* pPromedioCONMEBOL, float* pPromedioUEFA, float* pPromedioOFC, float* pCostoMantenimiento){
-	int puedeContinuar;
-
-	int calculosHechos = *pCalculosHechos;
-	float gastoHospedaje = *pGastoHospedaje;
-	float gastoComida = *pGastoComida;
-	float gastoTransporte = *pGastoTransporte;
-
-	int arqueros = *pArqueros;
-	int defensas = *pDefensas;
-	int mediocampistas = *pMediocampistas;
-	int delanteros = *pDelanteros;
-
-	int contadorAFC = *pAFC;
-	int contadorCAF = *pCAF;
-	int contadorCONCACAF = *pCONCACAF;
-	int contadorCONMEBOL = *pCONMEBOL;
-	int contadorUEFA = *pUEFA;
-	int contadorOFC = *pOFC;
-	float promedioAFC = *pPromedioAFC;
-	float promedioCAF = *pPromedioCAF;
-	float promedioCONCACAF = *pPromedioCONCACAF;
-	float promedioCONMEBOL = *pPromedioCONMEBOL;
-	float promedioUEFA = *pPromedioUEFA;
-	float promedioOFC = *pPromedioOFC;
-
-	float costoMantenimiento = *pCostoMantenimiento;
-
-	puedeContinuar = ValidarOpcionElegida(opcion, gastoHospedaje, gastoComida, gastoTransporte, arqueros, defensas, mediocampistas, delanteros, calculosHechos);
-
-	switch(opcion){
-		case 1:
-			CargarCostosMantenimiento(pGastoHospedaje, pGastoComida, pGastoTransporte);
-			break;
-
-		case 2:
-			CargaDeJugadores(pArqueros, pDefensas, pMediocampistas, pDelanteros, pAFC, pCAF, pCONCACAF, pCONMEBOL, pUEFA, pOFC);
-			break;
-
-		case 3:
-			if(puedeContinuar == 1){
-				CalcularTodasConfederaciones(MAX_JUGADORES, contadorAFC, contadorCAF, contadorCONCACAF, contadorCONMEBOL, contadorUEFA, contadorOFC, &promedioAFC, &promedioCAF, &promedioCONCACAF, &promedioCONMEBOL, &promedioUEFA, &promedioOFC);
-
-				costoMantenimiento = CalcularCostoMantenimiento(gastoHospedaje, gastoComida, gastoTransporte);
-
-				printf("\nLos calculos fueron realizados con exito!\n");
-				*pCalculosHechos = 1;
-			}
-
-			break;
-
-		case 4:
-			if(puedeContinuar == 1){
-				printf("\nPromedio de jugadores en AFC: %.2f", promedioAFC);
-				printf("\nPromedio de jugadores en CAF: %.2f", promedioCAF);
-				printf("\nPromedio de jugadores en CONCACAF: %.2f", promedioCONCACAF);
-				printf("\nPromedio de jugadores en CONMEBOL: %.2f", promedioCONMEBOL);
-				printf("\nPromedio de jugadores en UEFA: %.2f", promedioUEFA);
-				printf("\nPromedio de jugadores en OFC: %.2f", promedioOFC);
-
-				printf("\nEl costo de mantenimiento es de: $%.2f\n", costoMantenimiento);
-			}
-
-			break;
-
-		case 5:
-			printf("Saliendo...");
-			break;
-	}
-
-	*pPromedioAFC = promedioAFC;
-	*pPromedioCAF = promedioCAF;
-	*pPromedioCONCACAF = promedioCONCACAF;
-	*pPromedioCONMEBOL = promedioCONMEBOL;
-	*pPromedioUEFA = promedioUEFA;
-	*pPromedioOFC = promedioOFC;
-	*pCostoMantenimiento = costoMantenimiento;
 }
 
 
@@ -351,35 +258,42 @@ int PedirConfederacion(void){
 
 void ContadorConfederaciones(int confederacion, int* pAFC, int* pCAF, int* pCONCACAF, int* pCONMEBOL, int* pUEFA, int* pOFC){
 	switch(confederacion){
-	case 1:
+	case AFC:
 		*pAFC += 1;
 		break;
 
-	case 2:
+	case CAF:
 		*pCAF += 1;
 		break;
 
-	case 3:
+	case CONCACAF:
 		*pCONCACAF += 1;
 		break;
 
-	case 4:
+	case CONMEBOL:
 		*pCONMEBOL += 1;
 		break;
 
-	case 5:
+	case UEFA:
 		*pUEFA += 1;
 		break;
 
-	case 6:
+	case OFC:
 		*pOFC += 1;
 		break;
 	}
 }
 
 
+int ChequearMayoriaUEFA(float promedioAFC, float promedioCAF, float promedioCONCACAF, float promedioCONMEBOL, float promedioUEFA, float promedioOFC){
+	int mayoriaUEFA = 0;
 
+	if(promedioUEFA > promedioAFC && promedioUEFA > promedioCAF && promedioUEFA > promedioCONCACAF && promedioUEFA > promedioCONMEBOL && promedioUEFA > promedioOFC){
+		mayoriaUEFA = 1;
+	}
 
+	return mayoriaUEFA;
+}
 
 
 

@@ -42,7 +42,25 @@ float CalcularCostoMantenimiento(float gastoHospedaje, float gastoComida, float 
 }
 
 
+int CalcularAumento(float costo, int porcentajeAumento, float* pAumento, float* pCostoConAumento){
+	int retorno;
+	float aumento;
+	float costoConAumento;
 
+	retorno = -1;
+
+	if(pAumento != NULL && pCostoConAumento != NULL){
+		aumento = costo * porcentajeAumento / 100;
+		costoConAumento = costo + aumento;
+
+		*pAumento = aumento;
+		*pCostoConAumento = costoConAumento;
+
+		retorno = 0;
+	}
+
+	return retorno;
+}
 
 
 

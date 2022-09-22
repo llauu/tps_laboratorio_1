@@ -9,11 +9,15 @@ DIV C
 #include <stdio.h>
 #include <stdlib.h>
 #include "menu.h"
+#include "calculos.h"
+
 
 int main(void) {
 	setbuf(stdout, NULL);
 	int opcion;
 	int calculosHechos = 0;
+	int puedeContinuar;
+	int mayoriaUEFA;
 
 	float gastoHospedaje = 0;
 	float gastoComida = 0;
@@ -38,16 +42,71 @@ int main(void) {
 	float promedioOFC;
 
 	float costoMantenimiento;
+	float costoMantenimientoAumento;
+	int porcentajeAumento = 35;
+	float aumento;
 
 	do{
 		opcion = Menu(gastoHospedaje, gastoComida, gastoTransporte, arqueros, defensas, mediocampistas, delanteros);
 
-		EjecutarOpcionElegida(opcion, &gastoHospedaje, &gastoComida, &gastoTransporte, &arqueros, &defensas, &mediocampistas, &delanteros, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC, &calculosHechos, &promedioAFC, &promedioCAF, &promedioCONCACAF, &promedioCONMEBOL, &promedioUEFA, &promedioOFC, &costoMantenimiento);
+		switch(opcion){
+			case 1:
+				CargarCostosMantenimiento(&gastoHospedaje, &gastoComida, &gastoTransporte);
+				break;
+
+			case 2:
+				CargaDeJugadores(&arqueros, &defensas, &mediocampistas, &delanteros, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC);
+				break;
+
+			case 3:
+				puedeContinuar = ValidarOpcionElegida(gastoHospedaje, gastoComida, gastoTransporte, arqueros, defensas, mediocampistas, delanteros);
+
+				if(puedeContinuar == 1){
+					CalcularTodasConfederaciones(MAX_JUGADORES, contadorAFC, contadorCAF, contadorCONCACAF, contadorCONMEBOL, contadorUEFA, contadorOFC, &promedioAFC, &promedioCAF, &promedioCONCACAF, &promedioCONMEBOL, &promedioUEFA, &promedioOFC);
+
+					costoMantenimiento = CalcularCostoMantenimiento(gastoHospedaje, gastoComida, gastoTransporte);
+
+					mayoriaUEFA = ChequearMayoriaUEFA(promedioAFC, promedioCAF, promedioCONCACAF, promedioCONMEBOL, promedioUEFA, promedioOFC);
+
+					if(mayoriaUEFA == 1){
+						CalcularAumento(costoMantenimiento, porcentajeAumento, &aumento, &costoMantenimientoAumento);
+					}
+
+					printf("\nTodos los calculos fueron realizados con exito!\n");
+					calculosHechos = 1;
+				}
+
+				break;
+
+			case 4:
+				if(calculosHechos == 1){
+					printf("\n         Informar todos los resultados\n");
+					printf("\nPromedio de jugadores en AFC: %.2f", promedioAFC);
+					printf("\nPromedio de jugadores en CAF: %.2f", promedioCAF);
+					printf("\nPromedio de jugadores en CONCACAF: %.2f", promedioCONCACAF);
+					printf("\nPromedio de jugadores en CONMEBOL: %.2f", promedioCONMEBOL);
+					printf("\nPromedio de jugadores en UEFA: %.2f", promedioUEFA);
+					printf("\nPromedio de jugadores en OFC: %.2f", promedioOFC);
+
+					if(mayoriaUEFA == 1){
+						printf("\n\nEl costo de mantenimiento era de $%.2f y recibio un aumento de $%.2f, su nuevo valor es de: $%.2f\n", costoMantenimiento, aumento, costoMantenimientoAumento);
+					}
+					else{
+						printf("\n\nEl costo de mantenimiento es de: $%.2f\n", costoMantenimiento);
+					}
+				}
+				else{
+					printf("\n[ERROR] Tenes que realizar los calculos antes de informar los resultados.\n");
+				}
+
+				break;
+
+			case 5:
+				printf("Saliendo...\n");
+				break;
+		}
 
 	}while(opcion != 5);
-
-//	printf("\nAFC: %d\nCAF: %d\nCONCACAF: %d\nCONMEBOL: %d\nUEFA: %d\nOFC: %d", contadorAFC, contadorCAF, contadorCONCACAF, contadorCONMEBOL, contadorUEFA, contadorOFC);
-
 
 	return EXIT_SUCCESS;
 }

@@ -1,4 +1,3 @@
-
 #include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
@@ -109,39 +108,5 @@ int getString(char string[], int sizeString, char* mensaje, char* mensajeError){
 
 	return retorno;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

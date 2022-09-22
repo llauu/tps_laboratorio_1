@@ -1,10 +1,3 @@
-/*
- * calculos.h
- *
- *  Created on: Sep 20, 2022
- *      Author: llauu
- */
-
 #ifndef CALCULOS_H_
 #define CALCULOS_H_
 
@@ -13,4 +6,6 @@ int CalcularTodasConfederaciones(int maxJugadores, int contadorAFC, int contador
 
 float CalcularCostoMantenimiento(float gastoHospedaje, float gastoComida, float gastoTransporte);
 
-#endif /* CALCULOS_H_ */
+int CalcularAumento(float costo, int porcentajeAumento, float* pAumento, float* pCostoConAumento);
+
+#endif

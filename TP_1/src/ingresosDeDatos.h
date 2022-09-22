@@ -1,4 +1,3 @@
-
 #ifndef INGRESOSDEDATOS_H_
 #define INGRESOSDEDATOS_H_
 
@@ -8,4 +7,4 @@ int getFloat(float* pResultado, char* mensaje, char* mensajeError, float min, fl
 int getChar(char* pCaracter, char* mensaje, char* mensajeError, char min, char max);
 int getString(char string[], int sizeString, char* mensaje, char* mensajeError);
 
-#endif /* INGRESOSDEDATOS_H_ */
+#endif
