@@ -1,10 +1,12 @@
 #ifndef MENU_H_
 #define MENU_H_
-#define MAX_JUGADORES 4
-#define MAX_ARQUEROS 1
-#define MAX_DEFENSAS 1
-#define MAX_MEDIOS 1
-#define MAX_DELANTEROS 1
+
+#define MAX_JUGADORES 22
+#define MAX_ARQUEROS 2
+#define MAX_DEFENSAS 8
+#define MAX_MEDIOS 8
+#define MAX_DELANTEROS 4
+
 #define AFC 1
 #define CAF 2
 #define CONCACAF 3
