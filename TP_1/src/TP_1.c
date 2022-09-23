@@ -11,9 +11,14 @@ DIV C
 #include "menu.h"
 #include "calculos.h"
 
+#define MAX_ARQUEROS 2
+#define MAX_DEFENSAS 8
+#define MAX_MEDIOS 8
+#define MAX_DELANTEROS 4
 
 int main(void) {
 	setbuf(stdout, NULL);
+
 	int opcion;
 	int calculosHechos = 0;
 	int puedeContinuar;
@@ -27,6 +32,7 @@ int main(void) {
 	int mediocampistas = 0;
 	int delanteros = 0;
 
+	int contadorJugadoresEnTotal;
 	int contadorAFC = 0;
 	int contadorCAF = 0;
 	int contadorCONCACAF = 0;
@@ -55,14 +61,15 @@ int main(void) {
 				break;
 
 			case 2:
-				CargaDeJugadores(&arqueros, &defensas, &mediocampistas, &delanteros, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC);
+				CargaDeJugadores(&arqueros, &defensas, &mediocampistas, &delanteros, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC, MAX_ARQUEROS, MAX_DEFENSAS, MAX_MEDIOS, MAX_DELANTEROS);
 				break;
 
 			case 3:
-				puedeContinuar = ValidarOpcionElegida(gastoHospedaje, gastoComida, gastoTransporte, arqueros, defensas, mediocampistas, delanteros);
+				contadorJugadoresEnTotal = arqueros + defensas + mediocampistas + delanteros;
+				puedeContinuar = ValidarOpcionTres(gastoHospedaje, gastoComida, gastoTransporte, contadorJugadoresEnTotal);
 
 				if(puedeContinuar == 1){
-					CalcularTodasConfederaciones(MAX_JUGADORES, contadorAFC, contadorCAF, contadorCONCACAF, contadorCONMEBOL, contadorUEFA, contadorOFC, &promedioAFC, &promedioCAF, &promedioCONCACAF, &promedioCONMEBOL, &promedioUEFA, &promedioOFC);
+					CalcularTodasConfederaciones(contadorJugadoresEnTotal, contadorAFC, contadorCAF, contadorCONCACAF, contadorCONMEBOL, contadorUEFA, contadorOFC, &promedioAFC, &promedioCAF, &promedioCONCACAF, &promedioCONMEBOL, &promedioUEFA, &promedioOFC);
 
 					costoMantenimiento = CalcularCostoMantenimiento(gastoHospedaje, gastoComida, gastoTransporte);
 

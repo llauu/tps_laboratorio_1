@@ -26,34 +26,30 @@ int Menu(float gastoHospedaje, float gastoComida, float gastoTransporte, int arq
 }
 
 
-int ImprimirCostosMantenimiento(float gastoHospedaje, float gastoComida, float gastoTransporte){
+void ImprimirCostosMantenimiento(float gastoHospedaje, float gastoComida, float gastoTransporte){
 	printf("\n Costo de Hospedaje -> $%.2f", gastoHospedaje);
 	printf("\n Costo de Comida -> $%.2f", gastoComida);
 	printf("\n Costo de Transporte -> $%.2f", gastoTransporte);
-
-	return 0;
 }
 
 
-int ImprimirJugadores(int arqueros, int defensas, int mediocampistas, int delanteros){
+void ImprimirJugadores(int arqueros, int defensas, int mediocampistas, int delanteros){
 	printf("\n Arqueros -> %d", arqueros);
 	printf("\n Defensores -> %d", defensas);
 	printf("\n Mediocampistas -> %d", mediocampistas);
 	printf("\n Delanteros -> %d", delanteros);
-
-	return 0;
 }
 
 
-int ValidarOpcionElegida(float gastoHospedaje, float gastoComida, float gastoTransporte, int arqueros, int defensas, int mediocampistas, int delanteros){
+int ValidarOpcionTres(float gastoHospedaje, float gastoComida, float gastoTransporte, int contadorJugadoresEnTotal){
 	int puedeContinuar = 0;
 
 	if(gastoHospedaje != 0 && gastoComida != 0 && gastoTransporte != 0){
-		if(arqueros == MAX_ARQUEROS && defensas == MAX_DEFENSAS && mediocampistas == MAX_MEDIOS && delanteros == MAX_DELANTEROS){
+		if(contadorJugadoresEnTotal > 0){
 			puedeContinuar = 1;
 		}
 		else{
-			printf("\n[ERROR] Tenes que cargar a todos los jugadores antes de realizar los calculos.\n");
+			printf("\n[ERROR] Tenes que cargar al menos un jugador para realizar los calculos.\n");
 		}
 	}
 	else{
@@ -108,10 +104,11 @@ void CargarCostosMantenimiento(float* pGastoHospedaje, float* pGastoComida, floa
 }
 
 
-void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int* pDelanteros, int* pAFC, int* pCAF, int* pCONCACAF, int* pCONMEBOL, int* pUEFA, int* pOFC){
+void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int* pDelanteros, int* pAFC, int* pCAF, int* pCONCACAF, int* pCONMEBOL, int* pUEFA, int* pOFC, int maxArqueros, int maxDefensas, int maxMedios, int maxDelanteros){
 	int opcion;
 	int validacionJugador;
 	int confederacion;
+	int numeroCamiseta;
 
 	int contadorArqueros = *pArqueros;
 	int contadorDefensas = *pDefensas;
@@ -137,11 +134,11 @@ void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int*
 
 		switch(opcion){
 			case 1:
-				validacionJugador = ValidarCantidadJugadores(contadorArqueros, MAX_ARQUEROS);
+				validacionJugador = ValidarCantidadJugadores(contadorArqueros, maxArqueros);
 
 				if(validacionJugador == 1){
 					contadorArqueros++;
-					PedirDatosDelJugador(&confederacion);
+					PedirDatosDelJugador(&confederacion, &numeroCamiseta);
 					ContadorConfederaciones(confederacion, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC);
 				}
 				else{
@@ -151,11 +148,11 @@ void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int*
 				break;
 
 			case 2:
-				validacionJugador = ValidarCantidadJugadores(contadorDefensas, MAX_DEFENSAS);
+				validacionJugador = ValidarCantidadJugadores(contadorDefensas, maxDefensas);
 
 				if(validacionJugador == 1){
 					contadorDefensas++;
-					PedirDatosDelJugador(&confederacion);
+					PedirDatosDelJugador(&confederacion, &numeroCamiseta);
 					ContadorConfederaciones(confederacion, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC);
 				}
 				else{
@@ -164,11 +161,11 @@ void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int*
 				break;
 
 			case 3:
-				validacionJugador = ValidarCantidadJugadores(contadorMediocampistas, MAX_MEDIOS);
+				validacionJugador = ValidarCantidadJugadores(contadorMediocampistas, maxMedios);
 
 				if(validacionJugador == 1){
 					contadorMediocampistas++;
-					PedirDatosDelJugador(&confederacion);
+					PedirDatosDelJugador(&confederacion, &numeroCamiseta);
 					ContadorConfederaciones(confederacion, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC);
 				}
 				else{
@@ -177,11 +174,11 @@ void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int*
 				break;
 
 			case 4:
-				validacionJugador = ValidarCantidadJugadores(contadorDelanteros, MAX_DELANTEROS);
+				validacionJugador = ValidarCantidadJugadores(contadorDelanteros, maxDelanteros);
 
 				if(validacionJugador == 1){
 					contadorDelanteros++;
-					PedirDatosDelJugador(&confederacion);
+					PedirDatosDelJugador(&confederacion, &numeroCamiseta);
 					ContadorConfederaciones(confederacion, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC);
 				}
 				else{
@@ -190,7 +187,7 @@ void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int*
 				break;
 		}
 
-		if(contadorArqueros == MAX_ARQUEROS && contadorDefensas == MAX_DEFENSAS && contadorMediocampistas == MAX_MEDIOS && contadorDelanteros == MAX_DELANTEROS){
+		if(contadorArqueros == maxArqueros && contadorDefensas == maxDefensas && contadorMediocampistas == maxMedios && contadorDelanteros == maxDelanteros){
 			printf("\nTodos los jugadores fueron ingresados con exito!");
 			printf("\nVolviendo al menu principal...\n");
 
@@ -227,15 +224,16 @@ int ValidarCantidadJugadores(int contador, int maximo){
 }
 
 
-void PedirDatosDelJugador(int* pConfederacion){
+void PedirDatosDelJugador(int* pConfederacion, int* pNumeroCamiseta){
 	int numeroCamiseta;
 	int confederacion;
 
-	getInt(&numeroCamiseta, "\nIngrese el numero de camiseta del jugador: ", "\n[ERROR] El numero que ingreso no es valido.", 1, 99);
-	//En este caso el numero de la camiseta lo piso todo el tiempo porque no se me solicito que haga nada con el
+	getInt(&numeroCamiseta, "\nIngrese el numero de camiseta del jugador: ", "\n[ERROR] El numero que ingreso no es valido.\n", 1, 99);
+	// En este caso el numero de la camiseta lo piso todo el tiempo porque no se me solicito que haga nada con el
 
 	confederacion = PedirConfederacion();
 	*pConfederacion = confederacion;
+	*pNumeroCamiseta = numeroCamiseta;
 }
 
 

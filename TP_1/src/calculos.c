@@ -3,25 +3,25 @@
 #include "calculos.h"
 
 
-float CalcularPromedioConfederacion(int maxJugadores, int contadorConfederacion){
+float CalcularPromedioConfederacion(int cantJugadores, int contadorConfederacion){
 	float promedioConfederacion;
 
-	promedioConfederacion = (float)contadorConfederacion / maxJugadores;
+	promedioConfederacion = (float)contadorConfederacion / cantJugadores;
 
 	return promedioConfederacion;
 }
 
 
-int CalcularTodasConfederaciones(int maxJugadores, int contadorAFC, int contadorCAF, int contadorCONCACAF, int contadorCONMEBOL, int contadorUEFA, int contadorOFC, float* promedioAFC, float* promedioCAF, float* promedioCONCACAF, float* promedioCONMEBOL, float* promedioUEFA, float* promedioOFC){
+int CalcularTodasConfederaciones(int cantJugadores, int contadorAFC, int contadorCAF, int contadorCONCACAF, int contadorCONMEBOL, int contadorUEFA, int contadorOFC, float* promedioAFC, float* promedioCAF, float* promedioCONCACAF, float* promedioCONMEBOL, float* promedioUEFA, float* promedioOFC){
 	int retorno;
 
-	if(maxJugadores != 0){
-		*promedioAFC = CalcularPromedioConfederacion(maxJugadores, contadorAFC);
-		*promedioCAF = CalcularPromedioConfederacion(maxJugadores, contadorCAF);
-		*promedioCONCACAF = CalcularPromedioConfederacion(maxJugadores, contadorCONCACAF);
-		*promedioCONMEBOL = CalcularPromedioConfederacion(maxJugadores, contadorCONMEBOL);
-		*promedioUEFA = CalcularPromedioConfederacion(maxJugadores, contadorUEFA);
-		*promedioOFC = CalcularPromedioConfederacion(maxJugadores, contadorOFC);
+	if(cantJugadores != 0){
+		*promedioAFC = CalcularPromedioConfederacion(cantJugadores, contadorAFC);
+		*promedioCAF = CalcularPromedioConfederacion(cantJugadores, contadorCAF);
+		*promedioCONCACAF = CalcularPromedioConfederacion(cantJugadores, contadorCONCACAF);
+		*promedioCONMEBOL = CalcularPromedioConfederacion(cantJugadores, contadorCONMEBOL);
+		*promedioUEFA = CalcularPromedioConfederacion(cantJugadores, contadorUEFA);
+		*promedioOFC = CalcularPromedioConfederacion(cantJugadores, contadorOFC);
 
 		retorno = 0;
 	}
