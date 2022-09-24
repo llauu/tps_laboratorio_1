@@ -60,7 +60,8 @@ int ValidarOpcionTres(float gastoHospedaje, float gastoComida, float gastoTransp
 }
 
 
-void CargarCostosMantenimiento(float* pGastoHospedaje, float* pGastoComida, float* pGastoTransporte){
+int CargarCostosMantenimiento(float* pGastoHospedaje, float* pGastoComida, float* pGastoTransporte){
+	int seCargoCosto = 0;
 	int opcion;
 	float gastoHospedaje = *pGastoHospedaje;
 	float gastoComida = *pGastoComida;
@@ -78,14 +79,17 @@ void CargarCostosMantenimiento(float* pGastoHospedaje, float* pGastoComida, floa
 		switch(opcion){
 			case 1:
 				getFloat(&gastoHospedaje, "\nIngrese el costo de hospedaje: ", "\n[ERROR] El costo que ingreso no es valido.", 0, 715000000);
+				seCargoCosto = 1;
 				break;
 
 			case 2:
 				getFloat(&gastoComida, "\nIngrese el costo de comida: ", "\n[ERROR] El costo que ingreso no es valido.", 0, 715000000);
+				seCargoCosto = 1;
 				break;
 
 			case 3:
 				getFloat(&gastoTransporte, "\nIngrese el costo de transporte: ", "\n[ERROR] El costo que ingreso no es valido.", 0, 715000000);
+				seCargoCosto = 1;
 				break;
 		}
 
@@ -101,10 +105,13 @@ void CargarCostosMantenimiento(float* pGastoHospedaje, float* pGastoComida, floa
 	*pGastoHospedaje = gastoHospedaje;
 	*pGastoComida = gastoComida;
 	*pGastoTransporte = gastoTransporte;
+
+	return seCargoCosto;
 }
 
 
-void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int* pDelanteros, int* pAFC, int* pCAF, int* pCONCACAF, int* pCONMEBOL, int* pUEFA, int* pOFC, int maxArqueros, int maxDefensas, int maxMedios, int maxDelanteros){
+int CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int* pDelanteros, int* pAFC, int* pCAF, int* pCONCACAF, int* pCONMEBOL, int* pUEFA, int* pOFC, int maxArqueros, int maxDefensas, int maxMedios, int maxDelanteros){
+	int seCargoJugador = 0;
 	int opcion;
 	int validacionJugador;
 	int confederacion;
@@ -140,6 +147,7 @@ void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int*
 					contadorArqueros++;
 					PedirDatosDelJugador(&confederacion, &numeroCamiseta);
 					ContadorConfederaciones(confederacion, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC);
+					seCargoJugador = 1;
 				}
 				else{
 					printf("\n[ERROR] No podes ingresar mas arqueros.\n");
@@ -154,6 +162,7 @@ void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int*
 					contadorDefensas++;
 					PedirDatosDelJugador(&confederacion, &numeroCamiseta);
 					ContadorConfederaciones(confederacion, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC);
+					seCargoJugador = 1;
 				}
 				else{
 					printf("\n[ERROR] No podes ingresar mas defensas.\n");
@@ -167,6 +176,7 @@ void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int*
 					contadorMediocampistas++;
 					PedirDatosDelJugador(&confederacion, &numeroCamiseta);
 					ContadorConfederaciones(confederacion, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC);
+					seCargoJugador = 1;
 				}
 				else{
 					printf("\n[ERROR] No podes ingresar mas mediocampistas.\n");
@@ -180,6 +190,7 @@ void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int*
 					contadorDelanteros++;
 					PedirDatosDelJugador(&confederacion, &numeroCamiseta);
 					ContadorConfederaciones(confederacion, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC);
+					seCargoJugador = 1;
 				}
 				else{
 					printf("\n[ERROR] No podes ingresar mas delanteros.\n");
@@ -207,6 +218,8 @@ void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int*
 	*pCONMEBOL = contadorCONMEBOL;
 	*pUEFA = contadorUEFA;
 	*pOFC = contadorOFC;
+
+	return seCargoJugador;
 }
 
 

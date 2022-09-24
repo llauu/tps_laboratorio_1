@@ -63,8 +63,9 @@ int ValidarOpcionTres(float gastoHospedaje, float gastoComida, float gastoTransp
  * @param pGastoHospedaje Puntero donde se va a guardar el gasto de hospedaje
  * @param pGastoComida Puntero donde se va a guardar el gasto de comida
  * @param pGastoTransporte Puntero donde se va a guardar el gasto de transporte
+ * @return 0 si NO se cargo ningun costo nuevo, 1 si se cargo un costo nuevo
  */
-void CargarCostosMantenimiento(float* pGastoHospedaje, float* pGastoComida, float* pGastoTransporte);
+int CargarCostosMantenimiento(float* pGastoHospedaje, float* pGastoComida, float* pGastoTransporte);
 
 
 /**
@@ -84,8 +85,9 @@ void CargarCostosMantenimiento(float* pGastoHospedaje, float* pGastoComida, floa
  * @param maxDefensas Cantidad maxima de defensas que se pueden ingresar
  * @param maxMedios Cantidad maxima de medios que se pueden ingresar
  * @param maxDelanteros Cantidad maxima de delanteros que se pueden ingresar
+ * @return 0 si NO se cargo ningun jugador nuevo, 1 si se cargo un jugador nuevo
  */
-void CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int* pDelanteros, int* pAFC, int* pCAF, int* pCONCACAF, int* pCONMEBOL, int* pUEFA, int* pOFC, int maxArqueros, int maxDefensas, int maxMedios, int maxDelanteros);
+int CargaDeJugadores(int* pArqueros, int* pDefensas, int* pMediocampistas, int* pDelanteros, int* pAFC, int* pCAF, int* pCONCACAF, int* pCONMEBOL, int* pUEFA, int* pOFC, int maxArqueros, int maxDefensas, int maxMedios, int maxDelanteros);
 
 
 /**

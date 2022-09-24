@@ -20,6 +20,8 @@ int main(void) {
 	setbuf(stdout, NULL);
 
 	int opcion;
+	int seCargoJugador;
+	int seCargoCosto;
 	int calculosHechos = 0;
 	int puedeContinuar;
 	int mayoriaUEFA;
@@ -57,11 +59,23 @@ int main(void) {
 
 		switch(opcion){
 			case 1:
-				CargarCostosMantenimiento(&gastoHospedaje, &gastoComida, &gastoTransporte);
+				// Guardo la variable seCargoCosto para que en caso de que se modifique algun gasto, se obligue a hacer nuevamente los calculos para mostrar los resultados
+				seCargoCosto = CargarCostosMantenimiento(&gastoHospedaje, &gastoComida, &gastoTransporte);
+
+				if(seCargoCosto == 1){
+					calculosHechos = 0;
+				}
+
 				break;
 
 			case 2:
-				CargaDeJugadores(&arqueros, &defensas, &mediocampistas, &delanteros, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC, MAX_ARQUEROS, MAX_DEFENSAS, MAX_MEDIOS, MAX_DELANTEROS);
+				// Guardo la variable seCargoJugador para que en caso de que se cargue otro jugador, se obligue a hacer nuevamente los calculos para mostrar los resultados
+				seCargoJugador = CargaDeJugadores(&arqueros, &defensas, &mediocampistas, &delanteros, &contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC, MAX_ARQUEROS, MAX_DEFENSAS, MAX_MEDIOS, MAX_DELANTEROS);
+
+				if(seCargoJugador == 1){
+					calculosHechos = 0;
+				}
+
 				break;
 
 			case 3:
