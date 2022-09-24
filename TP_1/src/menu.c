@@ -294,6 +294,22 @@ int ChequearMayoriaUEFA(float promedioAFC, float promedioCAF, float promedioCONC
 }
 
 
+void MostrarResultados(float promedioAFC, float promedioCAF, float promedioCONCACAF, float promedioCONMEBOL, float promedioUEFA, float promedioOFC, int mayoriaUEFA, float costoMantenimiento, float aumento, float costoMantenimientoAumento){
+	printf("\n         Informar todos los resultados\n");
+	printf("\nPromedio de jugadores en AFC: %.2f", promedioAFC);
+	printf("\nPromedio de jugadores en CAF: %.2f", promedioCAF);
+	printf("\nPromedio de jugadores en CONCACAF: %.2f", promedioCONCACAF);
+	printf("\nPromedio de jugadores en CONMEBOL: %.2f", promedioCONMEBOL);
+	printf("\nPromedio de jugadores en UEFA: %.2f", promedioUEFA);
+	printf("\nPromedio de jugadores en OFC: %.2f", promedioOFC);
+
+	if(mayoriaUEFA == 1){
+		printf("\n\nEl costo de mantenimiento era de $%.2f y recibio un aumento de $%.2f, su nuevo valor es de: $%.2f\n", costoMantenimiento, aumento, costoMantenimientoAumento);
+	}
+	else{
+		printf("\n\nEl costo de mantenimiento es de: $%.2f\n", costoMantenimiento);
+	}
+}
 
 
 

@@ -142,4 +142,21 @@ void ContadorConfederaciones(int confederacion, int* pAFC, int* pCAF, int* pCONC
  */
 int ChequearMayoriaUEFA(float promedioAFC, float promedioCAF, float promedioCONCACAF, float promedioCONMEBOL, float promedioUEFA, float promedioOFC);
 
+
+/**
+ * @brief Nos permite mostrar el promedio de jugadores en cada confederacion, y el costo de mantenimiento (en caso de que se aplique el aumento se mostrara tambien)
+ *
+ * @param promedioAFC Promedio de jugadores en AFC
+ * @param promedioCAF Promedio de jugadores en CAF
+ * @param promedioCONCACAF Promedio de jugadores en CONCACAF
+ * @param promedioCONMEBOL Promedio de jugadores en CONMEBOL
+ * @param promedioUEFA Promedio de jugadores en UEFA
+ * @param promedioOFC Promedio de jugadores en OFC
+ * @param mayoriaUEFA Variable que puede valer 0 o 1, nos indica si la mayoria de los jugadores pertenecen a la UEFA
+ * @param costoMantenimiento Costo del mantenimiento original, en bruto
+ * @param aumento Aumento aplicado al costo del mantenimiento, solo se va a utilizar si mayoriaUEFA es igual a 1
+ * @param costoMantenimientoAumento Costo del mantenimiento con el aumento aplicado, solo se va a utilizar si mayoriaUEFA es igual a 1
+ */
+void MostrarResultados(float promedioAFC, float promedioCAF, float promedioCONCACAF, float promedioCONMEBOL, float promedioUEFA, float promedioOFC, int mayoriaUEFA, float costoMantenimiento, float aumento, float costoMantenimientoAumento);
+
 #endif
