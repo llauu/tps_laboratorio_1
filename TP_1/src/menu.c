@@ -74,6 +74,7 @@ int CargarCostosMantenimiento(float* pGastoHospedaje, float* pGastoComida, float
 		printf("\n 3.Costo de Transporte -> $%.2f", gastoTransporte);
 		printf("\n 4.Volver al menu principal");
 
+
 		getInt(&opcion, "\n\nIngrese la opcion segun el costo que desea cargar: ", "\n[ERROR] La opcion que ingreso no es valida.", 1, 4);
 
 		switch(opcion){
