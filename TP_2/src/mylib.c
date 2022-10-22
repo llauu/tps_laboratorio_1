@@ -125,6 +125,39 @@ int getString(char string[], int sizeString, char* mensaje, char* mensajeError){
 	return retorno;
 }
 
+int getShort(short* pResultado, char* mensaje, char* mensajeError, short min, short max){
+	int retorno;
+	short numero;
+	char buffer[4096];
+
+	retorno = -1;
+
+	if(pResultado != NULL && mensaje != NULL && mensaje != NULL && min < max){
+		do{
+			printf("%s", mensaje);
+			scanf("%s", buffer);
+
+			if(esNumerica(buffer)){
+				numero = atoi(buffer);
+
+				if(numero >= min && numero <= max){
+					*pResultado = numero;
+					retorno = 0;
+				}
+				else{
+					printf("%s", mensajeError);
+				}
+			}
+			else{
+				printf("%s", mensajeError);
+			}
+
+		}while(retorno == -1);
+	}
+
+	return retorno;
+}
+
 int esNumerica(char* string){
     int retorno = 1;
     int i = 0;
@@ -162,6 +195,26 @@ int StringUpper(char string[], int size){
 	if(string != NULL && size > 0){
 		for(int i = 0; i < size; i++){
 			string[i] = toupper(string[i]);
+		}
+
+		retorno = 0;
+	}
+
+	return retorno;
+}
+
+
+int FirstToUppercase(char string[], int size){
+	int retorno;
+
+	retorno = -1;
+
+	if(string != NULL && size > 0){
+		string[0] = toupper(string[0]);
+		for(int i = 0; i < size; i++){
+			if(string[i] == ' '){
+				string[i+1] = toupper(string[i+1]);
+			}
 		}
 
 		retorno = 0;

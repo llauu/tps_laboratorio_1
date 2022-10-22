@@ -27,11 +27,8 @@ int ChequearValidezArrayConf(sConfederacion confederaciones[], int tamConfederac
 
 int InicializarConfs(sConfederacion confederaciones[], int tamConfederaciones){
 	int retorno = -1;
-	int arrayValido;
 
-	arrayValido = ChequearValidezArrayConf(confederaciones, tamConfederaciones);
-
-	if(arrayValido == 0){
+	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
 		retorno = 0;
 
 		for(int i = 0; i < tamConfederaciones; i++){
@@ -47,11 +44,8 @@ int MenuConfederacion(sConfederacion confederaciones[], int tamConfederaciones){
 	int retorno = -1;
 	int opcion;
 	int confirmoSalir;
-	int arrayValido;
 
-	arrayValido = ChequearValidezArrayConf(confederaciones, tamConfederaciones);
-
-	if(arrayValido == 0){
+	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
 		retorno = 0;
 
 		do{
@@ -93,11 +87,8 @@ int MenuConfederacion(sConfederacion confederaciones[], int tamConfederaciones){
 
 int ObtenerConfLibre(sConfederacion confederaciones[], int tamConfederaciones){
 	int retorno = -1;
-	int arrayValido;
 
-	arrayValido = ChequearValidezArrayConf(confederaciones, tamConfederaciones);
-
-	if(arrayValido == 0){
+	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
 		for(int i = 0; i < tamConfederaciones; i++){
 			if(confederaciones[i].isEmpty == LIBRE){
 				retorno = i;
@@ -128,12 +119,9 @@ sConfederacion CargarConfederacion(void){
 int AltaConfederacion(sConfederacion confederaciones[], int tamConfederaciones){
 	int retorno = -1;
 	int espacioLibre;
-	int arrayValido;
 	sConfederacion auxConfederacion;
 
-	arrayValido = ChequearValidezArrayConf(confederaciones, tamConfederaciones);
-
-	if(arrayValido == 0){
+	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
 		espacioLibre = ObtenerConfLibre(confederaciones, tamConfederaciones);
 
 		if(espacioLibre != -1){
@@ -157,11 +145,8 @@ int AltaConfederacion(sConfederacion confederaciones[], int tamConfederaciones){
 
 int ChequearConfCargada(sConfederacion confederaciones[], int tamConfederaciones){
 	int retorno = -1;
-	int arrayValido;
 
-	arrayValido = ChequearValidezArrayConf(confederaciones, tamConfederaciones);
-
-	if(arrayValido == 0){
+	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
 		for(int i = 0; i < tamConfederaciones; i++){
 			if(confederaciones[i].isEmpty == OCUPADO){
 				retorno = i;
@@ -174,7 +159,7 @@ int ChequearConfCargada(sConfederacion confederaciones[], int tamConfederaciones
 }
 
 
-void MostrarMenuDatos(void){
+void MostrarMenuDatosConfs(void){
 	printf("\n====================================================================");
 	printf("\n| ID  | NOMBRE     | REGION                         | AÑO CREACION |");
 	printf("\n--------------------------------------------------------------------");
@@ -188,13 +173,10 @@ void MostrarConfederacion(sConfederacion confederaciones){
 
 int MostrarConfsDisponibles(sConfederacion confederaciones[], int tamConfederaciones){
 	int flagHayConfederacion = -1;
-	int arrayValido;
 
-	arrayValido = ChequearValidezArrayConf(confederaciones, tamConfederaciones);
-
-	if(arrayValido == 0){
+	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
 		if(ChequearConfCargada(confederaciones, tamConfederaciones) == 0){
-			MostrarMenuDatos();
+			MostrarMenuDatosConfs();
 			for(int i = 0; i < tamConfederaciones; i++){
 				if(confederaciones[i].isEmpty == OCUPADO){
 					MostrarConfederacion(confederaciones[i]);
@@ -211,11 +193,8 @@ int MostrarConfsDisponibles(sConfederacion confederaciones[], int tamConfederaci
 
 int BuscarConfPorID(sConfederacion confederaciones[], int tamConfederaciones, int id){
 	int retorno = -1;
-	int arrayValido;
 
-	arrayValido = ChequearValidezArrayConf(confederaciones, tamConfederaciones);
-
-	if(arrayValido == 0){
+	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
 		for(int i = 0; i < tamConfederaciones; i++){
 			if(confederaciones[i].id == id && confederaciones[i].isEmpty == OCUPADO){
 				retorno = i;
@@ -232,11 +211,8 @@ int BajaConfederacion(sConfederacion confederaciones[], int tamConfederaciones){
 	int retorno = -1;
 	int idABajar;
 	int indiceID;
-	int arrayValido;
 
-	arrayValido = ChequearValidezArrayConf(confederaciones, tamConfederaciones);
-
-	if(arrayValido == 0){
+	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
 		if(ChequearConfCargada(confederaciones, tamConfederaciones) == 0){
 			MostrarConfsDisponibles(confederaciones, tamConfederaciones);
 
@@ -270,11 +246,8 @@ int ModificarConfederacion(sConfederacion confederaciones[], int tamConfederacio
 	int idAModificar;
 	int indiceID;
 	int opcionModificar;
-	int arrayValido;
 
-	arrayValido = ChequearValidezArrayConf(confederaciones, tamConfederaciones);
-
-	if(arrayValido == 0){
+	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
 		if(ChequearConfCargada(confederaciones, tamConfederaciones) == 0){
 			MostrarConfsDisponibles(confederaciones, tamConfederaciones);
 

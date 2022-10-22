@@ -1,9 +1,6 @@
 
 #ifndef CONFEDERACIONES_H_
 #define CONFEDERACIONES_H_
-#define CANT_CONF 6
-#define LIBRE 0
-#define OCUPADO 1
 
 typedef struct{
 	int id;
@@ -27,7 +24,7 @@ int AltaConfederacion(sConfederacion confederaciones[], int tamConfederaciones);
 
 int ChequearConfCargada(sConfederacion confederaciones[], int tamConfederaciones);
 
-void MostrarMenuDatos(void);
+void MostrarMenuDatosConfs(void);
 void MostrarConfederacion(sConfederacion confederaciones);
 int MostrarConfsDisponibles(sConfederacion confederaciones[], int tamConfederaciones);
 

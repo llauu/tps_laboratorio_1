@@ -10,32 +10,25 @@ DIV C 2022
 #include <stdlib.h>
 #include "mylib.h"
 #include "confederaciones.h"
-
-typedef struct{
-	int id;
-	char nombre[50];
-	char posicion[50];
-	short numeroCamiseta;
-	int idConfederacion;
-	float salario;
-	short aniosContrato;
-	short isEmpty;
-}sJugador;
+#include "jugadores.h"
+#define CANT_JUGADORES 3000
+#define CANT_CONF 6
 
 int main(void) {
-	sConfederacion confederaciones[CANT_CONF];
+//	sConfederacion confederaciones[CANT_CONF];
+	sConfederacion confederaciones[CANT_CONF] = {{100, "CONMEBOL", "SUDAMERICA", 1916, OCUPADO},
+												 {101, "UEFA", "EUROPA", 1954, OCUPADO},
+												 {102, "AFC", "ASIA", 1954, OCUPADO},
+												 {103, "CAF", "AFRICA", 1957, OCUPADO},
+												 {104, "CONCACAF", "NORTE Y CENTRO AMERICA", 1961, OCUPADO},
+												 {105, "OFC", "OCEANIA", 1966, OCUPADO}};
 
-//	sConfederacion confederaciones[CANT_CONF] = {{100, "CONMEBOL", "SUDAMERICA", 1916},
-//												 {101, "UEFA", "EUROPA", 1954},
-//												 {102, "AFC", "ASIA", 1954},
-//												 {103, "CAF", "AFRICA", 1957},
-//												 {104, "CONCACAF", "NORTE Y CENTRO AMERICA", 1961},
-//												 {103, "OFC", "OCEANIA", 1966}};
+	sJugador jugadores[CANT_JUGADORES];
 
 	int opcion;
 	int confirmoSalir;
 
-	InicializarConfs(confederaciones, CANT_CONF);
+//	InicializarConfs(confederaciones, CANT_CONF);
 
 	do{
 		printf("\n============================="
@@ -49,15 +42,15 @@ int main(void) {
 		getInt(&opcion, "\nSeleccione una opcion: ", "\n[ERROR] Opcion invalida.", 1, 3);
 
 		switch(opcion){
-			case 1://jugadores
-				printf("jugadores");
+			case 1:
+				MenuJugadores(jugadores, CANT_JUGADORES, confederaciones, CANT_CONF);
 				break;
 
-			case 2://confederaciones
+			case 2:
 				MenuConfederacion(confederaciones, CANT_CONF);
 				break;
 
-			case 3://salir
+			case 3:
 				confirmoSalir = ConfirmarSalida();
 				break;
 		}
