@@ -1,9 +1,8 @@
-
 #include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "mylib.h"
+#include "input.h"
 
 
 // Ingresos de datos -----------------------------------------------------------------
@@ -186,7 +185,7 @@ int esNumerica(char* string){
     return retorno;
 }
 
-// Pasar todo un string a MAYUS
+// String functions
 int StringUpper(char string[], int size){
 	int retorno;
 
@@ -204,12 +203,31 @@ int StringUpper(char string[], int size){
 }
 
 
+int StringLower(char string[], int size){
+	int retorno;
+
+	retorno = -1;
+
+	if(string != NULL && size > 0){
+		for(int i = 0; i < size; i++){
+			string[i] = tolower(string[i]);
+		}
+
+		retorno = 0;
+	}
+
+	return retorno;
+}
+
+
 int FirstToUppercase(char string[], int size){
 	int retorno;
 
 	retorno = -1;
 
 	if(string != NULL && size > 0){
+		StringLower(string, size);
+
 		string[0] = toupper(string[0]);
 		for(int i = 0; i < size; i++){
 			if(string[i] == ' '){

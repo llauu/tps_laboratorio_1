@@ -19,6 +19,10 @@ int MenuConfederacion(sConfederacion confederaciones[], int tamConfederaciones);
 
 int ObtenerIndiceLibre(sConfederacion confederaciones[], int tamConfederaciones);
 
+int PedirNombreConfederacion(char nombre[]);
+int PedirRegionConfederacion(char region[]);
+int PedirAnioConfederacion(int* anioCreada);
+
 sConfederacion CargarConfederacion(void);
 int AltaConfederacion(sConfederacion confederaciones[], int tamConfederaciones);
 

@@ -19,8 +19,15 @@ int InicializarJugadores(sJugador jugadores[], int tamJugadores);
 int MenuJugadores(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones);
 
 int ObtenerJugadorLibre(sJugador jugadores[], int tamJugadores);
+
+int PedirNombreJugador(char nombre[]);
 int ValidarPosicionJugador(char posicion[]);
-int CargarConfEnJugador(int* idConfederacion, sConfederacion confederaciones[], int tamConfederaciones);
+int PedirPosicionJugador(char posicion[], int size);
+int PedirNumCamisetaJugador(short* numCamiseta);
+int PedirSalarioJugador(float* salario);
+int PedirConfJugador(int* idConfederacion, sConfederacion confederaciones[], int tamConfederaciones);
+int PedirAnioContratoJugador(short* aniosContrato);
+
 sJugador CargarJugador(sConfederacion confederaciones[], int tamConfederaciones);
 int AltaJugador(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones);
 
@@ -37,5 +44,7 @@ int BuscarJugadorPorID(sJugador jugadores[], int tamJugadores, int id);
 int BajaJugador(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones);
 
 int ModificarJugador(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones);
+
+int InformesJugador(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones);
 
 #endif

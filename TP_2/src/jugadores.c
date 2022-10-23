@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "mylib.h"
 #include "jugadores.h"
 #include "confederaciones.h"
+#include "input.h"
 
 
 static int GenerarID(void);
@@ -60,23 +60,24 @@ int MenuJugadores(sJugador jugadores[], int tamJugadores, sConfederacion confede
 			       "\n│ 5.Salir                   │"
 				   "\n└───────────────────────────┘\n");
 
-			getInt(&opcion, "\n» Seleccione una opcion: ", "\n[ERROR] Opcion invalida.", 1, 5);
+			getInt(&opcion, "\nSeleccione una opcion: \n» ", "\n[ERROR] Opcion invalida.", 1, 5);
 
 			switch(opcion){
 				case 1:
 					AltaJugador(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 					break;
 
-				case 2://baja
+				case 2:
 					BajaJugador(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 					break;
 
-				case 3://modi
+				case 3:
 					ModificarJugador(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 					break;
 
 				case 4:
-					MostrarJugadoresCargados(jugadores, tamJugadores, confederaciones, tamConfederaciones);
+//					MostrarJugadoresCargados(jugadores, tamJugadores, confederaciones, tamConfederaciones);
+					InformesJugador(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 					break;
 
 				case 5:
@@ -106,38 +107,79 @@ int ObtenerJugadorLibre(sJugador jugadores[], int tamJugadores){
 	return retorno;
 }
 
-int ValidarPosicionJugador(char posicion[]){
-	int retorno;
-	retorno = 1;
+int PedirNombreJugador(char nombre[]){
+	int retorno = -1;
 
-	if((strcasecmp("Arquero", posicion) != 0) && (strcasecmp("Defensor", posicion) != 0) && (strcasecmp("Mediocampista", posicion) != 0) && (strcasecmp("Delantero", posicion) != 0)){
-		printf("\n[ERROR] La posicion que ingreso no es correcta.");
+	if(nombre != NULL){
+		getString(nombre, 21, "\nIngrese el nombre del jugador: \n» ", "\n[ERROR] Superaste el limite de caracteres.");
+		FirstToUppercase(nombre, strlen(nombre));
+
 		retorno = 0;
 	}
 
 	return retorno;
 }
 
-int CargarPosEnJugador(char posicion[], int size){
-	int retorno = -1;
+int ValidarPosicionJugador(char posicion[]){
+	int retorno;
+	retorno = 0;
 
-	do{
-		retorno = getString(posicion, size, "\n» Ingrese la posicion del jugador: ", "\n[ERROR] Superaste el limite de caracteres.");
-		FirstToUppercase(posicion, strlen(posicion));
-
-	}while(ValidarPosicionJugador(posicion) == 0);
+	if((strcasecmp("Arquero", posicion) != 0) && (strcasecmp("Defensor", posicion) != 0) && (strcasecmp("Mediocampista", posicion) != 0) && (strcasecmp("Delantero", posicion) != 0)){
+		printf("\n[ERROR] La posicion que ingreso no es correcta.");
+		retorno = -1;
+	}
 
 	return retorno;
 }
 
-int CargarConfEnJugador(int* idConfederacion, sConfederacion confederaciones[], int tamConfederaciones){
+int PedirPosicionJugador(char posicion[], int size){
+	int retorno = -1;
+
+	do{
+		retorno = getString(posicion, size, "\nIngrese la posicion del jugador: \n» ", "\n[ERROR] Superaste el limite de caracteres.");
+		FirstToUppercase(posicion, strlen(posicion));
+
+	}while(ValidarPosicionJugador(posicion) == -1);
+
+	return retorno;
+}
+
+int PedirNumCamisetaJugador(short* numCamiseta){
+	int retorno = -1;
+	short numTmp;
+
+	if(numCamiseta != NULL){
+		getShort(&numTmp, "\nIngrese el numero de camiseta del jugador: \n» ", "\n[ERROR] Numero de camiseta no valido.", 1, 99);
+		*numCamiseta = numTmp;
+
+		retorno = 0;
+	}
+
+	return retorno;
+}
+
+int PedirSalarioJugador(float* salario){
+	int retorno = -1;
+	float salarioTmp;
+
+	if(salario != NULL){
+		getFloat(&salarioTmp, "\nIngrese el salario del jugador: \n» ", "\n[ERROR] Salario no valido.", 1, 999999999);
+		*salario = salarioTmp;
+
+		retorno = 0;
+	}
+
+	return retorno;
+}
+
+int PedirConfJugador(int* idConfederacion, sConfederacion confederaciones[], int tamConfederaciones){
 	int indiceID;
 	int tmpID;
 
 	MostrarConfsDisponibles(confederaciones, tamConfederaciones);
 
 	do{
-		getInt(&tmpID, "\n» Ingrese el ID de la confederacion del jugador: ", "\n[ERROR] ID no valido.", 100, 10000);
+		getInt(&tmpID, "\nIngrese el ID de la confederacion del jugador: \n» ", "\n[ERROR] ID no valido.", 100, 10000);
 
 		indiceID = BuscarConfPorID(confederaciones, tamConfederaciones, tmpID);
 
@@ -151,21 +193,34 @@ int CargarConfEnJugador(int* idConfederacion, sConfederacion confederaciones[], 
 	return indiceID;
 }
 
+int PedirAnioContratoJugador(short* aniosContrato){
+	int retorno = -1;
+	short aniosTmp;
+
+	if(aniosContrato != NULL){
+		getShort(&aniosTmp, "\nIngrese los años de contrato del jugador: \n» ", "\n[ERROR] Año no valido.", 1, 100);
+		*aniosContrato = aniosTmp;
+
+		retorno = 0;
+	}
+
+	return retorno;
+}
+
 sJugador CargarJugador(sConfederacion confederaciones[], int tamConfederaciones){
 	sJugador auxJugador;
 
-	getString(auxJugador.nombre, 21, "\n» Ingrese el nombre del jugador: ", "\n[ERROR] Superaste el limite de caracteres.");
-	FirstToUppercase(auxJugador.nombre, strlen(auxJugador.nombre));
+	PedirNombreJugador(auxJugador.nombre);
 
-	CargarPosEnJugador(auxJugador.posicion, 14);
+	PedirPosicionJugador(auxJugador.posicion, 14);
 
-	getShort(&auxJugador.numeroCamiseta, "\n» Ingrese el numero de camiseta del jugador: ", "\n[ERROR] Numero de camiseta no valido.", 1, 99);
+	PedirNumCamisetaJugador(&auxJugador.numeroCamiseta);
 
-	getFloat(&auxJugador.salario, "\n» Ingrese el salario del jugador: ", "\n[ERROR] Salario no valido.", 1, 999999999);
+	PedirSalarioJugador(&auxJugador.salario);
 
-	CargarConfEnJugador(&auxJugador.idConfederacion, confederaciones, tamConfederaciones);
+	PedirConfJugador(&auxJugador.idConfederacion, confederaciones, tamConfederaciones);
 
-	getShort(&auxJugador.aniosContrato, "\n» Ingrese los años de contrato del jugador: ", "\n[ERROR] Año no valido.", 1, 100);
+	PedirAnioContratoJugador(&auxJugador.aniosContrato);
 
 	return auxJugador;
 }
@@ -333,7 +388,7 @@ int BajaJugador(sJugador jugadores[], int tamJugadores, sConfederacion confedera
 			MostrarJugadoresCargados(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 
 			do{
-				getInt(&idABajar, "\n» Ingrese el ID del jugador que quiere dar de baja: ", "\n[ERROR] ID no valido.", 1, 10000);
+				getInt(&idABajar, "\nIngrese el ID del jugador a dar de baja: \n» ", "\n[ERROR] ID no valido.", 1, 10000);
 
 				indiceID = BuscarJugadorPorID(jugadores, tamJugadores, idABajar);
 
@@ -344,9 +399,9 @@ int BajaJugador(sJugador jugadores[], int tamJugadores, sConfederacion confedera
 
 			jugadores[indiceID].isEmpty = LIBRE;
 
-			printf("\n┌───────────────────────────────────────────┐"
-				   "\n│ JUGADOR DADO DE BAJA CON EXITO! ID » %-4d │"
-				   "\n└───────────────────────────────────────────┘\n", idABajar);
+			printf("\n┌─────────────────────────────────┐"
+				   "\n│ JUGADOR DADO DE BAJA CON EXITO! │"
+				   "\n└─────────────────────────────────┘\n");
 
 			retorno = 0;
 		}
@@ -370,7 +425,7 @@ int ModificarJugador(sJugador jugadores[], int tamJugadores, sConfederacion conf
 			MostrarJugadoresCargados(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 
 			do{
-				getInt(&idAModificar, "\n» Ingrese el ID del jugador que quiere modificar: ", "\n[ERROR] ID no valido.", 1, 10000);
+				getInt(&idAModificar, "\nIngrese el ID del jugador a modificar: \n» ", "\n[ERROR] ID no valido.", 1, 10000);
 
 				indiceID = BuscarJugadorPorID(jugadores, tamJugadores, idAModificar);
 
@@ -385,37 +440,36 @@ int ModificarJugador(sJugador jugadores[], int tamJugadores, sConfederacion conf
 				   "\n│ 1.Nombre                  │"
 				   "\n│ 2.Posicion                │"
 				   "\n│ 3.Numero de camiseta      │"
-				   "\n│ 4.Confederacion           │"
-				   "\n│ 5.Salario                 │"
+				   "\n│ 4.Salario                 │"
+				   "\n│ 5.Confederacion           │"
 				   "\n│ 6.Años de contrato        │"
 				   "\n└───────────────────────────┘\n");
 
-			getInt(&opcionModificar, "\n» Ingrese el numero de lo que quiere modificar: ", "\n[ERROR] Opcion invalida.", 1, 6);
+			getInt(&opcionModificar, "\nIngrese el numero de lo que quiere modificar: \n» ", "\n[ERROR] Opcion invalida.", 1, 6);
 
 			switch(opcionModificar){
-				case 1://nombre
-					getString(jugadores[indiceID].nombre, 21, "\n» Ingrese el nombre del jugador: ", "\n[ERROR] Superaste el limite de caracteres.");
-					FirstToUppercase(jugadores[indiceID].nombre, strlen(jugadores[indiceID].nombre));
+				case 1:
+					PedirNombreJugador(jugadores[indiceID].nombre);
 					break;
 
-				case 2://pos
-					CargarPosEnJugador(jugadores[indiceID].posicion, 14);
+				case 2:
+					PedirPosicionJugador(jugadores[indiceID].posicion, 14);
 					break;
 
-				case 3://n camiseta
-					getShort(&jugadores[indiceID].numeroCamiseta, "\n» Ingrese el numero de camiseta del jugador: ", "\n[ERROR] Numero de camiseta no valido.", 1, 99);
+				case 3:
+					PedirNumCamisetaJugador(&jugadores[indiceID].numeroCamiseta);
 					break;
 
-				case 4://confe
-					CargarConfEnJugador(&jugadores[indiceID].idConfederacion, confederaciones, tamConfederaciones);
+				case 4:
+					PedirSalarioJugador(&jugadores[indiceID].salario);
 					break;
 
-				case 5://salario
-					getFloat(&jugadores[indiceID].salario, "\n» Ingrese el salario del jugador: ", "\n[ERROR] Salario no valido.", 1, 999999999);
+				case 5:
+					PedirConfJugador(&jugadores[indiceID].idConfederacion, confederaciones, tamConfederaciones);
 					break;
 
-				case 6://anios contrato
-					getShort(&jugadores[indiceID].aniosContrato, "\n» Ingrese los años de contrato del jugador: ", "\n[ERROR] Año no valido.", 1, 100);
+				case 6:
+					PedirAnioContratoJugador(&jugadores[indiceID].aniosContrato);
 					break;
 			}
 
@@ -434,6 +488,69 @@ int ModificarJugador(sJugador jugadores[], int tamJugadores, sConfederacion conf
 }
 
 
+int InformesJugador(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones){
+	int retorno = -1;
+	int opcion;
 
+	if(ChequearValidezArrayJugs(jugadores, tamJugadores) == 0 && ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
+		if(ChequearJugadorCargado(jugadores, tamJugadores) == 0){
+
+			printf("\n┌──────────────────────────────────────┐"
+				   "\n│          INFORMES JUGADOR            │"
+				   "\n├──────────────────────────────────────┤"
+				   "\n│ 1.Listado de los jugadores ordenados │"
+				   "\n│   alfabeticamente por nombre de      │"
+				   "\n│   confederación y nombre de jugador. │"
+				   "\n│                                      │"
+				   "\n│ 2.Listado de confederaciones con sus │"
+				   "\n│   jugadores.                         │"
+				   "\n│                                      │"
+				   "\n│ 3.Total y promedio de todos los      │"
+				   "\n│   salarios y cuántos jugadores       │"
+				   "\n│   cobran mas del salario promedio.   │"
+				   "\n│                                      │"
+				   "\n│ 4.Informar la confederación con      │"
+				   "\n│   mayor cantidad de años de          │"
+				   "\n│   contratos total.                   │"
+				   "\n│                                      │"
+				   "\n│ 5.Informar porcentaje de jugadores   │"
+				   "\n│   por cada confederación.            │"
+				   "\n│                                      │"
+				   "\n│ 6.Informar cual es la región con     │"
+				   "\n│   más jugadores y el listado de      │"
+				   "\n│   los mismos.                        │"
+				   "\n└──────────────────────────────────────┘\n");
+
+			getInt(&opcion, "\nIngrese el numero del informe que desea ver: \n» ", "\n[ERROR] Opcion invalida.", 1, 6);
+
+			switch(opcion){
+				case 1:
+					break;
+
+				case 2:
+					break;
+
+				case 3:
+					break;
+
+				case 4:
+					break;
+
+				case 5:
+					break;
+
+				case 6:
+					break;
+			}
+
+			retorno = 0;
+		}
+		else{
+			printf("\n[ERROR] No hay jugadores cargados.\n");
+		}
+	}
+
+	return retorno;
+}
 
 
