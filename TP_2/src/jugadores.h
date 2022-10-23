@@ -26,8 +26,16 @@ int AltaJugador(sJugador jugadores[], int tamJugadores, sConfederacion confedera
 
 int ChequearJugadorCargado(sJugador jugadores[], int tamJugadores);
 
+int OrdenarJugadoresPorID(sJugador jugadores[], int tamJugadores);
+
 void MostrarMenuDatosJugs(void);
-void MostrarJugador(sJugador jugador);
-int MostrarJugadoresCargados(sJugador jugadores[], int tamJugadores);
+int ObtenerNombreConfederacion(sConfederacion confederaciones[], int tamConfederaciones, int idConfDelJugador, char nombreConfederacion[]);
+void MostrarJugador(sJugador jugador, sConfederacion confederaciones[], int tamConfederaciones);
+int MostrarJugadoresCargados(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones);
+
+int BuscarJugadorPorID(sJugador jugadores[], int tamJugadores, int id);
+int BajaJugador(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones);
+
+int ModificarJugador(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones);
 
 #endif

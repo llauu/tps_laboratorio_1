@@ -24,6 +24,8 @@ int AltaConfederacion(sConfederacion confederaciones[], int tamConfederaciones);
 
 int ChequearConfCargada(sConfederacion confederaciones[], int tamConfederaciones);
 
+int OrdenarConfederacionesPorID(sConfederacion confederaciones[], int tamConfederaciones);
+
 void MostrarMenuDatosConfs(void);
 void MostrarConfederacion(sConfederacion confederaciones);
 int MostrarConfsDisponibles(sConfederacion confederaciones[], int tamConfederaciones);
