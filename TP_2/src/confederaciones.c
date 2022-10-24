@@ -49,16 +49,16 @@ int MenuConfederacion(sConfederacion confederaciones[], int tamConfederaciones){
 		retorno = 0;
 
 		do{
-			printf("\n┌───────────────────────────┐"
-				   "\n│   MENU CONFEDERACIONES    │"
-				   "\n├───────────────────────────┤"
-				   "\n│ 1.Alta confederacion      │"
-				   "\n│ 2.Baja confederacion      │"
-				   "\n│ 3.Modificar confederacion │"
-				   "\n│ 4.Salir                   │"
-				   "\n└───────────────────────────┘\n");
+			printf("\n+---------------------------+"
+				   "\n|   MENU CONFEDERACIONES    |"
+				   "\n+---------------------------+"
+				   "\n| 1.Alta confederacion      |"
+				   "\n| 2.Baja confederacion      |"
+				   "\n| 3.Modificar confederacion |"
+				   "\n| 4.Salir                   |"
+				   "\n+---------------------------+\n");
 
-			getInt(&opcion, "\nSeleccione una opcion: \n» ", "\n[ERROR] Opcion invalida.", 1, 4);
+			getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 4);
 
 			switch(opcion){
 				case 1:
@@ -105,7 +105,7 @@ int PedirNombreConfederacion(char nombre[]){
 	int retorno = -1;
 
 	if(nombre != NULL){
-		getString(nombre, 11, "\nIngrese el nombre de la confederacion: \n» ", "\n[ERROR] Superaste el limite de caracteres.");
+		getString(nombre, 11, "\nIngrese el nombre de la confederacion: \n> ", "\n[ERROR] Superaste el limite de caracteres.");
 		StringUpper(nombre, strlen(nombre));
 
 		retorno = 0;
@@ -119,7 +119,7 @@ int PedirRegionConfederacion(char region[]){
 	int retorno = -1;
 
 	if(region != NULL){
-		getString(region, 31, "\nIngrese la region de la confederacion: \n» ", "\n[ERROR] Superaste el limite de caracteres.");
+		getString(region, 31, "\nIngrese la region de la confederacion: \n> ", "\n[ERROR] Superaste el limite de caracteres.");
 		StringUpper(region, strlen(region));
 
 		retorno = 0;
@@ -134,7 +134,7 @@ int PedirAnioConfederacion(int* anioCreada){
 	int anioTmp;
 
 	if(anioCreada != NULL){
-		getInt(&anioTmp, "\nIngrese el año de creacion de la confederacion: \n» ", "\n[ERROR] Año no valido.", 1, 2022);
+		getInt(&anioTmp, "\nIngrese el año de creacion de la confederacion: \n> ", "\n[ERROR] Año no valido.", 1, 2022);
 		*anioCreada = anioTmp;
 
 		retorno = 0;
@@ -235,14 +235,14 @@ int OrdenarConfederacionesPorID(sConfederacion confederaciones[], int tamConfede
 
 
 void MostrarMenuDatosConfs(void){
-	printf("\n┌─────┬────────────┬────────────────────────────────┬──────────────┐"
-		   "\n│ ID  │ NOMBRE     │ REGION                         │ AÑO CREACION │"
-		   "\n├─────┼────────────┼────────────────────────────────┼──────────────┤");
+	printf("\n+-----+------------+--------------------------------+--------------+"
+		   "\n| ID  | NOMBRE     | REGION                         | AÑO CREACION |"
+		   "\n+-----+------------+--------------------------------+--------------+");
 }
 
 
 void MostrarConfederacion(sConfederacion confederaciones){
-	printf("\n│ %-4d│ %-10s │ %-30s │ %-12d │", confederaciones.id, confederaciones.nombre, confederaciones.region, confederaciones.anioCreacion);
+	printf("\n| %-4d| %-10s | %-30s | %-12d |", confederaciones.id, confederaciones.nombre, confederaciones.region, confederaciones.anioCreacion);
 }
 
 
@@ -259,7 +259,7 @@ int MostrarConfsDisponibles(sConfederacion confederaciones[], int tamConfederaci
 					flagHayConfederacion = 0;
 				}
 			}
-			printf("\n└─────┴────────────┴────────────────────────────────┴──────────────┘\n");
+			printf("\n+-----+------------+--------------------------------+--------------+\n");
 		}
 	}
 
@@ -293,7 +293,7 @@ int BajaConfederacion(sConfederacion confederaciones[], int tamConfederaciones){
 			MostrarConfsDisponibles(confederaciones, tamConfederaciones);
 
 			do{
-				getInt(&idABajar, "\nIngrese el ID de la confederacion que quiere dar de baja: \n» ", "\n[ERROR] ID no valido.", 100, 10000);
+				getInt(&idABajar, "\nIngrese el ID de la confederacion que quiere dar de baja: \n> ", "\n[ERROR] ID no valido.", 100, 10000);
 
 				indiceID = BuscarConfPorID(confederaciones, tamConfederaciones, idABajar);
 
@@ -304,9 +304,9 @@ int BajaConfederacion(sConfederacion confederaciones[], int tamConfederaciones){
 
 			confederaciones[indiceID].isEmpty = LIBRE;
 
-			printf("\n┌───────────────────────────────────────┐"
-				   "\n│ CONFEDERACION DADA DE BAJA CON EXITO! │"
-				   "\n└───────────────────────────────────────┘\n");
+			printf("\n+---------------------------------------+"
+				   "\n| CONFEDERACION DADA DE BAJA CON EXITO! |"
+				   "\n+---------------------------------------+\n");
 
 			retorno = 0;
 		}
@@ -330,7 +330,7 @@ int ModificarConfederacion(sConfederacion confederaciones[], int tamConfederacio
 			MostrarConfsDisponibles(confederaciones, tamConfederaciones);
 
 			do{
-				getInt(&idAModificar, "\nIngrese el ID de la confederacion que quiere modificar: \n» ", "\n[ERROR] ID no valido.", 100, 10000);
+				getInt(&idAModificar, "\nIngrese el ID de la confederacion que quiere modificar: \n> ", "\n[ERROR] ID no valido.", 100, 10000);
 
 				indiceID = BuscarConfPorID(confederaciones, tamConfederaciones, idAModificar);
 
@@ -339,15 +339,15 @@ int ModificarConfederacion(sConfederacion confederaciones[], int tamConfederacio
 				}
 			}while(indiceID == -1);
 
-			printf("\n┌───────────────────────────┐"
-				   "\n│  MODIFICAR CONFEDERACION  │"
-				   "\n├───────────────────────────┤"
-				   "\n│ 1.Nombre                  │"
-				   "\n│ 2.Region                  │"
-				   "\n│ 3.Año de creacion         │"
-				   "\n└───────────────────────────┘\n");
+			printf("\n+---------------------------+"
+				   "\n|  MODIFICAR CONFEDERACION  |"
+				   "\n+---------------------------+"
+				   "\n| 1.Nombre                  |"
+				   "\n| 2.Region                  |"
+				   "\n| 3.Año de creacion         |"
+				   "\n+---------------------------+\n");
 
-			getInt(&opcionModificar, "\nIngrese el numero de lo que quiere modificar: \n» ", "\n[ERROR] Opcion invalida.", 1, 3);
+			getInt(&opcionModificar, "\nIngrese el numero de lo que quiere modificar: \n> ", "\n[ERROR] Opcion invalida.", 1, 3);
 
 			switch(opcionModificar){
 				case 1:
@@ -363,9 +363,9 @@ int ModificarConfederacion(sConfederacion confederaciones[], int tamConfederacio
 					break;
 			}
 
-			printf("\n┌───────────────────────────────────┐"
-				   "\n│ MODIFICACION REALIZADA CON EXITO! │"
-				   "\n└───────────────────────────────────┘\n");
+			printf("\n+-----------------------------------+"
+				   "\n| MODIFICACION REALIZADA CON EXITO! |"
+				   "\n+-----------------------------------+\n");
 
 			retorno = 0;
 		}

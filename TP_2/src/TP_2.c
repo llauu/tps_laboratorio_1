@@ -31,15 +31,15 @@ int main(void) {
 //	InicializarConfs(confederaciones, CANT_CONF);
 
 	do{
-		printf("\n┌───────────────────────────┐"
-			   "\n│      MENU PRINCIPAL       │"
-			   "\n├───────────────────────────┤"
-			   "\n│ 1.Menu de jugadores       │"
-			   "\n│ 2.Menu de confederaciones │"
-			   "\n│ 3.Salir                   │"
-			   "\n└───────────────────────────┘\n");
+		printf("\n+---------------------------+"
+			   "\n|      MENU PRINCIPAL       |"
+			   "\n+---------------------------+"
+			   "\n| 1.Menu de jugadores       |"
+			   "\n| 2.Menu de confederaciones |"
+			   "\n| 3.Salir                   |"
+			   "\n+---------------------------+\n");
 
-		getInt(&opcion, "\nSeleccione una opcion: \n» ", "\n[ERROR] Opcion invalida.", 1, 3);
+		getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 3);
 
 		switch(opcion){
 			case 1:

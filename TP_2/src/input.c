@@ -246,7 +246,7 @@ int ConfirmarSalida(void){
 	int confirmo = 0;
 	char confirmacion[5];
 
-	getString(confirmacion, 5, "\nSeguro que desea salir? (Escriba 'si' para confirmar)\n» ", "\n[ERROR] Opcion invalida.");
+	getString(confirmacion, 5, "\nSeguro que desea salir? (Escriba 'si' para confirmar)\n> ", "\n[ERROR] Opcion invalida.");
 
 	if(strcasecmp(confirmacion, "si") == 0){
 		confirmo = 1;

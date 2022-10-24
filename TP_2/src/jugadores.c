@@ -50,17 +50,17 @@ int MenuJugadores(sJugador jugadores[], int tamJugadores, sConfederacion confede
 		retorno = 0;
 
 		do{
-			printf("\n┌───────────────────────────┐"
-				   "\n│      MENU JUGADORES       │"
-				   "\n├───────────────────────────┤"
-				   "\n│ 1.Alta jugador            │"
-				   "\n│ 2.Baja jugador            │"
-				   "\n│ 3.Modificar jugador       │"
-				   "\n│ 4.Informes                │"
-			       "\n│ 5.Salir                   │"
-				   "\n└───────────────────────────┘\n");
+			printf("\n+---------------------------+"
+				   "\n|      MENU JUGADORES       |"
+				   "\n+---------------------------+"
+				   "\n| 1.Alta jugador            |"
+				   "\n| 2.Baja jugador            |"
+				   "\n| 3.Modificar jugador       |"
+				   "\n| 4.Informes                |"
+			       "\n| 5.Salir                   |"
+				   "\n+---------------------------+\n");
 
-			getInt(&opcion, "\nSeleccione una opcion: \n» ", "\n[ERROR] Opcion invalida.", 1, 5);
+			getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 5);
 
 			switch(opcion){
 				case 1:
@@ -76,8 +76,8 @@ int MenuJugadores(sJugador jugadores[], int tamJugadores, sConfederacion confede
 					break;
 
 				case 4:
-//					MostrarJugadoresCargados(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 					InformesJugador(jugadores, tamJugadores, confederaciones, tamConfederaciones);
+					MostrarJugadoresCargados(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 					break;
 
 				case 5:
@@ -111,7 +111,7 @@ int PedirNombreJugador(char nombre[]){
 	int retorno = -1;
 
 	if(nombre != NULL){
-		getString(nombre, 21, "\nIngrese el nombre del jugador: \n» ", "\n[ERROR] Superaste el limite de caracteres.");
+		getString(nombre, 21, "\nIngrese el nombre del jugador: \n> ", "\n[ERROR] Superaste el limite de caracteres.");
 		FirstToUppercase(nombre, strlen(nombre));
 
 		retorno = 0;
@@ -136,7 +136,7 @@ int PedirPosicionJugador(char posicion[], int size){
 	int retorno = -1;
 
 	do{
-		retorno = getString(posicion, size, "\nIngrese la posicion del jugador: \n» ", "\n[ERROR] Superaste el limite de caracteres.");
+		retorno = getString(posicion, size, "\nIngrese la posicion del jugador: \n> ", "\n[ERROR] Superaste el limite de caracteres.");
 		FirstToUppercase(posicion, strlen(posicion));
 
 	}while(ValidarPosicionJugador(posicion) == -1);
@@ -149,7 +149,7 @@ int PedirNumCamisetaJugador(short* numCamiseta){
 	short numTmp;
 
 	if(numCamiseta != NULL){
-		getShort(&numTmp, "\nIngrese el numero de camiseta del jugador: \n» ", "\n[ERROR] Numero de camiseta no valido.", 1, 99);
+		getShort(&numTmp, "\nIngrese el numero de camiseta del jugador: \n> ", "\n[ERROR] Numero de camiseta no valido.", 1, 99);
 		*numCamiseta = numTmp;
 
 		retorno = 0;
@@ -163,7 +163,7 @@ int PedirSalarioJugador(float* salario){
 	float salarioTmp;
 
 	if(salario != NULL){
-		getFloat(&salarioTmp, "\nIngrese el salario del jugador: \n» ", "\n[ERROR] Salario no valido.", 1, 999999999);
+		getFloat(&salarioTmp, "\nIngrese el salario del jugador: \n> ", "\n[ERROR] Salario no valido.", 1, 999999999);
 		*salario = salarioTmp;
 
 		retorno = 0;
@@ -179,7 +179,7 @@ int PedirConfJugador(int* idConfederacion, sConfederacion confederaciones[], int
 	MostrarConfsDisponibles(confederaciones, tamConfederaciones);
 
 	do{
-		getInt(&tmpID, "\nIngrese el ID de la confederacion del jugador: \n» ", "\n[ERROR] ID no valido.", 100, 10000);
+		getInt(&tmpID, "\nIngrese el ID de la confederacion del jugador: \n> ", "\n[ERROR] ID no valido.", 100, 10000);
 
 		indiceID = BuscarConfPorID(confederaciones, tamConfederaciones, tmpID);
 
@@ -198,7 +198,7 @@ int PedirAnioContratoJugador(short* aniosContrato){
 	short aniosTmp;
 
 	if(aniosContrato != NULL){
-		getShort(&aniosTmp, "\nIngrese los años de contrato del jugador: \n» ", "\n[ERROR] Año no valido.", 1, 100);
+		getShort(&aniosTmp, "\nIngrese los años de contrato del jugador: \n> ", "\n[ERROR] Año no valido.", 1, 100);
 		*aniosContrato = aniosTmp;
 
 		retorno = 0;
@@ -304,9 +304,9 @@ int OrdenarJugadoresPorID(sJugador jugadores[], int tamJugadores){
 
 
 void MostrarMenuDatosJugs(void){
-	printf("\n┌──────┬──────────────────────┬───────────────┬─────────────┬──────────────┬───────────────┬──────────────────┐"
-		   "\n│  ID  │ NOMBRE               │ POSICION      │ N° CAMISETA │ SUELDO       │ CONFEDERACION │ AÑOS DE CONTRATO │"
-		   "\n├──────┼──────────────────────┼───────────────┼─────────────┼──────────────┼───────────────┼──────────────────┤");
+	printf("\n+------+----------------------+---------------+-------------+--------------+---------------+------------------+"
+		   "\n|  ID  | NOMBRE               | POSICION      | N° CAMISETA | SUELDO       | CONFEDERACION | AÑOS DE CONTRATO |"
+		   "\n+------+----------------------+---------------+-------------+--------------+---------------+------------------+");
 }
 
 
@@ -333,7 +333,7 @@ void MostrarJugador(sJugador jugador, sConfederacion confederaciones[], int tamC
 	existeConf = ObtenerNombreConfederacion(confederaciones, tamConfederaciones, jugador.idConfederacion, nombreConfederacion);
 
 	if(existeConf == 0){
-		printf("\n│ %3d  │ %-20s │ %-13s │     %-7d │ %-12.2f │ %-13s │        %-9d │",
+		printf("\n| %3d  | %-20s | %-13s |     %-7d | %-12.2f | %-13s |        %-9d |",
 				jugador.id, jugador.nombre, jugador.posicion, jugador.numeroCamiseta,
 				jugador.salario, nombreConfederacion, jugador.aniosContrato);
 	}
@@ -354,7 +354,7 @@ int MostrarJugadoresCargados(sJugador jugadores[], int tamJugadores, sConfederac
 					flagHayJugador = 0;
 				}
 			}
-			printf("\n└──────┴──────────────────────┴───────────────┴─────────────┴──────────────┴───────────────┴──────────────────┘\n");
+			printf("\n+------+----------------------+---------------+-------------+--------------+---------------+------------------+\n");
 		}
 	}
 
@@ -388,7 +388,7 @@ int BajaJugador(sJugador jugadores[], int tamJugadores, sConfederacion confedera
 			MostrarJugadoresCargados(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 
 			do{
-				getInt(&idABajar, "\nIngrese el ID del jugador a dar de baja: \n» ", "\n[ERROR] ID no valido.", 1, 10000);
+				getInt(&idABajar, "\nIngrese el ID del jugador a dar de baja: \n> ", "\n[ERROR] ID no valido.", 1, 10000);
 
 				indiceID = BuscarJugadorPorID(jugadores, tamJugadores, idABajar);
 
@@ -399,9 +399,9 @@ int BajaJugador(sJugador jugadores[], int tamJugadores, sConfederacion confedera
 
 			jugadores[indiceID].isEmpty = LIBRE;
 
-			printf("\n┌─────────────────────────────────┐"
-				   "\n│ JUGADOR DADO DE BAJA CON EXITO! │"
-				   "\n└─────────────────────────────────┘\n");
+			printf("\n+---------------------------------+"
+				   "\n| JUGADOR DADO DE BAJA CON EXITO! |"
+				   "\n+---------------------------------+\n");
 
 			retorno = 0;
 		}
@@ -425,7 +425,7 @@ int ModificarJugador(sJugador jugadores[], int tamJugadores, sConfederacion conf
 			MostrarJugadoresCargados(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 
 			do{
-				getInt(&idAModificar, "\nIngrese el ID del jugador a modificar: \n» ", "\n[ERROR] ID no valido.", 1, 10000);
+				getInt(&idAModificar, "\nIngrese el ID del jugador a modificar: \n> ", "\n[ERROR] ID no valido.", 1, 10000);
 
 				indiceID = BuscarJugadorPorID(jugadores, tamJugadores, idAModificar);
 
@@ -434,18 +434,18 @@ int ModificarJugador(sJugador jugadores[], int tamJugadores, sConfederacion conf
 				}
 			}while(indiceID == -1);
 
-			printf("\n┌───────────────────────────┐"
-				   "\n│     MODIFICAR JUGADOR     │"
-				   "\n├───────────────────────────┤"
-				   "\n│ 1.Nombre                  │"
-				   "\n│ 2.Posicion                │"
-				   "\n│ 3.Numero de camiseta      │"
-				   "\n│ 4.Salario                 │"
-				   "\n│ 5.Confederacion           │"
-				   "\n│ 6.Años de contrato        │"
-				   "\n└───────────────────────────┘\n");
+			printf("\n+---------------------------+"
+				   "\n|     MODIFICAR JUGADOR     |"
+				   "\n+---------------------------+"
+				   "\n| 1.Nombre                  |"
+				   "\n| 2.Posicion                |"
+				   "\n| 3.Numero de camiseta      |"
+				   "\n| 4.Salario                 |"
+				   "\n| 5.Confederacion           |"
+				   "\n| 6.Años de contrato        |"
+				   "\n+---------------------------+\n");
 
-			getInt(&opcionModificar, "\nIngrese el numero de lo que quiere modificar: \n» ", "\n[ERROR] Opcion invalida.", 1, 6);
+			getInt(&opcionModificar, "\nIngrese el numero de lo que quiere modificar: \n> ", "\n[ERROR] Opcion invalida.", 1, 6);
 
 			switch(opcionModificar){
 				case 1:
@@ -473,9 +473,9 @@ int ModificarJugador(sJugador jugadores[], int tamJugadores, sConfederacion conf
 					break;
 			}
 
-			printf("\n┌───────────────────────────────────┐"
-				   "\n│ MODIFICACION REALIZADA CON EXITO! │"
-				   "\n└───────────────────────────────────┘\n");
+			printf("\n+-----------------------------------+"
+				   "\n| MODIFICACION REALIZADA CON EXITO! |"
+				   "\n+-----------------------------------+\n");
 
 			retorno = 0;
 		}
@@ -495,33 +495,33 @@ int InformesJugador(sJugador jugadores[], int tamJugadores, sConfederacion confe
 	if(ChequearValidezArrayJugs(jugadores, tamJugadores) == 0 && ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
 		if(ChequearJugadorCargado(jugadores, tamJugadores) == 0){
 
-			printf("\n┌──────────────────────────────────────┐"
-				   "\n│          INFORMES JUGADOR            │"
-				   "\n├──────────────────────────────────────┤"
-				   "\n│ 1.Listado de los jugadores ordenados │"
-				   "\n│   alfabeticamente por nombre de      │"
-				   "\n│   confederación y nombre de jugador. │"
-				   "\n│                                      │"
-				   "\n│ 2.Listado de confederaciones con sus │"
-				   "\n│   jugadores.                         │"
-				   "\n│                                      │"
-				   "\n│ 3.Total y promedio de todos los      │"
-				   "\n│   salarios y cuántos jugadores       │"
-				   "\n│   cobran mas del salario promedio.   │"
-				   "\n│                                      │"
-				   "\n│ 4.Informar la confederación con      │"
-				   "\n│   mayor cantidad de años de          │"
-				   "\n│   contratos total.                   │"
-				   "\n│                                      │"
-				   "\n│ 5.Informar porcentaje de jugadores   │"
-				   "\n│   por cada confederación.            │"
-				   "\n│                                      │"
-				   "\n│ 6.Informar cual es la región con     │"
-				   "\n│   más jugadores y el listado de      │"
-				   "\n│   los mismos.                        │"
-				   "\n└──────────────────────────────────────┘\n");
+			printf("\n+--------------------------------------+"
+				   "\n|          INFORMES JUGADOR            |"
+				   "\n+--------------------------------------+"
+				   "\n| 1.Listado de los jugadores ordenados |"
+				   "\n|   alfabeticamente por nombre de      |"
+				   "\n|   confederación y nombre de jugador. |"
+				   "\n|                                      |"
+				   "\n| 2.Listado de confederaciones con sus |"
+				   "\n|   jugadores.                         |"
+				   "\n|                                      |"
+				   "\n| 3.Total y promedio de todos los      |"
+				   "\n|   salarios y cuántos jugadores       |"
+				   "\n|   cobran mas del salario promedio.   |"
+				   "\n|                                      |"
+				   "\n| 4.Informar la confederación con      |"
+				   "\n|   mayor cantidad de años de          |"
+				   "\n|   contratos total.                   |"
+				   "\n|                                      |"
+				   "\n| 5.Informar porcentaje de jugadores   |"
+				   "\n|   por cada confederación.            |"
+				   "\n|                                      |"
+				   "\n| 6.Informar cual es la región con     |"
+				   "\n|   más jugadores y el listado de      |"
+				   "\n|   los mismos.                        |"
+				   "\n+--------------------------------------+\n");
 
-			getInt(&opcion, "\nIngrese el numero del informe que desea ver: \n» ", "\n[ERROR] Opcion invalida.", 1, 6);
+			getInt(&opcion, "\nIngrese el numero del informe que desea ver: \n> ", "\n[ERROR] Opcion invalida.", 1, 6);
 
 			switch(opcion){
 				case 1:
