@@ -19,7 +19,19 @@ int main(void) {
 	int opcion;
 	int confirmoSalir;
 
-	sJugador jugadores[CANT_JUGADORES];
+//	sJugador jugadores[CANT_JUGADORES];
+	sJugador jugadores[CANT_JUGADORES] = {{1, "Lionel Messi", "Delantero", 10, 101, 436000, 4, OCUPADO},
+										  {2, "Cristiano Ronaldo", "Delantero", 7, 104, 53426, 2, OCUPADO},
+										  {3, "Martin Rodriguez", "Defensor", 34, 102, 23666, 5, OCUPADO},
+										  {4, "Roman Riquelme", "Delantero", 11, 101, 433410, 1, OCUPADO},
+										  {5, "Martin Palermo", "Mediocampista", 9, 103, 124565, 9, OCUPADO},
+										  {6, "Alex Busquets", "Defensor", 5, 101, 66377, 1, OCUPADO},
+										  {7, "Diego Maradona", "Delantero", 10, 100, 4333334, 3, OCUPADO},
+										  {8, "Juana De Arco", "Mediocampista", 15, 101, 532677, 4, OCUPADO},
+										  {9, "Agustin Rossi", "Arquero", 1, 102, 125600, 5, OCUPADO},
+										  {10, "Julian Alvarez", "Arquero", 9, 105, 423690, 7, OCUPADO}};
+
+
 //	sConfederacion confederaciones[CANT_CONF];
 	sConfederacion confederaciones[CANT_CONF] = {{100, "CONMEBOL", "SUDAMERICA", 1916, OCUPADO},
 												 {101, "UEFA", "EUROPA", 1954, OCUPADO},
@@ -28,6 +40,7 @@ int main(void) {
 												 {104, "CONCACAF", "NORTE Y CENTRO AMERICA", 1961, OCUPADO},
 												 {105, "OFC", "OCEANIA", 1966, OCUPADO}};
 
+//	InicializarJugadores(jugadores, CANT_JUGADORES);
 //	InicializarConfs(confederaciones, CANT_CONF);
 
 	do{

@@ -40,4 +40,6 @@ int BajaConfederacion(sConfederacion confederaciones[], int tamConfederaciones);
 
 int ModificarConfederacion(sConfederacion confederaciones[], int tamConfederaciones);
 
+int OrdenarConfederacionesAlfabeticamente(sConfederacion confederaciones[], int tamConfederaciones);
+
 #endif

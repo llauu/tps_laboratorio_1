@@ -377,9 +377,40 @@ int ModificarConfederacion(sConfederacion confederaciones[], int tamConfederacio
 	return retorno;
 }
 
+int OrdenarConfederacionesAlfabeticamente(sConfederacion confederaciones[], int tamConfederaciones){
+	int flagSwap;
+	int i;
+	int contador = 0;
+	int retorno = -1;
+	sConfederacion confederacionTmp;
+    int nuevoTam;
 
+    if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
+    	nuevoTam = tamConfederaciones - 1;
 
+    	do{
+    		flagSwap = 0;
 
+    		for(i = 0; i < nuevoTam; i++){
+    			if(confederaciones[i].isEmpty == OCUPADO && confederaciones[i+1].isEmpty == OCUPADO){
+        			contador++;
+        			if(strcmp(confederaciones[i].nombre, confederaciones[i+1].nombre) > 0){
+        				flagSwap = 1;
+
+        				confederacionTmp = confederaciones[i];
+        				confederaciones[i] = confederaciones[i+1];
+        				confederaciones[i+1] = confederacionTmp;
+        			}
+    			}
+    		}
+    		nuevoTam--;
+    	}
+    	while(flagSwap);
+    	retorno = contador;
+    }
+
+    return retorno;
+}
 
 
 

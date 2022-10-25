@@ -77,7 +77,6 @@ int MenuJugadores(sJugador jugadores[], int tamJugadores, sConfederacion confede
 
 				case 4:
 					InformesJugador(jugadores, tamJugadores, confederaciones, tamConfederaciones);
-					MostrarJugadoresCargados(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 					break;
 
 				case 5:
@@ -309,15 +308,17 @@ void MostrarMenuDatosJugs(void){
 		   "\n+------+----------------------+---------------+-------------+--------------+---------------+------------------+");
 }
 
+void MostrarPieDatosJugs(void){
+	printf("\n+------+----------------------+---------------+-------------+--------------+---------------+------------------+\n");
+}
 
-int ObtenerNombreConfederacion(sConfederacion confederaciones[], int tamConfederaciones, int idConfDelJugador, char nombreConfederacion[]){
+
+int EnlazarJugadorConConf(sConfederacion confederaciones[], int tamConfederaciones, int idConfDelJugador){
 	int retorno = -1;
 
 	for(int i = 0; i < tamConfederaciones; i++){
 		if(idConfDelJugador == confederaciones[i].id){
-			strcpy(nombreConfederacion, confederaciones[i].nombre);
-			retorno = 0;
-
+			retorno = i;
 			break;
 		}
 	}
@@ -328,12 +329,15 @@ int ObtenerNombreConfederacion(sConfederacion confederaciones[], int tamConfeder
 
 void MostrarJugador(sJugador jugador, sConfederacion confederaciones[], int tamConfederaciones){
 	char nombreConfederacion[11];
-	int existeConf = -1;
+	int indice;
 
-	existeConf = ObtenerNombreConfederacion(confederaciones, tamConfederaciones, jugador.idConfederacion, nombreConfederacion);
+	indice = EnlazarJugadorConConf(confederaciones, tamConfederaciones, jugador.idConfederacion);
 
-	if(existeConf == 0){
-		printf("\n| %3d  | %-20s | %-13s |     %-7d | %-12.2f | %-13s |        %-9d |",
+	strcpy(nombreConfederacion, confederaciones[indice].nombre);
+
+
+	if(indice != -1){
+		printf("\n| %3d  | %-20s | %-13s |     %-7hd | %-12.2f | %-13s |        %-9hd |",
 				jugador.id, jugador.nombre, jugador.posicion, jugador.numeroCamiseta,
 				jugador.salario, nombreConfederacion, jugador.aniosContrato);
 	}
@@ -346,7 +350,6 @@ int MostrarJugadoresCargados(sJugador jugadores[], int tamJugadores, sConfederac
 
 	if(ChequearValidezArrayJugs(jugadores, tamJugadores) == 0){
 		if(ChequearJugadorCargado(jugadores, tamJugadores) == 0){
-			OrdenarJugadoresPorID(jugadores, tamJugadores);
 			MostrarMenuDatosJugs();
 			for(int i = 0; i < tamJugadores; i++){
 				if(jugadores[i].isEmpty == OCUPADO){
@@ -354,7 +357,7 @@ int MostrarJugadoresCargados(sJugador jugadores[], int tamJugadores, sConfederac
 					flagHayJugador = 0;
 				}
 			}
-			printf("\n+------+----------------------+---------------+-------------+--------------+---------------+------------------+\n");
+			MostrarPieDatosJugs();
 		}
 	}
 
@@ -385,6 +388,7 @@ int BajaJugador(sJugador jugadores[], int tamJugadores, sConfederacion confedera
 
 	if(ChequearValidezArrayJugs(jugadores, tamJugadores) == 0){
 		if(ChequearJugadorCargado(jugadores, tamJugadores) == 0){
+			OrdenarJugadoresPorID(jugadores, tamJugadores);
 			MostrarJugadoresCargados(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 
 			do{
@@ -422,6 +426,7 @@ int ModificarJugador(sJugador jugadores[], int tamJugadores, sConfederacion conf
 
 	if(ChequearValidezArrayJugs(jugadores, tamJugadores) == 0 && ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
 		if(ChequearJugadorCargado(jugadores, tamJugadores) == 0){
+			OrdenarJugadoresPorID(jugadores, tamJugadores);
 			MostrarJugadoresCargados(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 
 			do{
@@ -525,9 +530,14 @@ int InformesJugador(sJugador jugadores[], int tamJugadores, sConfederacion confe
 
 			switch(opcion){
 				case 1:
+					OrdenarJugadoresAlfabeticamente(jugadores, tamJugadores);
+					OrdenarConfederacionesAlfabeticamente(confederaciones, tamConfederaciones);
+
+					MostrarJugadoresPorConfOrdenados(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 					break;
 
 				case 2:
+					MostrarJugadoresPorConf(jugadores, tamJugadores, confederaciones, tamConfederaciones);
 					break;
 
 				case 3:
@@ -550,7 +560,136 @@ int InformesJugador(sJugador jugadores[], int tamJugadores, sConfederacion confe
 		}
 	}
 
+	OrdenarConfederacionesAlfabeticamente(confederaciones, tamConfederaciones);
 	return retorno;
 }
+
+
+int BuscarJugadorOcupado(int comienzo, sJugador jugadores[], int tamJugadores){
+	int i;
+	int indice = -1;
+
+	for(i = comienzo; i < tamJugadores; i++){
+		if(jugadores[i].isEmpty == OCUPADO){
+			indice = i;
+			break;
+		}
+	}
+
+	return indice;
+}
+
+
+int OrdenarJugadoresAlfabeticamente(sJugador jugadores[], int tamJugadores){
+	int flagSwap;
+	int i;
+	int j;
+	int contador = 0;
+	int retorno = -1;
+	sJugador jugadorTmp;
+    int nuevoTam;
+
+    if(ChequearValidezArrayJugs(jugadores, tamJugadores) == 0){
+    	nuevoTam = tamJugadores - 1;
+
+    	do{
+    		flagSwap = 0;
+
+    		for(i = 0; i < nuevoTam; i++){
+    			if(jugadores[i].isEmpty == OCUPADO){
+    				j = BuscarJugadorOcupado((i+1), jugadores, nuevoTam);
+
+    				if(j != -1){
+        				if(strcmp(jugadores[i].nombre, jugadores[j].nombre) > 0){
+        					flagSwap = 1;
+
+        					jugadorTmp = jugadores[i];
+        					jugadores[i] = jugadores[j];
+        					jugadores[j] = jugadorTmp;
+        				}
+    				}
+    			}
+    		}
+
+    		nuevoTam--;
+    	}
+    	while(flagSwap);
+
+    	retorno = contador;
+    }
+
+    return retorno;
+}
+
+
+int MostrarJugadoresDeUnaConf(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones, int posConf){
+	int contador = 0;
+
+	for(int j = 0; j < tamJugadores; j++){
+		if(jugadores[j].isEmpty == OCUPADO){
+			if(confederaciones[posConf].id == jugadores[j].idConfederacion){
+				contador++;
+				MostrarJugador(jugadores[j], confederaciones, tamConfederaciones);
+			}
+		}
+	}
+
+	return contador;
+}
+
+
+int MostrarJugadoresPorConfOrdenados(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones){
+	int retorno = -1;
+
+	if(ChequearValidezArrayJugs(jugadores, tamJugadores) == 0){
+		if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
+			MostrarMenuDatosJugs();
+			for(int i = 0; i < tamConfederaciones; i++){
+				if(confederaciones[i].isEmpty == OCUPADO){
+					MostrarJugadoresDeUnaConf(jugadores, tamJugadores, confederaciones, tamConfederaciones, i);
+				}
+			}
+			MostrarPieDatosJugs();
+
+			retorno = 0;
+		}
+	}
+
+	return retorno;
+}
+
+
+int MostrarJugadoresPorConf(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones){
+	int retorno = -1;
+
+	for(int i = 0; i < tamConfederaciones; i++){
+		if(confederaciones[i].isEmpty == OCUPADO){
+			printf("\n+---------------+"
+				   "\n| %-13s |"
+				   "\n+---------------+", confederaciones[i].nombre);
+
+			MostrarMenuDatosJugs();
+			MostrarJugadoresDeUnaConf(jugadores, tamJugadores, confederaciones, tamConfederaciones, i);
+			MostrarPieDatosJugs();
+		}
+	}
+
+	return retorno;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

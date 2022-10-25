@@ -36,7 +36,8 @@ int ChequearJugadorCargado(sJugador jugadores[], int tamJugadores);
 int OrdenarJugadoresPorID(sJugador jugadores[], int tamJugadores);
 
 void MostrarMenuDatosJugs(void);
-int ObtenerNombreConfederacion(sConfederacion confederaciones[], int tamConfederaciones, int idConfDelJugador, char nombreConfederacion[]);
+void MostrarPieDatosJugs(void);
+int EnlazarJugadorConConf(sConfederacion confederaciones[], int tamConfederaciones, int idConfDelJugador);
 void MostrarJugador(sJugador jugador, sConfederacion confederaciones[], int tamConfederaciones);
 int MostrarJugadoresCargados(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones);
 
@@ -46,5 +47,12 @@ int BajaJugador(sJugador jugadores[], int tamJugadores, sConfederacion confedera
 int ModificarJugador(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones);
 
 int InformesJugador(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones);
+
+int BuscarJugadorOcupado(int comienzo, sJugador jugadores[], int tamJugadores);
+
+int OrdenarJugadoresAlfabeticamente(sJugador jugadores[], int tamJugadores);
+int MostrarJugadoresPorConfOrdenados(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones);
+int MostrarJugadoresPorConf(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones);
+
 
 #endif
