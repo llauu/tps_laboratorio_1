@@ -235,7 +235,8 @@ int OrdenarConfederacionesPorID(sConfederacion confederaciones[], int tamConfede
 
 
 void MostrarMenuDatosConfs(void){
-	printf("\n+-----+------------+--------------------------------+--------------+"
+	printf("\n"
+		   "\n+-----+------------+--------------------------------+--------------+"
 		   "\n| ID  | NOMBRE     | REGION                         | AÑO CREACION |"
 		   "\n+-----+------------+--------------------------------+--------------+");
 }
@@ -413,10 +414,22 @@ int OrdenarConfederacionesAlfabeticamente(sConfederacion confederaciones[], int 
 }
 
 
+int VincularAuxConfederaciones(sConfederacion confederaciones[], int tamConfederaciones, sConfederacionAux confederacionesAux[]){
+	int retorno = -1;
 
+	if(confederacionesAux != NULL && tamConfederaciones > 0 && ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
+		for(int i = 0; i < tamConfederaciones; i++){
+			if(confederaciones[i].isEmpty == OCUPADO){
+				confederacionesAux[i].idConfederacion = confederaciones[i].id;
 
+				confederacionesAux[i].acumuladorAniosContrato = 0;
+				confederacionesAux[i].contadorJugadores = 0;
+			}
+		}
+	}
 
-
+	return retorno;
+}
 
 
 

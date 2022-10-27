@@ -10,6 +10,13 @@ typedef struct{
 	short isEmpty;
 }sConfederacion;
 
+typedef struct{
+	int idConfederacion;
+	int acumuladorAniosContrato;
+	int contadorJugadores;
+	float promedioJugadores;
+}sConfederacionAux;
+
 
 int ChequearValidezArrayConf(sConfederacion confederaciones[], int tamConfederaciones);
 
@@ -41,5 +48,7 @@ int BajaConfederacion(sConfederacion confederaciones[], int tamConfederaciones);
 int ModificarConfederacion(sConfederacion confederaciones[], int tamConfederaciones);
 
 int OrdenarConfederacionesAlfabeticamente(sConfederacion confederaciones[], int tamConfederaciones);
+
+int VincularAuxConfederaciones(sConfederacion confederaciones[], int tamConfederaciones, sConfederacionAux confederacionesAux[]);
 
 #endif

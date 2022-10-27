@@ -11,6 +11,7 @@ DIV C 2022
 #include "confederaciones.h"
 #include "input.h"
 #include "jugadores.h"
+#include "nexo.h"
 
 #define CANT_JUGADORES 3000
 #define CANT_CONF 6
@@ -21,24 +22,27 @@ int main(void) {
 
 //	sJugador jugadores[CANT_JUGADORES];
 	sJugador jugadores[CANT_JUGADORES] = {{1, "Lionel Messi", "Delantero", 10, 101, 436000, 4, OCUPADO},
-										  {2, "Cristiano Ronaldo", "Delantero", 7, 104, 53426, 2, OCUPADO},
-										  {3, "Martin Rodriguez", "Defensor", 34, 102, 23666, 5, OCUPADO},
+										  {2, "Cristiano Ronaldo", "Delantero", 7, 104, 53426.54, 2, OCUPADO},
+										  {3, "Martin Rodriguez", "Defensor", 34, 102, 23666.3, 5, OCUPADO},
 										  {4, "Roman Riquelme", "Delantero", 11, 101, 433410, 1, OCUPADO},
 										  {5, "Martin Palermo", "Mediocampista", 9, 103, 124565, 9, OCUPADO},
 										  {6, "Alex Busquets", "Defensor", 5, 101, 66377, 1, OCUPADO},
-										  {7, "Diego Maradona", "Delantero", 10, 100, 4333334, 3, OCUPADO},
+										  {7, "Diego Maradona", "Delantero", 10, 100, 4333334.23, 3, OCUPADO},
 										  {8, "Juana De Arco", "Mediocampista", 15, 101, 532677, 4, OCUPADO},
-										  {9, "Agustin Rossi", "Arquero", 1, 102, 125600, 5, OCUPADO},
-										  {10, "Julian Alvarez", "Arquero", 9, 105, 423690, 7, OCUPADO}};
+										  {9, "Mr Roman", "Mediocampista", 15, 103, 1232233.4, 6, OCUPADO},
+										  {10, "Agustin Rossi", "Arquero", 1, 102, 125600.13, 5, OCUPADO},
+										  {11, "Julian Alvarez", "Arquero", 9, 105, 423690.9, 7, OCUPADO}};
 
 
 //	sConfederacion confederaciones[CANT_CONF];
-	sConfederacion confederaciones[CANT_CONF] = {{100, "CONMEBOL", "SUDAMERICA", 1916, OCUPADO},
-												 {101, "UEFA", "EUROPA", 1954, OCUPADO},
-												 {102, "AFC", "ASIA", 1954, OCUPADO},
-												 {103, "CAF", "AFRICA", 1957, OCUPADO},
-												 {104, "CONCACAF", "NORTE Y CENTRO AMERICA", 1961, OCUPADO},
-												 {105, "OFC", "OCEANIA", 1966, OCUPADO}};
+	sConfederacion confederaciones[CANT_CONF] = {{100, "CONMEBOL", "SUDAMERICA", 1916, OCUPADO}, // 1
+												 {101, "UEFA", "EUROPA", 1954, OCUPADO}, // 4
+												 {102, "AFC", "ASIA", 1954, OCUPADO}, // 2
+												 {103, "CAF", "AFRICA", 1957, OCUPADO}, // 2
+												 {104, "CONCACAF", "NORTE Y CENTRO AMERICA", 1961, OCUPADO},// 1
+												 {105, "OFC", "OCEANIA", 1966, OCUPADO}}; // 1
+
+	sConfederacionAux auxiliar[CANT_CONF];
 
 //	InicializarJugadores(jugadores, CANT_JUGADORES);
 //	InicializarConfs(confederaciones, CANT_CONF);
@@ -56,7 +60,7 @@ int main(void) {
 
 		switch(opcion){
 			case 1:
-				MenuJugadores(jugadores, CANT_JUGADORES, confederaciones, CANT_CONF);
+				MenuJugadores(jugadores, CANT_JUGADORES, confederaciones, CANT_CONF, auxiliar);
 				break;
 
 			case 2:
