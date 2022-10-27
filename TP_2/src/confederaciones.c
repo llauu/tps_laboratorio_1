@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "confederaciones.h"
-#include "input.h"
+#include "input-output.h"
 
 
 static int GenerarID(void);
@@ -49,14 +49,7 @@ int MenuConfederacion(sConfederacion confederaciones[], int tamConfederaciones){
 		retorno = 0;
 
 		do{
-			printf("\n+---------------------------+"
-				   "\n|   MENU CONFEDERACIONES    |"
-				   "\n+---------------------------+"
-				   "\n| 1.Alta confederacion      |"
-				   "\n| 2.Baja confederacion      |"
-				   "\n| 3.Modificar confederacion |"
-				   "\n| 4.Salir                   |"
-				   "\n+---------------------------+\n");
+			MostrarMenuConfederaciones();
 
 			getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 4);
 
@@ -105,7 +98,7 @@ int PedirNombreConfederacion(char nombre[]){
 	int retorno = -1;
 
 	if(nombre != NULL){
-		getString(nombre, 11, "\nIngrese el nombre de la confederacion: \n> ", "\n[ERROR] Superaste el limite de caracteres.");
+		getString(nombre, 11, "\nIngrese el nombre de la confederacion: \n> ", "\n[ERROR] Texto invalido.");
 		StringUpper(nombre, strlen(nombre));
 
 		retorno = 0;
@@ -119,7 +112,7 @@ int PedirRegionConfederacion(char region[]){
 	int retorno = -1;
 
 	if(region != NULL){
-		getString(region, 31, "\nIngrese la region de la confederacion: \n> ", "\n[ERROR] Superaste el limite de caracteres.");
+		getString(region, 31, "\nIngrese la region de la confederacion: \n> ", "\n[ERROR] Texto invalido.");
 		StringUpper(region, strlen(region));
 
 		retorno = 0;
@@ -201,6 +194,7 @@ int ChequearConfCargada(sConfederacion confederaciones[], int tamConfederaciones
 int OrdenarConfederacionesPorID(sConfederacion confederaciones[], int tamConfederaciones){
 	int flagSwap;
 	int i;
+	int j;
 	int contador = 0;
 	int retorno = -1;
 	sConfederacion confederacionTmp;
@@ -213,14 +207,18 @@ int OrdenarConfederacionesPorID(sConfederacion confederaciones[], int tamConfede
     		flagSwap = 0;
 
     		for(i = 0; i < nuevoTam; i++){
-    			if(confederaciones[i].isEmpty == OCUPADO && confederaciones[i+1].isEmpty == OCUPADO){
+    			if(confederaciones[i].isEmpty == OCUPADO){
+    				j = BuscarConfederacionOcupada((i+1), confederaciones, tamConfederaciones);
         			contador++;
-        			if(confederaciones[i].id > confederaciones[i+1].id){
-        				flagSwap = 1;
 
-        				confederacionTmp = confederaciones[i];
-        				confederaciones[i] = confederaciones[i+1];
-        				confederaciones[i+1] = confederacionTmp;
+        			if(j != -1){
+            			if(confederaciones[i].id > confederaciones[j].id){
+            				flagSwap = 1;
+
+            				confederacionTmp = confederaciones[i];
+            				confederaciones[i] = confederaciones[j];
+            				confederaciones[j] = confederacionTmp;
+            			}
         			}
     			}
     		}
@@ -231,14 +229,6 @@ int OrdenarConfederacionesPorID(sConfederacion confederaciones[], int tamConfede
     }
 
 	return retorno;
-}
-
-
-void MostrarMenuDatosConfs(void){
-	printf("\n"
-		   "\n+-----+------------+--------------------------------+--------------+"
-		   "\n| ID  | NOMBRE     | REGION                         | AÑO CREACION |"
-		   "\n+-----+------------+--------------------------------+--------------+");
 }
 
 
@@ -260,11 +250,26 @@ int MostrarConfsDisponibles(sConfederacion confederaciones[], int tamConfederaci
 					flagHayConfederacion = 0;
 				}
 			}
-			printf("\n+-----+------------+--------------------------------+--------------+\n");
+			MostrarPieDatosConfs();
 		}
 	}
 
 	return flagHayConfederacion;
+}
+
+
+int BuscarConfederacionOcupada(int comienzo, sConfederacion confederaciones[], int tamConfederaciones){
+	int i;
+	int indice = -1;
+
+	for(i = comienzo; i < tamConfederaciones; i++){
+		if(confederaciones[i].isEmpty == OCUPADO){
+			indice = i;
+			break;
+		}
+	}
+
+	return indice;
 }
 
 
@@ -284,30 +289,42 @@ int BuscarConfPorID(sConfederacion confederaciones[], int tamConfederaciones, in
 }
 
 
+int SolicitarYValidarIDConf(sConfederacion confederaciones[], int tamConfederaciones){
+	int idIngresado;
+	int indiceID = -1;
+
+	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
+		do{
+			getInt(&idIngresado, "\nIngrese el ID de la confederacion: \n> ", "\n[ERROR] ID no valido.", 100, 10000);
+
+			indiceID = BuscarConfPorID(confederaciones, tamConfederaciones, idIngresado);
+
+			if(indiceID == -1){
+				printf("\n[ERROR] El ID %d no existe.", idIngresado);
+			}
+		}while(indiceID == -1);
+	}
+
+	return indiceID;
+}
+
+
 int BajaConfederacion(sConfederacion confederaciones[], int tamConfederaciones){
 	int retorno = -1;
-	int idABajar;
 	int indiceID;
 
 	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
 		if(ChequearConfCargada(confederaciones, tamConfederaciones) == 0){
+			MostrarMenuBaja();
 			MostrarConfsDisponibles(confederaciones, tamConfederaciones);
 
-			do{
-				getInt(&idABajar, "\nIngrese el ID de la confederacion que quiere dar de baja: \n> ", "\n[ERROR] ID no valido.", 100, 10000);
+			indiceID = SolicitarYValidarIDConf(confederaciones, tamConfederaciones);
 
-				indiceID = BuscarConfPorID(confederaciones, tamConfederaciones, idABajar);
+			if(indiceID != -1){
+				confederaciones[indiceID].isEmpty = LIBRE;
 
-				if(indiceID == -1){
-					printf("\n[ERROR] El ID %d no existe.", idABajar);
-				}
-			}while(indiceID == -1);
-
-			confederaciones[indiceID].isEmpty = LIBRE;
-
-			printf("\n+---------------------------------------+"
-				   "\n| CONFEDERACION DADA DE BAJA CON EXITO! |"
-				   "\n+---------------------------------------+\n");
+				MostrarBajaExitosa();
+			}
 
 			retorno = 0;
 		}
@@ -322,31 +339,17 @@ int BajaConfederacion(sConfederacion confederaciones[], int tamConfederaciones){
 
 int ModificarConfederacion(sConfederacion confederaciones[], int tamConfederaciones){
 	int retorno = -1;
-	int idAModificar;
 	int indiceID;
 	int opcionModificar;
 
 	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
 		if(ChequearConfCargada(confederaciones, tamConfederaciones) == 0){
+			MostrarMenuModificacion();
 			MostrarConfsDisponibles(confederaciones, tamConfederaciones);
 
-			do{
-				getInt(&idAModificar, "\nIngrese el ID de la confederacion que quiere modificar: \n> ", "\n[ERROR] ID no valido.", 100, 10000);
+			indiceID = SolicitarYValidarIDConf(confederaciones, tamConfederaciones);
 
-				indiceID = BuscarConfPorID(confederaciones, tamConfederaciones, idAModificar);
-
-				if(indiceID == -1){
-					printf("\n[ERROR] El ID %d no existe.", idAModificar);
-				}
-			}while(indiceID == -1);
-
-			printf("\n+---------------------------+"
-				   "\n|  MODIFICAR CONFEDERACION  |"
-				   "\n+---------------------------+"
-				   "\n| 1.Nombre                  |"
-				   "\n| 2.Region                  |"
-				   "\n| 3.Año de creacion         |"
-				   "\n+---------------------------+\n");
+			MostrarMenuModificacionConfs();
 
 			getInt(&opcionModificar, "\nIngrese el numero de lo que quiere modificar: \n> ", "\n[ERROR] Opcion invalida.", 1, 3);
 
@@ -364,9 +367,7 @@ int ModificarConfederacion(sConfederacion confederaciones[], int tamConfederacio
 					break;
 			}
 
-			printf("\n+-----------------------------------+"
-				   "\n| MODIFICACION REALIZADA CON EXITO! |"
-				   "\n+-----------------------------------+\n");
+			MostrarModificacionExitosa();
 
 			retorno = 0;
 		}
@@ -381,6 +382,7 @@ int ModificarConfederacion(sConfederacion confederaciones[], int tamConfederacio
 int OrdenarConfederacionesAlfabeticamente(sConfederacion confederaciones[], int tamConfederaciones){
 	int flagSwap;
 	int i;
+	int j;
 	int contador = 0;
 	int retorno = -1;
 	sConfederacion confederacionTmp;
@@ -393,14 +395,18 @@ int OrdenarConfederacionesAlfabeticamente(sConfederacion confederaciones[], int 
     		flagSwap = 0;
 
     		for(i = 0; i < nuevoTam; i++){
-    			if(confederaciones[i].isEmpty == OCUPADO && confederaciones[i+1].isEmpty == OCUPADO){
+    			if(confederaciones[i].isEmpty == OCUPADO){
+    				j = BuscarConfederacionOcupada((i+1), confederaciones, tamConfederaciones);
         			contador++;
-        			if(strcmp(confederaciones[i].nombre, confederaciones[i+1].nombre) > 0){
-        				flagSwap = 1;
 
-        				confederacionTmp = confederaciones[i];
-        				confederaciones[i] = confederaciones[i+1];
-        				confederaciones[i+1] = confederacionTmp;
+        			if(j != -1){
+            			if(strcmp(confederaciones[i].nombre, confederaciones[j].nombre) > 0){
+            				flagSwap = 1;
+
+            				confederacionTmp = confederaciones[i];
+            				confederaciones[i] = confederaciones[j];
+            				confederaciones[j] = confederacionTmp;
+            			}
         			}
     			}
     		}

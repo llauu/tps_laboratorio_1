@@ -4,8 +4,8 @@
 #include <ctype.h>
 #include "jugadores.h"
 #include "confederaciones.h"
+#include "input-output.h"
 #include "nexo.h"
-#include "input.h"
 
 
 int ChequearValidezArrayJugs(sJugador jugadores[], int tamJugadores){
@@ -43,15 +43,7 @@ int MenuJugadores(sJugador jugadores[], int tamJugadores, sConfederacion confede
 		retorno = 0;
 
 		do{
-			printf("\n+---------------------------+"
-				   "\n|      MENU JUGADORES       |"
-				   "\n+---------------------------+"
-				   "\n| 1.Alta jugador            |"
-				   "\n| 2.Baja jugador            |"
-				   "\n| 3.Modificar jugador       |"
-				   "\n| 4.Informes                |"
-			       "\n| 5.Salir                   |"
-				   "\n+---------------------------+\n");
+			MostrarMenuJugadores();
 
 			getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 5);
 
@@ -99,11 +91,12 @@ int ObtenerJugadorLibre(sJugador jugadores[], int tamJugadores){
 	return retorno;
 }
 
+
 int PedirNombreJugador(char nombre[]){
 	int retorno = -1;
 
 	if(nombre != NULL){
-		getString(nombre, 21, "\nIngrese el nombre del jugador: \n> ", "\n[ERROR] Superaste el limite de caracteres.");
+		getString(nombre, 21, "\nIngrese el nombre del jugador: \n> ", "\n[ERROR] Texto invalido.");
 		FirstToUppercase(nombre, strlen(nombre));
 
 		retorno = 0;
@@ -111,6 +104,7 @@ int PedirNombreJugador(char nombre[]){
 
 	return retorno;
 }
+
 
 int ValidarPosicionJugador(char posicion[]){
 	int retorno;
@@ -124,17 +118,19 @@ int ValidarPosicionJugador(char posicion[]){
 	return retorno;
 }
 
+
 int PedirPosicionJugador(char posicion[], int size){
 	int retorno = -1;
 
 	do{
-		retorno = getString(posicion, size, "\nIngrese la posicion del jugador: \n> ", "\n[ERROR] Superaste el limite de caracteres.");
+		retorno = getString(posicion, size, "\nIngrese la posicion del jugador: \n> ", "\n[ERROR] Texto invalido.");
 		FirstToUppercase(posicion, strlen(posicion));
 
 	}while(ValidarPosicionJugador(posicion) == -1);
 
 	return retorno;
 }
+
 
 int PedirNumCamisetaJugador(short* numCamiseta){
 	int retorno = -1;
@@ -150,6 +146,7 @@ int PedirNumCamisetaJugador(short* numCamiseta){
 	return retorno;
 }
 
+
 int PedirSalarioJugador(float* salario){
 	int retorno = -1;
 	float salarioTmp;
@@ -163,6 +160,7 @@ int PedirSalarioJugador(float* salario){
 
 	return retorno;
 }
+
 
 int PedirConfJugador(int* idConfederacion, sConfederacion confederaciones[], int tamConfederaciones){
 	int indiceID;
@@ -185,6 +183,7 @@ int PedirConfJugador(int* idConfederacion, sConfederacion confederaciones[], int
 	return indiceID;
 }
 
+
 int PedirAnioContratoJugador(short* aniosContrato){
 	int retorno = -1;
 	short aniosTmp;
@@ -194,22 +193,6 @@ int PedirAnioContratoJugador(short* aniosContrato){
 		*aniosContrato = aniosTmp;
 
 		retorno = 0;
-	}
-
-	return retorno;
-}
-
-
-int ChequearJugadorCargado(sJugador jugadores[], int tamJugadores){
-	int retorno = -1;
-
-	if(ChequearValidezArrayJugs(jugadores, tamJugadores) == 0){
-		for(int i = 0; i < tamJugadores; i++){
-			if(jugadores[i].isEmpty == OCUPADO){
-				retorno = 0;
-				break;
-			}
-		}
 	}
 
 	return retorno;
@@ -257,17 +240,6 @@ int OrdenarJugadoresPorID(sJugador jugadores[], int tamJugadores){
 }
 
 
-void MostrarMenuDatosJugs(void){
-	printf("\n+------+----------------------+---------------+-------------+--------------+---------------+------------------+"
-		   "\n|  ID  | NOMBRE               | POSICION      | N° CAMISETA | SUELDO       | CONFEDERACION | AÑOS DE CONTRATO |"
-		   "\n+------+----------------------+---------------+-------------+--------------+---------------+------------------+");
-}
-
-void MostrarPieDatosJugs(void){
-	printf("\n+------+----------------------+---------------+-------------+--------------+---------------+------------------+\n");
-}
-
-
 int BuscarJugadorPorID(sJugador jugadores[], int tamJugadores, int id){
 	int retorno = -1;
 
@@ -282,8 +254,6 @@ int BuscarJugadorPorID(sJugador jugadores[], int tamJugadores, int id){
 
 	return retorno;
 }
-
-
 
 
 int BuscarJugadorOcupado(int comienzo, sJugador jugadores[], int tamJugadores){
@@ -375,14 +345,16 @@ int ContarJugadoresCargados(sJugador jugadores[], int tamJugadores){
 
 
 float CalcularSalarioPromedio(sJugador jugadores[], int tamJugadores){
-	float salarioPromedio;
+	float salarioPromedio = -1;
 	float totalSalarios;
 	int totalJugadores;
 
 	totalSalarios = CalcularSalariosTotales(jugadores, tamJugadores);
 	totalJugadores = ContarJugadoresCargados(jugadores, tamJugadores);
 
-	salarioPromedio = totalSalarios / totalJugadores;
+	if(totalJugadores != 0){
+		salarioPromedio = totalSalarios / totalJugadores;
+	}
 
 	return salarioPromedio;
 }

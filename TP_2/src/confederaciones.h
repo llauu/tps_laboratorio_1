@@ -1,4 +1,3 @@
-
 #ifndef CONFEDERACIONES_H_
 #define CONFEDERACIONES_H_
 
@@ -27,21 +26,28 @@ int MenuConfederacion(sConfederacion confederaciones[], int tamConfederaciones);
 int ObtenerIndiceLibre(sConfederacion confederaciones[], int tamConfederaciones);
 
 int PedirNombreConfederacion(char nombre[]);
+
 int PedirRegionConfederacion(char region[]);
+
 int PedirAnioConfederacion(int* anioCreada);
 
 sConfederacion CargarConfederacion(void);
+
 int AltaConfederacion(sConfederacion confederaciones[], int tamConfederaciones);
 
 int ChequearConfCargada(sConfederacion confederaciones[], int tamConfederaciones);
 
 int OrdenarConfederacionesPorID(sConfederacion confederaciones[], int tamConfederaciones);
 
-void MostrarMenuDatosConfs(void);
 void MostrarConfederacion(sConfederacion confederaciones);
+
 int MostrarConfsDisponibles(sConfederacion confederaciones[], int tamConfederaciones);
 
+int BuscarConfederacionOcupada(int comienzo, sConfederacion confederaciones[], int tamConfederaciones);
+
 int BuscarConfPorID(sConfederacion confederaciones[], int tamConfederaciones, int id);
+
+int SolicitarYValidarIDConf(sConfederacion confederaciones[], int tamConfederaciones);
 
 int BajaConfederacion(sConfederacion confederaciones[], int tamConfederaciones);
 
@@ -50,5 +56,6 @@ int ModificarConfederacion(sConfederacion confederaciones[], int tamConfederacio
 int OrdenarConfederacionesAlfabeticamente(sConfederacion confederaciones[], int tamConfederaciones);
 
 int VincularAuxConfederaciones(sConfederacion confederaciones[], int tamConfederaciones, sConfederacionAux confederacionesAux[]);
+
 
 #endif
