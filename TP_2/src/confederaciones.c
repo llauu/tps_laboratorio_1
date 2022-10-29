@@ -6,6 +6,11 @@
 #include "input-output.h"
 
 
+/**
+ * @brief ID autoincremental, unico y autonomo. Es inicializado una unica vez al comienzo del programa, comienza desde el numero 100
+ *
+ * @return El ID generado
+ */
 static int GenerarID(void);
 static int GenerarID(void){
 	static int idIncremental = 100;
@@ -197,22 +202,6 @@ int PedirConfJugador(int* idConfederacion, sConfederacion confederaciones[], int
 }
 
 
-int ChequearConfCargada(sConfederacion confederaciones[], int tamConfederaciones){
-	int retorno = -1;
-
-	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
-		for(int i = 0; i < tamConfederaciones; i++){
-			if(confederaciones[i].isEmpty == OCUPADO){
-				retorno = 0;
-				break;
-			}
-		}
-	}
-
-	return retorno;
-}
-
-
 int OrdenarConfederacionesPorID(sConfederacion confederaciones[], int tamConfederaciones){
 	int flagSwap;
 	int i;
@@ -263,7 +252,7 @@ int MostrarConfsDisponibles(sConfederacion confederaciones[], int tamConfederaci
 	int flagHayConfederacion = -1;
 
 	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
-		if(ChequearConfCargada(confederaciones, tamConfederaciones) == 0){
+		if(BuscarConfederacionOcupada(0, confederaciones, tamConfederaciones) != -1){
 			OrdenarConfederacionesPorID(confederaciones, tamConfederaciones);
 			MostrarMenuDatosConfs();
 			for(int i = 0; i < tamConfederaciones; i++){
@@ -336,7 +325,7 @@ int BajaConfederacion(sConfederacion confederaciones[], int tamConfederaciones){
 	int indiceID;
 
 	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
-		if(ChequearConfCargada(confederaciones, tamConfederaciones) == 0){
+		if(BuscarConfederacionOcupada(0, confederaciones, tamConfederaciones) != -1){
 			MostrarMenuBaja();
 			MostrarConfsDisponibles(confederaciones, tamConfederaciones);
 
@@ -365,7 +354,7 @@ int ModificarConfederacion(sConfederacion confederaciones[], int tamConfederacio
 	int opcionModificar;
 
 	if(ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
-		if(ChequearConfCargada(confederaciones, tamConfederaciones) == 0){
+		if(BuscarConfederacionOcupada(0, confederaciones, tamConfederaciones) != -1){
 			MostrarMenuModificacion();
 			MostrarConfsDisponibles(confederaciones, tamConfederaciones);
 
@@ -400,6 +389,7 @@ int ModificarConfederacion(sConfederacion confederaciones[], int tamConfederacio
 
 	return retorno;
 }
+
 
 int OrdenarConfederacionesAlfabeticamente(sConfederacion confederaciones[], int tamConfederaciones){
 	int flagSwap;
@@ -454,6 +444,8 @@ int VincularAuxConfederaciones(sConfederacion confederaciones[], int tamConfeder
 				confederacionesAux[i].contadorJugadores = 0;
 			}
 		}
+
+		retorno = 0;
 	}
 
 	return retorno;

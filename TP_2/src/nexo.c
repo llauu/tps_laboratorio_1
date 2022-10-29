@@ -4,6 +4,12 @@
 #include "nexo.h"
 #include "input-output.h"
 
+
+/**
+ * @brief ID autoincremental, unico y autonomo. Es inicializado una unica vez al comienzo del programa, comienza desde el numero 1
+ *
+ * @return El ID generado
+ */
 static int GenerarID(void);
 static int GenerarID(void){
 	static int idIncremental = 1;
@@ -79,7 +85,7 @@ int AltaJugador(sJugador jugadores[], int tamJugadores, sConfederacion confedera
 	sJugador auxJugador;
 
 	if(ChequearValidezArrayJugs(jugadores, tamJugadores) == 0 && ChequearValidezArrayConf(confederaciones, tamConfederaciones) == 0){
-		if(ChequearConfCargada(confederaciones, tamConfederaciones) == 0){
+		if(BuscarConfederacionOcupada(0, confederaciones, tamConfederaciones) != -1){
 			espacioLibre = ObtenerJugadorLibre(jugadores, tamJugadores);
 
 			if(espacioLibre != -1){
@@ -396,6 +402,8 @@ int CalcularAniosContratoPorConf(sConfederacion confederaciones[], int tamConfed
 				}
 			}
 		}
+
+		retorno = 0;
 	}
 
 	return retorno;

@@ -4,6 +4,9 @@
 
 	Lautaro Monserrat
 	45426439
+
+	ACLARACION: No pude hacer que en Windows se muestre la 'ñ' correctamente, por lo que puede ser que en algunas
+	partes se descuadren los informes que estan en formato tabla. En Linux se muestra de manera correcta.
 ----------------------*/
 
 #include <stdio.h>
@@ -22,13 +25,14 @@ int main(void){
 	int opcion;
 	int confirmoSalir;
 
+	sConfederacionAux auxiliar[CANT_CONF];
+
 	sConfederacion confederaciones[CANT_CONF] = {{100, "CONMEBOL", "SUDAMERICA", 1916, OCUPADO}, // 1 jugador hardcodeado
 												 {101, "UEFA", "EUROPA", 1954, OCUPADO}, // 4 jugadores hardcodeados
 												 {102, "AFC", "ASIA", 1954, OCUPADO}, // 2 jugadores hardcodeados
 												 {103, "CAF", "AFRICA", 1957, OCUPADO}, // 2 jugadores hardcodeados
 												 {104, "CONCACAF", "NORTE Y CENTRO AMERICA", 1961, OCUPADO},// 1 jugador hardcodeado
 												 {105, "OFC", "OCEANIA", 1966, OCUPADO}}; // 1 jugador hardcodeado
-
 
 //	sJugador jugadores[CANT_JUGADORES] = {{1, "Lionel Messi", "Delantero", 10, 101, 436000, 4, OCUPADO},
 //										  {2, "Cristiano Ronaldo", "Delantero", 7, 104, 53426.54, 2, OCUPADO},
@@ -44,7 +48,6 @@ int main(void){
 
 
 //	sConfederacion confederaciones[CANT_CONF];
-	sConfederacionAux auxiliar[CANT_CONF];
 	sJugador jugadores[CANT_JUGADORES];
 
 
@@ -57,15 +60,15 @@ int main(void){
 		getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 3);
 
 		switch(opcion){
-			case 1:
+			case 1: // Menu jugadores
 				MenuJugadores(jugadores, CANT_JUGADORES, confederaciones, CANT_CONF, auxiliar);
 				break;
 
-			case 2:
+			case 2: // Menu confederaciones
 				MenuConfederacion(confederaciones, CANT_CONF);
 				break;
 
-			case 3:
+			case 3: // Salir
 				confirmoSalir = ConfirmarSalida();
 				break;
 		}
@@ -74,36 +77,6 @@ int main(void){
 
 	return EXIT_SUCCESS;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

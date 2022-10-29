@@ -152,6 +152,7 @@ int getString(char string[], int sizeString, char* mensaje, char* mensajeError){
 		do{
 			PedirTexto(buffer, mensaje);
 
+			// Este while es para que se valide si se ingreso un enter y se dejo el campo vacio, en ese caso, que no le permita continuar hasta que ingrese un texto valido
 			while(buffer[0] == '\0'){
 				printf("%s", mensajeError);
 
