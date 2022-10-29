@@ -175,6 +175,28 @@ int AltaConfederacion(sConfederacion confederaciones[], int tamConfederaciones){
 }
 
 
+int PedirConfJugador(int* idConfederacion, sConfederacion confederaciones[], int tamConfederaciones){
+	int indiceID;
+	int tmpID;
+
+	MostrarConfsDisponibles(confederaciones, tamConfederaciones);
+
+	do{
+		getInt(&tmpID, "\nIngrese el ID de la confederacion del jugador: \n> ", "\n[ERROR] ID no valido.", 100, 10000);
+
+		indiceID = BuscarConfPorID(confederaciones, tamConfederaciones, tmpID);
+
+		if(indiceID == -1){
+			printf("\n[ERROR] El ID %d no existe.", tmpID);
+		}
+	}while(indiceID == -1);
+
+	*idConfederacion = tmpID;
+
+	return indiceID;
+}
+
+
 int ChequearConfCargada(sConfederacion confederaciones[], int tamConfederaciones){
 	int retorno = -1;
 

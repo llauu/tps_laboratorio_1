@@ -1,14 +1,13 @@
 /*----------------------
 	Trabajo Practico 2
+	DIV C - 2022
 
 	Lautaro Monserrat
 	45426439
-	DIV C 2022
 ----------------------*/
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h>
 #include "input-output.h"
 #include "confederaciones.h"
 #include "jugadores.h"
@@ -19,11 +18,6 @@
 
 int main(void){
 	setbuf(stdout, NULL);
-
-	// Establezco el idioma a español para que se muestren correctamente las 'ñ'
-	setlocale(LC_ALL, "spanish");
-
-	printf("\nñ\n");
 
 	int opcion;
 	int confirmoSalir;
@@ -80,7 +74,6 @@ int main(void){
 
 	return EXIT_SUCCESS;
 }
-
 
 
 

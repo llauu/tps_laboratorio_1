@@ -4,12 +4,53 @@
 #include "nexo.h"
 #include "input-output.h"
 
-
 static int GenerarID(void);
 static int GenerarID(void){
 	static int idIncremental = 1;
 
 	return idIncremental++;
+}
+
+
+int MenuJugadores(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones, sConfederacionAux confederacionesAux[]){
+	int retorno = -1;
+	int opcion;
+	int confirmoSalir;
+
+	if(ChequearValidezArrayJugs(jugadores, tamJugadores) == 0){
+		retorno = 0;
+
+		do{
+			MostrarMenuJugadores();
+
+			getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 5);
+
+			switch(opcion){
+				case 1:
+					AltaJugador(jugadores, tamJugadores, confederaciones, tamConfederaciones);
+					break;
+
+				case 2:
+					BajaJugador(jugadores, tamJugadores, confederaciones, tamConfederaciones);
+					break;
+
+				case 3:
+					ModificarJugador(jugadores, tamJugadores, confederaciones, tamConfederaciones);
+					break;
+
+				case 4:
+					InformesJugador(jugadores, tamJugadores, confederaciones, tamConfederaciones, confederacionesAux);
+					break;
+
+				case 5:
+					confirmoSalir = ConfirmarSalida();
+					break;
+			}
+
+		}while(opcion != 5 || confirmoSalir != 1);
+	}
+
+	return retorno;
 }
 
 

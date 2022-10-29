@@ -34,48 +34,6 @@ int InicializarJugadores(sJugador jugadores[], int tamJugadores){
 }
 
 
-int MenuJugadores(sJugador jugadores[], int tamJugadores, sConfederacion confederaciones[], int tamConfederaciones, sConfederacionAux confederacionesAux[]){
-	int retorno = -1;
-	int opcion;
-	int confirmoSalir;
-
-	if(ChequearValidezArrayJugs(jugadores, tamJugadores) == 0){
-		retorno = 0;
-
-		do{
-			MostrarMenuJugadores();
-
-			getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 5);
-
-			switch(opcion){
-				case 1:
-					AltaJugador(jugadores, tamJugadores, confederaciones, tamConfederaciones);
-					break;
-
-				case 2:
-					BajaJugador(jugadores, tamJugadores, confederaciones, tamConfederaciones);
-					break;
-
-				case 3:
-					ModificarJugador(jugadores, tamJugadores, confederaciones, tamConfederaciones);
-					break;
-
-				case 4:
-					InformesJugador(jugadores, tamJugadores, confederaciones, tamConfederaciones, confederacionesAux);
-					break;
-
-				case 5:
-					confirmoSalir = ConfirmarSalida();
-					break;
-			}
-
-		}while(opcion != 5 || confirmoSalir != 1);
-	}
-
-	return retorno;
-}
-
-
 int ObtenerJugadorLibre(sJugador jugadores[], int tamJugadores){
 	int retorno = -1;
 
@@ -159,28 +117,6 @@ int PedirSalarioJugador(float* salario){
 	}
 
 	return retorno;
-}
-
-
-int PedirConfJugador(int* idConfederacion, sConfederacion confederaciones[], int tamConfederaciones){
-	int indiceID;
-	int tmpID;
-
-	MostrarConfsDisponibles(confederaciones, tamConfederaciones);
-
-	do{
-		getInt(&tmpID, "\nIngrese el ID de la confederacion del jugador: \n> ", "\n[ERROR] ID no valido.", 100, 10000);
-
-		indiceID = BuscarConfPorID(confederaciones, tamConfederaciones, tmpID);
-
-		if(indiceID == -1){
-			printf("\n[ERROR] El ID %d no existe.", tmpID);
-		}
-	}while(indiceID == -1);
-
-	*idConfederacion = tmpID;
-
-	return indiceID;
 }
 
 
@@ -394,6 +330,8 @@ int MostrarInformeSalarios(sJugador jugadores[], int tamJugadores){
 		printf("\nEl total de todos los salarios es: %.2f", totalSalarios);
 		printf("\nEl promedio de todos los salarios es: %.2f", salarioPromedio);
 		printf("\nLa cantidad de jugadores que cobran mas del salario promedio es: %d\n", contadorJugadoresMasDelPromedio);
+
+		retorno = 0;
 	}
 
 	return retorno;

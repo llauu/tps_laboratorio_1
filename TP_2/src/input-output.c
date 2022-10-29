@@ -18,6 +18,7 @@ static int esTexto(char string[], int sizeString){
 			}
 		}
 	}
+
 	return retorno;
 }
 
@@ -149,9 +150,14 @@ int getString(char string[], int sizeString, char* mensaje, char* mensajeError){
 
 	if(string != NULL && mensaje != NULL && mensaje != NULL && sizeString > 0){
 		do{
-			printf("%s", mensaje);
-			__fpurge(stdin);
-			scanf("%[^\n]", buffer); // El %[^\n] marca que va a leer hasta q detecte un salto de linea
+			PedirTexto(buffer, mensaje);
+
+			while(buffer[0] == '\0'){
+				printf("%s", mensajeError);
+
+				PedirTexto(buffer, mensaje);
+			}
+
 
 			if(strlen(buffer) < sizeString){
 				if(esTexto(buffer, sizeString) != 0){
@@ -197,6 +203,21 @@ int getShort(short* pResultado, char* mensaje, char* mensajeError, short min, sh
 			}
 
 		}while(retorno == -1);
+	}
+
+	return retorno;
+}
+
+int PedirTexto(char buffer[], char* mensaje){
+	int retorno = -1;
+
+	if(buffer != NULL && mensaje != NULL){
+		__fpurge(stdin);// El %[^\n] marca que va a leer hasta q detecte un salto de linea
+		printf("%s", mensaje);
+
+		scanf("%[^\n]", buffer);
+
+		retorno = 0;
 	}
 
 	return retorno;
