@@ -5,6 +5,12 @@
 #include "Jugador.h"
 #include "input-output.h"
 
+/*
+ * 	Trabajo Practico 3
+ *	ALUMNO: Lautaro Monserrat
+ *	Div C 2022
+ */
+
 int main()
 {
     int option;
