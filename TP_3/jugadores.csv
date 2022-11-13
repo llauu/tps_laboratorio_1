@@ -1,0 +1,372 @@
+id,nombreCompleto,edad,posicion,nacionalidad,idSelecion
+1,Emiliano Martinez,28,Portero,Argentino,0
+2,Juan Musso,27,Portero,Argentino,0
+3,Agustin Marchesin,33,Portero,Argentino,0
+4,Esteban Andrada,30,Portero,Argentino,0
+5,Franco Armani,34,Portero,Argentino,0
+6,Geronimo Rulli,29,Portero,Argentino,0
+7,Agustin Rossi,25,Portero,Argentino,0
+8,Cristian Romero,23,Defensa central,Argentino,0
+9,Lisandro Martinez,23,Defensa central,Argentino,0
+10,Marcos Senesi,24,Defensa central,Argentino,0
+11,Lucas Martinez Quarta,25,Defensa central,Argentino,0
+12,Facundo Medina,22,Defensa central,Argentino,0
+13,Nicolas Otamendi,33,Defensa central,Argentino,0
+14,German Pezzella,30,Defensa central,Argentino,0
+15,Walter Kannemann,30,Defensa central,Argentino,0
+16,Nehuen Perez,21,Defensa central,Argentino,0
+17,Nicolas Tagliafico,28,Lateral izquierdo,Argentino,0
+18,Marcos Acuna,29,Lateral izquierdo,Argentino,0
+19,Gonzalo Montiel,24,Lateral derecho,Argentino,0
+20,Juan Foyth ,23,Lateral derecho,Argentino,0
+21,Nahuel Molina,23,Lateral derecho,Argentino,0
+22,Guido Rodriguez,27,Pivote,Argentino,0
+23,Leandro Paredes ,27,Pivote,Argentino,0
+24,Rodrigo de Paul,27,Mediocentro,Argentino,0
+25,Giovani Lo Celso,25,Mediocentro,Argentino,0
+26,Exequiel Palacios,22,Mediocentro,Argentino,0
+27,Nicolas Dominguez,23,Mediocentro,Argentino,0
+28,Alexis Mac Allister,22,Mediocentro,Argentino,0
+29,Manuel Lanzini,28,Mediocentro ofensivo,Argentino,0
+30,Lucas Ocampos,26,Extremo izquierdo,Argentino,0
+31,Nicolas Gonzalez ,23,Extremo izquierdo,Argentino,0
+32,Papu Gomez,33,Extremo izquierdo,Argentino,0
+33,angel Correa,26,Extremo derecho,Argentino,0
+34,Emiliano Buendia,24,Extremo derecho,Argentino,0
+35,angel Di Maria ,33,Extremo derecho,Argentino,0
+36,Eduardo Salvio,30,Extremo derecho,Argentino,0
+37,Maximiliano Meza,28,Extremo derecho,Argentino,0
+38,Lionel Messi,34,Mediapunta,Argentino,0
+39,Paulo Dybala ,27,Mediapunta,Argentino,0
+40,Joaquin Correa,26,Mediapunta,Argentino,0
+41,Lautaro Martinez,23,Delantero centro,Argentino,0
+42,Lucas Alario,28,Delantero centro,Argentino,0
+43,Sergio Aguero,33,Delantero centro,Argentino,0
+44,Julian alvarez,21,Delantero centro,Argentino,0
+45,Giovanni Simeone,25,Delantero centro,Argentino,0
+46,Lucas Boye,25,Delantero centro,Argentino,0
+47,Alisson,30,Portero,Brasilero,0
+48,Ederson,29,Portero,Brasilero,0
+49,Weverton,34,Portero,Brasilero,0
+50,Marquinhos,28,Defensa central,Brasilero,0
+51,eder Militao,24,Defensa central,Brasilero,0
+52,Bremer ,25,Defensa central,Brasilero,0
+53,Roger Ibanez,23,Defensa central,Brasilero,0
+54,Thiago Silva,38,Defensa central,Brasilero,0
+55,Renan Lodi,24,Lateral izquierdo,Brasilero,0
+56,Alex Telles,29,Lateral izquierdo,Brasilero,0
+57,Danilo ,31,Lateral derecho,Brasilero,0
+58,Fabinho,29,Pivote,Brasilero,0
+59,Casemiro,30,Pivote,Brasilero,0
+60,Bruno Guimaraes,24,Pivote,Brasilero,0
+61,Fred,29,Mediocentro,Brasilero,0
+62,everton Ribeiro,33,Mediocentro,Brasilero,0
+63,Lucas Paqueta,25,Mediocentro ofensivo,Brasilero,0
+64,Vinicius Junior,22,Extremo izquierdo,Brasilero,0
+65,Neymar ,30,Extremo izquierdo,Brasilero,0
+66,Antony,22,Extremo derecho,Brasilero,0
+67,Rodrygo,21,Extremo derecho,Brasilero,0
+68,Raphinha,25,Extremo derecho,Brasilero,0
+69,Richarlison ,25,Delantero centro,Brasilero,0
+70,Roberto Firmino,31,Delantero centro,Brasilero,0
+71,Matheus Cunha,23,Delantero centro,Brasilero,0
+72,Pedro,25,Delantero centro,Brasilero,0
+73,Sergio Rochet,29,Portero,Uruguayo,0
+74,Fernando Muslera,36,Portero,Uruguayo,0
+75,Sebastian Sosa,36,Portero,Uruguayo,0
+76,Ronald Araujo ,23,Defensa central,Uruguayo,0
+77,Agustin Rogel,25,Defensa central,Uruguayo,0
+78,Sebastian Caceres,23,Defensa central,Uruguayo,0
+79,Leandro Cabrera,31,Defensa central,Uruguayo,0
+80,Martin Caceres,35,Defensa central,Uruguayo,0
+81,Mathias Olivera,24,Lateral izquierdo,Uruguayo,0
+82,Matias Vina,24,Lateral izquierdo,Uruguayo,0
+83,Guillermo Varela,29,Lateral derecho,Uruguayo,0
+84,Damian Suarez,34,Lateral derecho,Uruguayo,0
+85,Lucas Torreira,26,Pivote,Uruguayo,0
+86,Manuel Ugarte,21,Pivote,Uruguayo,0
+87,Federico Valverde ,24,Mediocentro,Uruguayo,0
+88,Rodrigo Bentancur,25,Mediocentro,Uruguayo,0
+89,Nicolas de la Cruz ,25,Mediocentro,Uruguayo,0
+90,Matias Vecino,31,Mediocentro,Uruguayo,0
+91,Giorgian de Arrascaeta,28,Mediocentro ofensivo,Uruguayo,0
+92,Diego Rossi ,24,Extremo izquierdo,Uruguayo,0
+93,Agustin Canobbio,24,Extremo derecho,Uruguayo,0
+94,Facundo Pellistri,20,Extremo derecho,Uruguayo,0
+95,Brian Ocampo,23,Extremo derecho,Uruguayo,0
+96,Darwin Nunez,23,Delantero centro,Uruguayo,0
+97,Luis Suarez,35,Delantero centro,Uruguayo,0
+98,Martin Satriano,21,Delantero centro,Uruguayo,0
+99,Anthony Lopes,29,Portero,Portugues,0
+100,Rui Silva,26,Portero,Portugues,0
+101,Rui Patricio,32,Portero,Portugues,0
+102,Jose Sa,27,Portero,Portugues,0
+103,Diogo Costa,20,Portero,Portugues,0
+104,Bruno Varela,25,Portero,Portugues,0
+105,Ruben Dias,23,Defensa central,Portugues,0
+106,Domingos Duarte,25,Defensa central,Portugues,0
+107,Ruben Semedo,26,Defensa central,Portugues,0
+108,Luis Neto,32,Defensa central,Portugues,0
+109,Jose Fonte,36,Defensa central,Portugues,0
+110,Pepe,37,Defensa central,Portugues,0
+111,Raphael Guerreiro,26,Lateral izquierdo,Portugues,0
+112,Nuno Mendes,18,Lateral izquierdo,Portugues,0
+113,Mario Rui,29,Lateral izquierdo,Portugues,0
+114,Nuno Sequeira,29,Lateral izquierdo,Portugues,0
+115,Joao Cancelo,26,Lateral derecho,Portugues,0
+116,Nelson Semedo,26,Lateral derecho,Portugues,0
+117,Diogo Dalot,21,Lateral derecho,Portugues,0
+118,Cedric Soares,28,Lateral derecho,Portugues,0
+119,Ruben Neves,23,Pivote,Portugues,0
+120,Danilo Pereira,28,Pivote,Portugues,0
+121,Joao Palhinha,24,Pivote,Portugues,0
+122,William Carvalho,28,Pivote,Portugues,0
+123,Renato Sanches,22,Mediocentro,Portugues,0
+124,Andre Gomes,26,Mediocentro,Portugues,0
+125,Sergio Oliveira,28,Mediocentro,Portugues,0
+126,Joao Mario,27,Mediocentro,Portugues,0
+127,Matheus Nunes,21,Mediocentro,Portugues,0
+128,Joao Moutinho,33,Mediocentro,Portugues,0
+129,Otavio,25,Interior derecho,Portugues,0
+130,Bruno Fernandes,25,Mediocentro ofensivo,Portugues,0
+131,Bernardo Silva,25,Mediocentro ofensivo,Portugues,0
+132,Diogo Jota,23,Extremo izquierdo,Portugues,0
+133,Pedro Neto,20,Extremo izquierdo,Portugues,0
+134,Rafael Leao,21,Extremo izquierdo,Portugues,0
+135,Gonzalo Guedes,23,Extremo izquierdo,Portugues,0
+136,Pedro Gonzalves,22,Extremo izquierdo,Portugues,0
+137,Daniel Podence,24,Extremo derecho,Portugues,0
+138,Francisco Trincao,20,Extremo derecho,Portugues,0
+139,Joao Felix,20,Mediapunta,Portugues,0
+140,Rafa Silva,27,Mediapunta,Portugues,0
+141,Cristiano Ronaldo,35,Delantero centro,Portugues,0
+142,Andre Silva,24,Delantero centro,Portugues,0
+143,Paulinho,27,Delantero centro,Portugues,0
+144,Aaron Ramsdale,24,Portero,Ingles,0
+145,Dean Henderson,25,Portero,Ingles,0
+146,Nick Pope,30,Portero,Ingles,0
+147,Fikayo Tomori,24,Defensa central,Ingles,0
+148,Marc Guehi,22,Defensa central,Ingles,0
+149,Harry Maguire,29,Defensa central,Ingles,0
+150,John Stones,28,Defensa central,Ingles,0
+151,Eric Dier,28,Defensa central,Ingles,0
+152,Conor Coady,29,Defensa central,Ingles,0
+153,Ben Chilwell,25,Lateral izquierdo,Ingles,0
+154,Luke Shaw,27,Lateral izquierdo,Ingles,0
+155,Trent Alexander Arnold,24,Lateral derecho,Ingles,0
+156,Reece James,22,Lateral derecho,Ingles,0
+157,Kyle Walker,32,Lateral derecho,Ingles,0
+158,Kieran Trippier,32,Lateral derecho,Ingles,0
+159,Declan Rice,23,Pivote,Ingles,0
+160,Kalvin Phillips,26,Pivote,Ingles,0
+161,Phil Foden,22,Mediocentro,Ingles,0
+162,Jude Bellingham,19,Mediocentro,Ingles,0
+163,James Ward Prowse,27,Mediocentro,Ingles,0
+164,Jordan Henderson,32,Mediocentro,Ingles,0
+165,Bukayo Saka,21,Interior derecho,Ingles,0
+166,Mason Mount,23,Mediocentro ofensivo,Ingles,0
+167,Raheem Sterling,27,Extremo izquierdo,Ingles,0
+168,Jack Grealish,27,Extremo izquierdo,Ingles,0
+169,Jarrod Bowen,25,Extremo derecho,Ingles,0
+170,Harry Kane,29,Delantero centro,Ingles,0
+171,Tammy Abraham,25,Delantero centro,Ingles,0
+172,Ivan Toney,26,Delantero centro,Ingles,0
+173,Antonio Rudiger,29,Defensa central,Aleman,0
+174,Armel Bella Kotchap ,20,Defensa central,Aleman,0
+175,Benjamin Henrichs,25,Lateral derecho,Aleman,0
+176,David Raum,24,Lateral izquierdo,Aleman,0
+177,Florian Neuhaus,23,Mediocentro,Aleman,0
+178,Ilkay Gundogan,32,Mediocentro,Aleman,0
+179,Jamal Musiala,19,Mediocentro ofensivo,Aleman,0
+180,Jonas Hofmann ,30,Extremo derecho,Aleman,0
+181,Joshua Kimmich,27,Pivote,Aleman,0
+182,Kai Havertz,23,Mediocentro ofensivo,Aleman,0
+183,Kevin Trapp,32,Portero,Aleman,0
+184,Leon Goretzka,25,Mediocentro,Aleman,0
+185,Leroy Sane ,26,Extremo izquierdo,Aleman,0
+186,Lukas Nmecha,23,Delantero centro,Aleman,0
+187,Mahmoud Dahoud,24,Mediocentro,Aleman,0
+188,Marc Andre ter Stegen,30,Portero,Aleman,0
+189,Matthias Ginter,28,Defensa central,Aleman,0
+190,Maximilian Arnold,28,Mediocentro,Aleman,0
+191,Nadiem Amiri,23,Mediocentro,Aleman,0
+192,Nico Schlotterbeck,22,Defensa central,Aleman,0
+193,Niklas Sule,27,Defensa central,Aleman,0
+194,Oliver Baumann,32,Portero,Aleman,0
+195,Robin Gosens,28,Interior izquierdo,Aleman,0
+196,Serge Gnabry,27,Extremo derecho,Aleman,0
+197,Thilo Kehrer,26,Defensa central,Aleman,0
+198,Thomas Muller ,33,Mediapunta,Aleman,0
+199,Timo Werner,26,Delantero centro,Aleman,0
+200,Toni Kroos,30,Mediocentro,Aleman,0
+201,Guillermo Ochoa,37,Portero,Mexicano,0
+202,Rodolfo Cota,35,Portero,Mexicano,0
+203,Alfredo Talavera,40,Portero,Mexicano,0
+204,Cesar Montes,25,Defensa central,Mexicano,0
+205,Johan Vasquez,24,Defensa central,Mexicano,0
+206,Nestor Araujo,31,Defensa central,Mexicano,0
+207,Hector Moreno,34,Defensa central,Mexicano,0
+208,Jesus Angulo,24,Lateral izquierdo,Mexicano,0
+209,Gerardo Arteaga,24,Lateral izquierdo,Mexicano,0
+210,Jesus Gallardo,28,Lateral izquierdo,Mexicano,0
+211,Kevin alvarez,23,Lateral derecho,Mexicano,0
+212,Jorge Sanchez,24,Lateral derecho,Mexicano,0
+213,Edson alvarez,25,Pivote,Mexicano,0
+214,Luis Chavez,26,Pivote,Mexicano,0
+215,Carlos Rodriguez,25,Mediocentro,Mexicano,0
+216,erick Sanchez,23,Mediocentro,Mexicano,0
+217,erick Gutierrez,27,Mediocentro,Mexicano,0
+218,Luis Romo,27,Mediocentro,Mexicano,0
+219,Fernando Beltran,24,Mediocentro,Mexicano,0
+220,Orbelin Pineda,26,Mediocentro,Mexicano,0
+221,Hector Herrera,32,Mediocentro,Mexicano,0
+222,Andres Guardado ,36,Mediocentro,Mexicano,0
+223,Alexis Vega,24,Extremo izquierdo,Mexicano,0
+224,Hirving Lozano,27,Extremo derecho,Mexicano,0
+225,Tecatito ,29,Extremo derecho,Mexicano,0
+226,Roberto Alvarado,24,Extremo derecho,Mexicano,0
+227,Uriel Antuna,25,Extremo derecho,Mexicano,0
+228,Diego Lainez,22,Extremo derecho,Mexicano,0
+229,Raul Jimenez ,31,Delantero centro,Mexicano,0
+230,Henry Martin,29,Delantero centro,Mexicano,0
+231,Rogelio Funes Mori,31,Delantero centro,Mexicano,0
+232,Santiago Gimenez,21,Delantero centro,Mexicano,0
+233,Matt Turner,28,Portero,Estado Unidense,0
+234,Sean Johnson,33,Portero,Estado Unidense,0
+235,Ethan Horvath,27,Portero,Estado Unidense,0
+236,Walker Zimmerman,29,Defensa central,Estado Unidense,0
+237,Mark McKenzie,23,Defensa central,Estado Unidense,0
+238,Aaron Long,30,Defensa central,Estado Unidense,0
+239,Erik Palmer Brown,25,Defensa central,Estado Unidense,0
+240,Sam Vines,23,Lateral izquierdo,Estado Unidense,0
+241,Sergino Dest,21,Lateral derecho,Estado Unidense,0
+242,Joe Scally,19,Lateral derecho,Estado Unidense,0
+243,Reggie Cannon,24,Lateral derecho,Estado Unidense,0
+244,DeAndre Yedlin,29,Lateral derecho,Estado Unidense,0
+245,Tyler Adams,23,Pivote,Estado Unidense,0
+246,Kellyn Acosta,27,Pivote,Estado Unidense,0
+247,Weston McKennie,24,Mediocentro,Estado Unidense,0
+248,Luca de la Torre,24,Mediocentro,Estado Unidense,0
+249,Johnny,21,Mediocentro,Estado Unidense,0
+250,Giovanni Reyna,19,Mediocentro ofensivo,Estado Unidense,0
+251,Brenden Aaronson,22,Mediocentro ofensivo,Estado Unidense,0
+252,Malik Tillman,20,Mediocentro ofensivo,Estado Unidense,0
+253,Jordan Morris,28,Extremo izquierdo,Estado Unidense,0
+254,Paul Arriola,27,Extremo derecho,Estado Unidense,0
+255,Josh Sargent,22,Delantero centro,Estado Unidense,0
+256,Ricardo Pepi,19,Delantero centro,Estado Unidense,0
+257,Jesus Ferreira,21,Delantero centro,Estado Unidense,0
+258,Andre Onana,26,Portero,Camerunes,0
+259,Devis Epassy,29,Portero,Camerunes,0
+260,Simon Ngapandouetnbu,19,Portero,Camerunes,0
+261,Christopher Wooh,21,Defensa central,Camerunes,0
+262,Jean Charles Castelletto,27,Defensa central,Camerunes,0
+263,Nicolas N Koulou,32,Defensa central,Camerunes,0
+264,Oumar Gonzalez,24,Defensa central,Camerunes,0
+265,Enzo Tchato,19,Defensa central,Camerunes,0
+266,Nouhou,25,Lateral izquierdo,Camerunes,0
+267,Darlin Yongwa,22,Lateral izquierdo,Camerunes,0
+268,Olivier Mbaizo,25,Lateral derecho,Camerunes,0
+269,Collins Fai,30,Lateral derecho,Camerunes,0
+270,Jean Onana,22,Pivote,Camerunes,0
+271,Martin Hongla,24,Pivote,Camerunes,0
+272,Samuel Oum Gouet,24,Pivote,Camerunes,0
+273,Gael Ondoua,26,Pivote,Camerunes,0
+274,Georges Mandjeck,33,Pivote,Camerunes,0
+275,Olivier Ntcham,26,Mediocentro,Camerunes,0
+276,Pierre Kunde,27,Mediocentro,Camerunes,0
+277,Karl Toko Ekambi,30,Extremo izquierdo,Camerunes,0
+278,Georges Kevin N Koudou,27,Extremo izquierdo,Camerunes,0
+279,Nicolas Moumi Ngamaleu,28,Extremo izquierdo,Camerunes,0
+280,Bryan Mbeumo,23,Extremo derecho,Camerunes,0
+281,Vincent Aboubakar,30,Delantero centro,Camerunes,0
+282,Jean Pierre Nsame,29,Delantero centro,Camerunes,0
+283,Leandre Tawamba,32,Delantero centro,Camerunes,0
+284,Alfred Gomis,29,Portero,Senegales,0
+285,Seny Dieng,27,Portero,Senegales,0
+286,Mory Diaw,29,Portero,Senegales,0
+287,Kalidou Koulibaly,31,Defensa central,Senegales,0
+288,Moussa Niakhate,26,Defensa central,Senegales,0
+289,Abdou Diallo,26,Defensa central,Senegales,0
+290,Pape Abou Cisse ,27,Defensa central,Senegales,0
+291,Formose Mendy,21,Defensa central,Senegales,0
+292,Ismail Jakobs,23,Lateral izquierdo,Senegales,0
+293,Fode Ballo Toure,25,Lateral izquierdo,Senegales,0
+294,Pape Gueye,23,Pivote,Senegales,0
+295,Nampalys Mendy,30,Pivote,Senegales,0
+296,Cheikhou Kouyate,32,Pivote,Senegales,0
+297,Mamadou Loum,25,Pivote,Senegales,0
+298,Moustapha Name,27,Pivote,Senegales,0
+299,Pape Matar Sarr,20,Mediocentro,Senegales,0
+300,Idrissa Gueye,33,Mediocentro,Senegales,0
+301,Pathe Ciss,28,Mediocentro,Senegales,0
+302,Iliman Ndiaye,22,Mediocentro ofensivo,Senegales,0
+303,Sadio Mane,30,Extremo izquierdo,Senegales,0
+304,Ismaila Sarr,24,Extremo derecho,Senegales,0
+305,Krepin Diatta,23,Extremo derecho,Senegales,0
+306,Nicolas Jackson,21,Extremo derecho,Senegales,0
+307,Demba Seck,21,Extremo derecho,Senegales,0
+308,Boulaye Dia,25,Delantero centro,Senegales,0
+309,Bamba Dieng ,22,Delantero centro,Senegales,0
+310,Mathew Ryan,30,Portero,Australiano,0
+311,Mitchell Langerak,34,Portero,Australiano,0
+312,Andrew Redmayne,33,Portero,Australiano,0
+313,Milos Degenek,28,Defensa central,Australiano,0
+314,Trent Sainsbury,30,Defensa central,Australiano,0
+315,Bailey Wright,30,Defensa central,Australiano,0
+316,Harrison Delbridge,30,Defensa central,Australiano,0
+317,Thomas Deng,25,Defensa central,Australiano,0
+318,Aziz Behich,31,Lateral izquierdo,Australiano,0
+319,Joel King,22,Lateral izquierdo,Australiano,0
+320,Nathaniel Atkinson ,23,Lateral derecho,Australiano,0
+321,Fran Karacic,26,Lateral derecho,Australiano,0
+322,Ryan Strain,25,Lateral derecho,Australiano,0
+323,Connor Metcalfe,22,Pivote,Australiano,0
+324,Keanu Baccus,24,Pivote,Australiano,0
+325,Cammy Devlin ,24,Pivote,Australiano,0
+326,Aaron Mooy,32,Mediocentro,Australiano,0
+327,Riley McGree,23,Mediocentro,Australiano,0
+328,Jackson Irvine,29,Mediocentro,Australiano,0
+329,Tyrese Francois,22,Mediocentro,Australiano,0
+330,Ajdin Hrustic ,26,Mediocentro ofensivo,Australiano,0
+331,Denis Genreau,23,Mediocentro ofensivo,Australiano,0
+332,Awer Mabil,27,Extremo izquierdo,Australiano,0
+333,Mathew Leckie,31,Extremo izquierdo,Australiano,0
+334,Martin Boyle,29,Extremo derecho,Australiano,0
+335,Marco Tilio,21,Extremo derecho,Australiano,0
+336,Jamie Maclaren,29,Delantero centro,Australiano,0
+337,Adam Taggart,29,Delantero centro,Australiano,0
+338,Jason Cummings,27,Delantero centro,Australiano,0
+339,Mitchell Duke,31,Delantero centro,Australiano,0
+340,Garang Kuol,18,Delantero centro,Australiano,0
+341,Meshaal Barsham,24,Portero,Qatari,0
+342,Salah Zakaria,23,Portero,Qatari,0
+343,Saad Al Sheeb,32,Portero,Qatari,0
+344,Yousef Hassan,26,Portero,Qatari,0
+345,Tarek Salman,24,Defensa central,Qatari,0
+346,Pedro Miguel,32,Defensa central,Qatari,0
+347,Bassam Al Rawi,24,Defensa central,Qatari,0
+348,Boualem Khoukhi,32,Defensa central,Qatari,0
+349,Mohamed Emad Aiash,21,Defensa central,Qatari,0
+350,Abdelkarim Hassan,29,Lateral izquierdo,Qatari,0
+351,Homam Ahmed,23,Lateral izquierdo,Qatari,0
+352,Musab Khoder,29,Lateral derecho,Qatari,0
+353,Karim Boudiaf,32,Pivote,Qatari,0
+354,Ahmed Fadel,29,Pivote,Qatari,0
+355,Jassem Gaber Abdulsallam,20,Pivote,Qatari,0
+356,Abdulaziz Hatem,32,Mediocentro,Qatari,0
+357,Mohammed Waad,23,Mediocentro,Qatari,0
+358,Osama Al Tairi,20,Mediocentro,Qatari,0
+359,Mustafa Mashaal,21,Mediocentro,Qatari,0
+360,Ali Asad,29,Mediocentro ofensivo,Qatari,0
+361,Akram Afif,25,Extremo izquierdo,Qatari,0
+362,Abdelrahman Moustafa,25,Extremo izquierdo,Qatari,0
+363,Khalid Muneer Mazeed,24,Extremo izquierdo,Qatari,30
+364,Yusuf Abdurisag,23,Extremo izquierdo,Qatari,0
+365,Hasan Al Haydos,31,Extremo derecho,Qatari,0
+366,Ismaeel Mohammed,32,Extremo derecho,Qatari,20
+367,Naif Al Hadhrami,21,Extremo derecho,Qatari,0
+368,Almoez Ali,26,Delantero centro,Qatari,0
+369,Ahmed Alaaeldin,29,Delantero centro,Qatari,0
+370,Mohammed Muntari,28,Delantero centro,Qatari,0
+377,Lautaor Monserrat,23,Arquero,Argentino,3
