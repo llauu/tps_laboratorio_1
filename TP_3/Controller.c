@@ -13,7 +13,7 @@
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
 int controller_cargarJugadoresDesdeTexto(char* path , LinkedList* pArrayListJugador)
@@ -38,7 +38,7 @@ int controller_cargarJugadoresDesdeTexto(char* path , LinkedList* pArrayListJuga
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
 int controller_cargarConvocadosDesdeBinario(char* path , LinkedList* pArrayListJugador)
@@ -63,7 +63,7 @@ int controller_cargarConvocadosDesdeBinario(char* path , LinkedList* pArrayListJ
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  */
 int controller_agregarJugador(LinkedList* pArrayListJugador)
 {
@@ -84,10 +84,10 @@ int controller_agregarJugador(LinkedList* pArrayListJugador)
 			if(rtn){
 				sprintf(idAux, "%d", ultimoIdAux);
 
-				getString(nombreAux, 100, "\nNombre: ", "\nERROR");
-				getStringNumeric(edadAux, 100, "\nEdad: ", "\nERROR");
-				getString(posicionAux, 100, "\nPosicion: ", "\nERROR");
-				getString(nacionalidadAux, 100, "\nNacionalidad: ", "\nERROR");
+				getString(nombreAux, 100, "\nIngrese el nombre: \n> ", "\n[ERROR] Nombre no valido.");
+				getStringNumeric(edadAux, 100, "\nIngrese la edad: \n> ", "\n[ERROR] Edad no valida.");
+				getString(posicionAux, 100, "\nIngrese la posicion: \n> ", "\n[ERROR] Posicion no valida.");
+				getString(nacionalidadAux, 100, "\nIngrese la nacionalidad: \n> ", "\n[ERROR] Nacionalidad no valida.");
 
 				FirstToUppercase(nombreAux, 100);
 				FirstToUppercase(posicionAux, 100);
@@ -102,7 +102,6 @@ int controller_agregarJugador(LinkedList* pArrayListJugador)
 			else{
 				printf("\n[ERROR] Hubo un fallo en la carga del ultimo id.\n");
 			}
-
 		}
 		else{
 			printf("\n[ERROR] Tenes que cargar los archivos .csv antes de dar de alta nuevos jugadores.\n");
@@ -117,7 +116,7 @@ int controller_agregarJugador(LinkedList* pArrayListJugador)
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
 int controller_editarJugador(LinkedList* pArrayListJugador)
@@ -151,30 +150,31 @@ int controller_editarJugador(LinkedList* pArrayListJugador)
 
 			switch(opcion){
 				case 1: // nombre:
-					getString(nombreAux, 100, "\nIngrese el nuevo nombre del jugador: ", "\nERROR");
+					getString(nombreAux, 100, "\nIngrese el nombre: \n> ", "\n[ERROR] Nombre no valido.");
 					FirstToUppercase(nombreAux, 100);
 					jug_setNombreCompleto(jugadorAEditar, nombreAux);
 					break;
 
 				case 2: // edad:
-					getInt(&edadAux, "\nIngrese la nueva edad del jugador: ", "\nERROR", 1, 100);
+					getInt(&edadAux, "\nIngrese la nueva edad del jugador: ", "\nERROR", 18, 100);
 					jug_setEdad(jugadorAEditar, edadAux);
 					break;
 
 				case 3: // posi:
-					getString(posicionAux, 100, "\nIngrese la nueva posicion del jugador: ", "\nERROR");
+					getString(posicionAux, 100, "\nIngrese la posicion: \n> ", "\n[ERROR] Posicion no valida.");
 					FirstToUppercase(posicionAux, 100);
 					jug_setPosicion(jugadorAEditar, posicionAux);
 					break;
 
 				case 4: // nacio:
-					getString(nacionalidadAux, 100, "\nIngrese la nueva nacionalidad del jugador: ", "\nERROR");
+					getString(nacionalidadAux, 100, "\nIngrese la nacionalidad: \n> ", "\n[ERROR] Nacionalidad no valida.");
 					FirstToUppercase(nacionalidadAux, 100);
 					jug_setNacionalidad(jugadorAEditar, nacionalidadAux);
 					break;
 			}
 
 			printf("\nSe modifico con exito!");
+			rtn = 1;
 		}
 		else{
 			printf("\n[ERROR] No hay jugadores cargados para editar.\n");
@@ -188,7 +188,8 @@ int controller_editarJugador(LinkedList* pArrayListJugador)
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+ * \param pArrayListSeleccion LinkedList*
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
 int controller_removerJugador(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion)
@@ -238,7 +239,7 @@ int controller_removerJugador(LinkedList* pArrayListJugador, LinkedList* pArrayL
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
 int controller_listarJugadores(LinkedList* pArrayListJugador)
@@ -275,19 +276,57 @@ int controller_listarJugadores(LinkedList* pArrayListJugador)
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
 int controller_ordenarJugadores(LinkedList* pArrayListJugador)
 {
-    return 1;
+	int rtn = -1;
+	int opcion;
+	int criterioOrdenamiento;
+
+	if(pArrayListJugador != NULL){
+		if(ll_len(pArrayListJugador) > 0){
+			printf("\n+---------------------------------+"
+				   "\n|        ORDENAR Y LISTAR         |"
+				   "\n+---------------------------------+"
+				   "\n| 1.JUGADORES POR NACIONALIDAD    |"
+				   "\n| 2.JUGADORES POR EDAD            |"
+				   "\n| 3.JUGADORES POR NOMBRE          |"
+				   "\n+---------------------------------+\n");
+			getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 3);
+
+			getInt(&criterioOrdenamiento, "\nSeleccione un criterio de ordenamiento\n 0 para descendente o 1 para ascendente: \n> ",  "\n[ERROR] Opcion invalida.", 0, 1);
+
+			switch(opcion){
+				case 1:
+					ll_sort(pArrayListJugador, jug_OrdenarPorNacionalidad, criterioOrdenamiento);
+					break;
+
+				case 2:
+					ll_sort(pArrayListJugador, jug_OrdenarPorEdad, criterioOrdenamiento);
+					break;
+
+				case 3:
+					ll_sort(pArrayListJugador, jug_OrdenarPorNombre, criterioOrdenamiento);
+					break;
+			}
+
+			rtn = 1;
+		}
+		else{
+			printf("\n[ERROR] Es necesario cargar los jugadores para ordenarlos.\n");
+		}
+	}
+
+    return rtn;
 }
 
 /** \brief Guarda los datos de los jugadores en el archivo jugadores.csv (modo texto).
  *
  * \param path char*
  * \param pArrayListSeleccion LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
 int controller_guardarJugadoresModoTexto(char* path , LinkedList* pArrayListJugador)
@@ -338,20 +377,77 @@ int controller_guardarJugadoresModoTexto(char* path , LinkedList* pArrayListJuga
     return rtn;
 }
 
+/**
+ * @brief Menu para guardar los jugadores de una confederacion
+ *
+ * @param path
+ * @param pArrayListSeleccion
+ * @param pArrayListJugador
+ * @return int -1 si salio mal, 1 si todo ok
+ */
+int controller_menuGuardarConvocadosBinario(char* path, LinkedList* pArrayListSeleccion, LinkedList* pArrayListJugador){
+	int rtn = -1;
+	int opcion;
+
+	if(path != NULL && pArrayListSeleccion != NULL && pArrayListJugador != NULL){
+		if(ll_len(pArrayListJugador) > 0){
+			printf("\n1.AFC"
+				   "\n2.CAF"
+				   "\n3.CONCACAF"
+				   "\n4.CONMEBOL"
+				   "\n5.UEFA");
+			getInt(&opcion, "\nSeleccione que confederacion quiere guardar: \n> ", "\n[ERROR] Opcion invalida.", 1, 5);
+
+			switch(opcion){
+				case 1:
+					controller_guardarConvocadosModoBinario(path, pArrayListJugador, pArrayListSeleccion, "AFC");
+					break;
+
+				case 2:
+					controller_guardarConvocadosModoBinario(path, pArrayListJugador, pArrayListSeleccion, "CAF");
+					break;
+
+				case 3:
+					controller_guardarConvocadosModoBinario(path, pArrayListJugador, pArrayListSeleccion, "CONCACAF");
+					break;
+
+				case 4:
+					controller_guardarConvocadosModoBinario(path, pArrayListJugador, pArrayListSeleccion, "CONMEBOL");
+					break;
+
+				case 5:
+					controller_guardarConvocadosModoBinario(path, pArrayListJugador, pArrayListSeleccion, "UEFA");
+					break;
+			}
+
+			rtn = 1;
+		}
+		else{
+			printf("\n[ERROR] Se deben cargar los archivos antes de guardar en binario los convocados.\n");
+		}
+	}
+
+	return rtn;
+}
+
+
 /** \brief Guarda los datos de los jugadores en el archivo binario.
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
-int controller_guardarConvocadosModoBinario(char* path , LinkedList* pArrayListJugador)
+int controller_guardarConvocadosModoBinario(char* path, LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion, char* confederacionAGuardar)
 {
 	int rtn = -1;
 	int cant;
 	FILE* miArchivo;
 	Jugador* jugadorAux;
+	Seleccion* seleccionAux;
+	char confederacion[100];
 	int idSeleccionAux;
+	int indiceSeleccion;
 
 	if(path != NULL && pArrayListJugador != NULL){
 		cant = ll_len(pArrayListJugador);
@@ -366,7 +462,15 @@ int controller_guardarConvocadosModoBinario(char* path , LinkedList* pArrayListJ
 					jug_getIdSeleccion(jugadorAux, &idSeleccionAux);
 
 					if(idSeleccionAux > 0){
-						fwrite(jugadorAux, sizeof(Jugador), 1, miArchivo);
+						indiceSeleccion = controller_buscarSeleccionPorID(pArrayListSeleccion, idSeleccionAux);
+
+						seleccionAux = ll_get(pArrayListSeleccion, indiceSeleccion);
+
+						selec_getConfederacion(seleccionAux, confederacion);
+
+						if(strcmp(confederacion, confederacionAGuardar) == 0){
+							fwrite(jugadorAux, sizeof(Jugador), 1, miArchivo);
+						}
 					}
 				}
 			    fclose(miArchivo);
@@ -383,12 +487,11 @@ int controller_guardarConvocadosModoBinario(char* path , LinkedList* pArrayListJ
 }
 
 
-
 /** \brief Carga los datos de los selecciones desde el archivo selecciones.csv (modo texto).
  *
  * \param path char*
  * \param pArrayListSeleccion LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
 int controller_cargarSeleccionesDesdeTexto(char* path , LinkedList* pArrayListSeleccion)
@@ -412,12 +515,57 @@ int controller_cargarSeleccionesDesdeTexto(char* path , LinkedList* pArrayListSe
  *
  * \param path char*
  * \param pArrayListSeleccion LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
 int controller_editarSeleccion(LinkedList* pArrayListSeleccion)
 {
-    return 1;
+	int rtn = -1;
+	int opcion;
+	char paisAux[100];
+	char confederacionAux[100];
+	int indiceAEditar;
+	Seleccion* seleccionAEditar;
+
+	if(pArrayListSeleccion != NULL){
+		if(ll_len(pArrayListSeleccion) > 0){
+			controller_listarSelecciones(pArrayListSeleccion);
+
+			indiceAEditar = controller_solicitarYValidarIdSeleccion(pArrayListSeleccion);
+			seleccionAEditar = (Seleccion*) ll_get(pArrayListSeleccion, indiceAEditar);
+
+			printf("\n+---------------------------+"
+				   "\n|     MENU MODIFICACION     |"
+				   "\n+---------------------------+"
+				   "\n| 1.PAIS                    |"
+				   "\n| 2.CONFEDERACION           |"
+				   "\n+---------------------------+\n");
+
+			getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 2);
+
+			switch(opcion){
+				case 1:
+					getString(paisAux, 100, "\nIngrese el nuevo pais de la seleccion: ", "\nERROR");
+					FirstToUppercase(paisAux, 100);
+					selec_setPais(seleccionAEditar, paisAux);
+					break;
+
+				case 2:
+					getString(confederacionAux, 100, "\nIngrese la nueva confederacion de la seleccion: ", "\nERROR");
+					StringUpper(confederacionAux, 100);
+					selec_setConfederacion(seleccionAEditar, confederacionAux);
+					break;
+			}
+
+			printf("\nSe modifico con exito!");
+			rtn = 1;
+		}
+		else{
+			printf("\n[ERROR] No hay selecciones cargadas para editar.\n");
+		}
+	}
+
+    return rtn;
 }
 
 
@@ -425,7 +573,7 @@ int controller_editarSeleccion(LinkedList* pArrayListSeleccion)
  *
  * \param path char*
  * \param pArrayListSeleccion LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
 int controller_listarSelecciones(LinkedList* pArrayListSeleccion)
@@ -438,9 +586,7 @@ int controller_listarSelecciones(LinkedList* pArrayListSeleccion)
 		cant = ll_len(pArrayListSeleccion);
 
 		if(cant > 0){
-			printf("\n+------+--------------------------------+---------------------------+--------------+"
-				   "\n|  ID  |            PAIS                |       CONFEDERACION       |  CONVOCADOS  |"
-				   "\n+------+--------------------------------+---------------------------+--------------+");
+			MostrarCabeceraConfederaciones();
 
 			for(int i = 0; i < cant; i++){
 				seleccionAux = (Seleccion*) ll_get(pArrayListSeleccion, i);
@@ -448,7 +594,7 @@ int controller_listarSelecciones(LinkedList* pArrayListSeleccion)
 				selec_mostrarSeleccion(seleccionAux);
 			}
 
-			printf("\n+------+--------------------------------+---------------------------+--------------+\n");
+			MostrarPieConfederaciones();
 
 			rtn = 1;
 		}
@@ -464,19 +610,47 @@ int controller_listarSelecciones(LinkedList* pArrayListSeleccion)
  *
  * \param path char*
  * \param pArrayListSeleccion LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
 int controller_ordenarSelecciones(LinkedList* pArrayListSeleccion)
 {
-    return 1;
+	int rtn = -1;
+	int opcion;
+	int criterioOrdenamiento;
+
+	if(pArrayListSeleccion != NULL){
+		if(ll_len(pArrayListSeleccion) > 0){
+			printf("\n+---------------------------------+"
+				   "\n|        ORDENAR Y LISTAR         |"
+				   "\n+---------------------------------+"
+				   "\n| 1.SELECCIONES POR CONFEDERACION |"
+				   "\n+---------------------------------+\n");
+			getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 2);
+
+			getInt(&criterioOrdenamiento, "\nSeleccione un criterio de ordenamiento\n 0 para descendente o 1 para ascendente: \n> ",  "\n[ERROR] Opcion invalida.", 0, 1);
+
+			switch(opcion){
+				case 1:
+					ll_sort(pArrayListSeleccion, selec_OrdenarPorConfederacion, criterioOrdenamiento);
+					break;
+			}
+
+			rtn = 1;
+		}
+		else{
+			printf("\n[ERROR] Es necesario cargar las selecciones para ordenarlas.\n");
+		}
+	}
+
+    return rtn;
 }
 
 /** \brief Guarda los datos de los selecciones en el archivo selecciones.csv (modo texto).
  *
  * \param path char*
  * \param pArrayListSeleccion LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
 int controller_guardarSeleccionesModoTexto(char* path , LinkedList* pArrayListSeleccion)
@@ -523,7 +697,13 @@ int controller_guardarSeleccionesModoTexto(char* path , LinkedList* pArrayListSe
     return rtn;
 }
 
-
+/**
+ * @brief Carga un archivo donde se guardo el ultimo id del jugador utilizado
+ *
+ * @param path
+ * @param ultimoId
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int controller_cargarUltimoIDJugador(char* path, int* ultimoId){
 	int rtn = -1;
 	int ultimoIdAux = 370;
@@ -557,7 +737,13 @@ int controller_cargarUltimoIDJugador(char* path, int* ultimoId){
 	return rtn;
 }
 
-
+/**
+ * @brief Lista los jugadores convocados en una seleccion
+ *
+ * @param pArrayListJugador
+ * @param pArrayListSeleccion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int controller_listarJugadoresConvocados(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion){
 	int rtn = -1;
 	int cant;
@@ -592,18 +778,13 @@ int controller_listarJugadoresConvocados(LinkedList* pArrayListJugador, LinkedLi
 	return rtn;
 }
 
-
-int controller_obtenerNombreSeleccion(LinkedList* pArrayListSeleccion, int idSeleccion){
-	int rtn = -1;
-
-	if(pArrayListSeleccion != NULL && idSeleccion > 0){
-
-	}
-
-	return rtn;
-}
-
-
+/**
+ * @brief Lista los jugadores pero con el nombre de la seleccion a la que pertenece
+ *
+ * @param pArrayListJugador
+ * @param pArrayListSeleccion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int controller_listarJugadoresConSelecciones(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion){
 	int rtn = -1;
 	int cant;
@@ -633,7 +814,13 @@ int controller_listarJugadoresConSelecciones(LinkedList* pArrayListJugador, Link
     return rtn;
 }
 
-
+/**
+ * @brief Muestra un solo jugador con el nombre de su seleccion
+ *
+ * @param jugador
+ * @param pArrayListSeleccion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int mostrarJugadorConSeleccion(Jugador* jugador, LinkedList* pArrayListSeleccion){
 	int rtn = -1;
 	int idAux;
@@ -672,36 +859,44 @@ int mostrarJugadorConSeleccion(Jugador* jugador, LinkedList* pArrayListSeleccion
 	return rtn;
 }
 
-
+/**
+ * @brief Muestra el menu de listados disponibles
+ *
+ * @param pArrayListJugador
+ * @param pArrayListSeleccion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int controller_menuListados(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion){
 	int rtn = -1;
 	int opcion;
 
 	if(pArrayListJugador != NULL && pArrayListSeleccion != NULL){
 		if(ll_len(pArrayListJugador) > 0 && ll_len(pArrayListSeleccion) > 0){
-	    	printf("\n+----------------------------+"
-	    		   "\n|       MENU LISTADOS        |"
-	    		   "\n+----------------------------+"
-	    		   "\n| 1.TODOS LOS JUGADORES      |"
-	    		   "\n| 2.TODAS LAS SELECCIONES    |"
-	    		   "\n| 3.JUGADORES CONVOCADOS     |"
-	     		   "\n| 4.VOLVER AL MENU PRINCIPAL |"
-	    		   "\n+----------------------------+\n");
-	    	getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 4);
+			do{
+		    	printf("\n+----------------------------+"
+		    		   "\n|       MENU LISTADOS        |"
+		    		   "\n+----------------------------+"
+		    		   "\n| 1.TODOS LOS JUGADORES      |"
+		    		   "\n| 2.TODAS LAS SELECCIONES    |"
+		    		   "\n| 3.JUGADORES CONVOCADOS     |"
+		     		   "\n| 4.SALIR                    |"
+		    		   "\n+----------------------------+\n");
+		    	getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 4);
 
-	    	switch(opcion){
-				case 1:
-					controller_listarJugadores(pArrayListJugador);
-					break;
+		    	switch(opcion){
+					case 1:
+						controller_listarJugadores(pArrayListJugador);
+						break;
 
-				case 2:
-					controller_listarSelecciones(pArrayListSeleccion);
-					break;
+					case 2:
+						controller_listarSelecciones(pArrayListSeleccion);
+						break;
 
-				case 3:
-					controller_listarJugadoresConvocados(pArrayListJugador, pArrayListSeleccion);
-					break;
-	    	}
+					case 3:
+						controller_listarJugadoresConvocados(pArrayListJugador, pArrayListSeleccion);
+						break;
+		    	}
+			}while(opcion != 4);
 
 			rtn = 1;
 		}
@@ -713,7 +908,13 @@ int controller_menuListados(LinkedList* pArrayListJugador, LinkedList* pArrayLis
 	return rtn;
 }
 
-
+/**
+ * @brief Permite convocar jugadores a las selecciones
+ *
+ * @param pArrayListJugador
+ * @param pArrayListSeleccion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int controller_convocarJugadores(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion){
 	int rtn = -1;
 	int indiceJugador;
@@ -751,6 +952,8 @@ int controller_convocarJugadores(LinkedList* pArrayListJugador, LinkedList* pArr
 					selec_setConvocados(seleccionAux, convocadosAux);
 
 					printf("\nJugador convocado con exito!\n");
+
+					rtn = 1;
 				}
 				else{
 					printf("\n[ERROR] La seleccion ya esta llena.\n");
@@ -763,14 +966,18 @@ int controller_convocarJugadores(LinkedList* pArrayListJugador, LinkedList* pArr
 		else{
 			printf("\n[ERROR] No hay jugadores y selecciones cargados para convocar.\n");
 		}
-
-		rtn = 1;
 	}
 
 	return rtn;
 }
 
-
+/**
+ * @brief Permite desconvocar jugadores de sus selecciones
+ *
+ * @param pArrayListJugador
+ * @param pArrayListSeleccion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int controller_quitarJugadoresConvocados(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion){
 
 	int rtn = -1;
@@ -813,7 +1020,7 @@ int controller_quitarJugadoresConvocados(LinkedList* pArrayListJugador, LinkedLi
 				selec_setConvocados(seleccionAux, convocadosAux);
 
 				printf("\nJugador quitado de la seleccion con exito!");
-
+				rtn = 1;
 			}
 			else{
 				printf("\n[ERROR] El jugador no esta convocado en una seleccion.");
@@ -829,7 +1036,13 @@ int controller_quitarJugadoresConvocados(LinkedList* pArrayListJugador, LinkedLi
 	return rtn;
 }
 
-
+/**
+ * @brief Muestra el menu de las opciones de convocados
+ *
+ * @param pArrayListJugador
+ * @param pArrayListSeleccion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int controller_menuConvocados(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion){
 	int rtn = -1;
 	int opcion;
@@ -840,27 +1053,31 @@ int controller_menuConvocados(LinkedList* pArrayListJugador, LinkedList* pArrayL
     		   "\n+----------------------------+"
     		   "\n| 1.CONVOCAR                 |"
     		   "\n| 2.QUITAR DE LA SELECCION   |"
-      		   "\n| 3.VOLVER AL MENU PRINCIPAL |"
+      		   "\n| 3.SALIR                    |"
     		   "\n+----------------------------+\n");
     	getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 3);
 
     	switch(opcion){
 			case 1:
-				controller_convocarJugadores(pArrayListJugador, pArrayListSeleccion);
+				rtn = controller_convocarJugadores(pArrayListJugador, pArrayListSeleccion);
 				break;
 
 			case 2:
-				controller_quitarJugadoresConvocados(pArrayListJugador, pArrayListSeleccion);
+				rtn = controller_quitarJugadoresConvocados(pArrayListJugador, pArrayListSeleccion);
 				break;
     	}
-
-		rtn = 1;
 	}
 
 	return rtn;
 }
 
-
+/**
+ * @brief Permite buscar el indice de un id en la linkedlist
+ *
+ * @param pArrayListJugador
+ * @param idIngresado
+ * @return int indice donde se encontro el id ingresado
+ */
 int controller_buscarJugadorPorID(LinkedList* pArrayListJugador, int idIngresado){
 	int indiceId = -1;
 	int cant;
@@ -887,7 +1104,12 @@ int controller_buscarJugadorPorID(LinkedList* pArrayListJugador, int idIngresado
 	return indiceId;
 }
 
-
+/**
+ * @brief Permite pedir un id para buscar
+ *
+ * @param pArrayListJugador
+ * @return int indice donde se encontro el id ingresado
+ */
 int controller_solicitarYValidarIdJugador(LinkedList* pArrayListJugador){
 	int indiceId = -1;
 	int idIngresado;
@@ -908,7 +1130,13 @@ int controller_solicitarYValidarIdJugador(LinkedList* pArrayListJugador){
 	return indiceId;
 }
 
-
+/**
+ * @brief Permite buscar el indice de un id en la linkedlist
+ *
+ * @param pArrayListSeleccion
+ * @param idIngresado
+ * @return int indice donde se encontro el id ingresado
+ */
 int controller_buscarSeleccionPorID(LinkedList* pArrayListSeleccion, int idIngresado){
 	int indiceId = -1;
 	int cant;
@@ -936,7 +1164,12 @@ int controller_buscarSeleccionPorID(LinkedList* pArrayListSeleccion, int idIngre
 	return indiceId;
 }
 
-
+/**
+ * @brief Permite pedir un id para buscar
+ *
+ * @param pArrayListSeleccion
+ * @return int indice donde se encontro el id ingresado
+ */
 int controller_solicitarYValidarIdSeleccion(LinkedList* pArrayListSeleccion){
 	int indiceId = -1;
 	int idIngresado;
@@ -958,8 +1191,62 @@ int controller_solicitarYValidarIdSeleccion(LinkedList* pArrayListSeleccion){
 	return indiceId;
 }
 
+/**
+ * @brief Muestra el menu de ordenamientos disponibles y permite elegir que se desea hacer
+ *
+ * @param pArrayListJugador
+ * @param pArrayListSeleccion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
+int controller_menuOrdenamientos(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion){
+	int rtn = -1;
+	int opcion;
+    LinkedList* listaJugadoresAux = ll_newLinkedList();
+    LinkedList* listaSeleccionesAux = ll_newLinkedList();
+
+	if(pArrayListJugador != NULL && pArrayListSeleccion != NULL && listaJugadoresAux != NULL && listaSeleccionesAux != NULL){
+		if(ll_len(pArrayListJugador) > 0 && ll_len(pArrayListSeleccion) > 0){
+
+			listaJugadoresAux = ll_clone(pArrayListJugador);
+			listaSeleccionesAux = ll_clone(pArrayListSeleccion);
+
+			do{
+		    	printf("\n+----------------+"
+		    		   "\n|    ORDENAR     |"
+		    		   "\n+----------------+"
+		    		   "\n| 1.JUGADORES    |"
+		    		   "\n| 2.SELECCIONES  |"
+		    		   "\n| 3.SALIR        |"
+		    		   "\n+----------------+\n");
+		    	getInt(&opcion, "\nSeleccione una opcion: \n> ", "\n[ERROR] Opcion invalida.", 1, 3);
+
+		    	switch(opcion){
+					case 1:
+						controller_ordenarJugadores(listaJugadoresAux);
+						controller_listarJugadoresConSelecciones(listaJugadoresAux, listaSeleccionesAux);
+						break;
+
+					case 2:
+						controller_ordenarSelecciones(listaSeleccionesAux);
+						controller_listarSelecciones(listaSeleccionesAux);
+						break;
+		    	}
+			}while(opcion != 3);
+
+		    ll_deleteLinkedList(listaJugadoresAux);
+		    ll_deleteLinkedList(listaSeleccionesAux);
+
+			rtn = 1;
+		}
+		else{
+			printf("\n[ERROR] Es necesario cargar los jugadores y selecciones para ordenar.\n");
+		}
 
 
+	}
+
+    return rtn;
+}
 
 
 

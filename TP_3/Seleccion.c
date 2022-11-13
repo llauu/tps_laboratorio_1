@@ -2,8 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Seleccion.h"
+#include "input-output.h"
 
-
+/**
+ * @brief Constructor de seleccion
+ *
+ * @return Seleccion*
+ */
 Seleccion* selec_new(){
 	Seleccion* miSeleccion;
 
@@ -12,6 +17,15 @@ Seleccion* selec_new(){
 	return miSeleccion;
 }
 
+/**
+ * @brief Constructor de seleccion parametrizado
+ *
+ * @param idStr char*
+ * @param paisStr char*
+ * @param confederacionStr char*
+ * @param convocadosStr char*
+ * @return Seleccion*
+ */
 Seleccion* selec_newParametros(char* idStr, char* paisStr, char* confederacionStr, char* convocadosStr){
 	Seleccion* miSeleccion;
 
@@ -27,12 +41,24 @@ Seleccion* selec_newParametros(char* idStr, char* paisStr, char* confederacionSt
 	return miSeleccion;
 }
 
+/**
+ * @brief Borra una seleccion de memoria dinamica
+ *
+ * @param this
+ */
 void selec_delete(Seleccion* this){
 	if(this != NULL){
 		free(this);
 	}
 }
 
+/**
+ * @brief getter de id de seleccion
+ *
+ * @param this
+ * @param id
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int selec_getId(Seleccion* this, int* id){
 	int rtn = -1;
 
@@ -45,6 +71,13 @@ int selec_getId(Seleccion* this, int* id){
 	return rtn;
 }
 
+/**
+ * @brief getter de pais de seleccion
+ *
+ * @param this
+ * @param pais
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int selec_getPais(Seleccion* this, char* pais){
 	int rtn = -1;
 
@@ -57,6 +90,32 @@ int selec_getPais(Seleccion* this, char* pais){
 	return rtn;
 }
 
+/**
+ * @brief setter de pais de seleccion
+ *
+ * @param this
+ * @param pais
+ * @return int -1 si salio mal, 1 si todo ok
+ */
+int selec_setPais(Seleccion* this, char* pais){
+	int rtn = -1;
+
+	if(this != NULL && pais != NULL){
+		strcpy(this->pais, pais);
+
+		rtn = 1;
+	}
+
+	return rtn;
+}
+
+/**
+ * @brief getter de confederacion de seleccion
+ *
+ * @param this
+ * @param confederacion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int selec_getConfederacion(Seleccion* this, char* confederacion){
 	int rtn = -1;
 
@@ -69,6 +128,32 @@ int selec_getConfederacion(Seleccion* this, char* confederacion){
 	return rtn;
 }
 
+/**
+ * @brief setter de confederacion
+ *
+ * @param this
+ * @param confederacion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
+int selec_setConfederacion(Seleccion* this, char* confederacion){
+	int rtn = -1;
+
+	if(this != NULL && confederacion != NULL){
+		strcpy(this->confederacion, confederacion);
+
+		rtn = 1;
+	}
+
+	return rtn;
+}
+
+/**
+ * @brief setter de convocados de seleccion
+ *
+ * @param this
+ * @param convocados
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int selec_setConvocados(Seleccion* this, int convocados){
 	int rtn = -1;
 
@@ -81,6 +166,13 @@ int selec_setConvocados(Seleccion* this, int convocados){
 	return rtn;
 }
 
+/**
+ * @brief getter de convocados de seleccion
+ *
+ * @param this
+ * @param convocados
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int selec_getConvocados(Seleccion* this, int* convocados){
 	int rtn = -1;
 
@@ -93,7 +185,12 @@ int selec_getConvocados(Seleccion* this, int* convocados){
 	return rtn;
 }
 
-
+/**
+ * @brief Permite mostrar una seleccion
+ *
+ * @param seleccion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int selec_mostrarSeleccion(Seleccion* seleccion){
 	int rtn = -1;
 	int idAux;
@@ -113,5 +210,40 @@ int selec_mostrarSeleccion(Seleccion* seleccion){
 	return rtn;
 }
 
+/**
+ * @brief ordena por confederacion 2 selecciones
+ *
+ * @param pSeleccionUno
+ * @param pSeleccionDos
+ * @return 1 si se hace swap, 0 si son iguales
+ */
+int selec_OrdenarPorConfederacion(void* pSeleccionUno, void* pSeleccionDos){
+	int rtn = -1;
+	char confederacionUno[100];
+	char confederacionDos[100];
+
+	Seleccion* seleccionUno;
+	Seleccion* seleccionDos;
+
+	seleccionUno = (Seleccion*) pSeleccionUno;
+	seleccionDos = (Seleccion*) pSeleccionDos;
+
+	selec_getConfederacion(seleccionUno, confederacionUno);
+	selec_getConfederacion(seleccionDos, confederacionDos);
+
+	StringUpper(confederacionUno, 100);
+	StringUpper(confederacionDos, 100);
+
+	if(strcmp(confederacionUno, confederacionDos) > 0){
+		rtn = 1;
+	}
+	else{
+		if(strcmp(confederacionUno, confederacionDos) == 0){
+			rtn = 0;
+		}
+	}
+
+	return rtn;
+}
 
 

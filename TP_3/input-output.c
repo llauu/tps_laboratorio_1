@@ -12,7 +12,7 @@ static int esTexto(char string[], int sizeString){
 
 	if(string != NULL && sizeString > 0){
 		for( ; string[i] != '\0' && i < sizeString; i++){
-			if(string[i] != '.' && string[i] != ' ' && (string[i] < 'A' || string[i] > 'Z' ) && (string[i] < 'a' || string[i] > 'z' ) && (string[i] > '9' || string[i] < '0')){
+			if(string[i] != '.' && string[i] != ' ' && (string[i] < 'A' || string[i] > 'Z' ) && (string[i] < 'a' || string[i] > 'z' )){
 				retorno = 0;
 				break;
 			}
@@ -319,6 +319,24 @@ int ConfirmarSalida(void){
 
 //========== Salidas =========================================================================================
 
+void MostrarMenuPrincipal(void){
+	printf("\n+---------------------------+"
+		   "\n|      MENU PRINCIPAL       |"
+		   "\n+---------------------------+"
+		   "\n| 1.CARGA DE ARCHIVOS       |"
+		   "\n| 2.ALTA DE JUGADOR         |"
+		   "\n| 3.MODIFICACION DE JUGADOR |"
+ 		   "\n| 4.BAJA DE JUGADOR         |"
+ 		   "\n| 5.LISTADOS                |"
+ 		   "\n| 6.CONVOCAR JUGADORES      |"
+ 		   "\n| 7.ORDENAR Y LISTAR        |"
+ 		   "\n| 8.GENERAR ARCHIVO BINARIO |"
+ 		   "\n| 9.CARGAR ARCHIVO BINARIO  |"
+ 		   "\n| 10.GUARDAR ARCHIVOS .CSV  |"
+ 		   "\n| 11.SALIR                  |"
+		   "\n+---------------------------+\n");
+}
+
 
 void MostrarCabeceraJugadores(void){
 	printf("\n+------+--------------------------------+---------------------------+----------------------+------+------+"
@@ -342,9 +360,15 @@ void MostrarPieConSeleccion(void){
 }
 
 
+void MostrarCabeceraConfederaciones(void){
+	printf("\n+------+--------------------------------+---------------------------+--------------+"
+		   "\n|  ID  |            PAIS                |       CONFEDERACION       |  CONVOCADOS  |"
+		   "\n+------+--------------------------------+---------------------------+--------------+");
+}
 
-
-
+void MostrarPieConfederaciones(void){
+	printf("\n+------+--------------------------------+---------------------------+--------------+\n");
+}
 
 
 

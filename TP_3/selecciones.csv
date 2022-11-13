@@ -14,7 +14,7 @@ id,pais,confederacion,convocados
 10,Costa Rica,CONCACAF,0
 15,Estados Unidos,CONCACAF,0
 24,Mexico,CONCACAF,0
-3,Argentina,CONMEBOL,1
+3,Argentina,CONMEBOL,0
 6,Brasil,CONMEBOL,0
 13,Ecuador,CONMEBOL,0
 32,Uruguay,CONMEBOL,0
@@ -26,8 +26,8 @@ id,pais,confederacion,convocados
 16,Francia,UEFA,0
 17,Gales,UEFA,0
 19,Holanda,UEFA,0
-20,Inglaterra,UEFA,1
+20,Inglaterra,UEFA,0
 25,Polonia,UEFA,0
 26,Portugal,UEFA,0
 29,Serbia,UEFA,0
-30,Suiza,UEFA,1
+30,Suiza,UEFA,0

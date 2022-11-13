@@ -38,4 +38,9 @@ int jug_getIdSeleccion(Jugador* this, int* idSeleccion);
 
 int jug_mostrarJugador(Jugador* jugador);
 
+// Ordenamientos
+int jug_OrdenarPorNacionalidad(void* pJugadorUno, void* pJugadorDos);
+int jug_OrdenarPorEdad(void* pJugadorUno, void* pJugadorDos);
+int jug_OrdenarPorNombre(void* pJugadorUno, void* pJugadorDos);
+
 #endif // jug_H_INCLUDED

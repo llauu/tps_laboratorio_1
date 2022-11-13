@@ -121,10 +121,15 @@ int ConfirmarSalida(void);
 
 
 //========== Salidas =========================================================================================
+void MostrarMenuPrincipal(void);
+
 void MostrarCabeceraJugadores(void);
 void MostrarPieJugadores(void);
 
 void MostrarCabeceraConSeleccion(void);
 void MostrarPieConSeleccion(void);
+
+void MostrarCabeceraConfederaciones(void);
+void MostrarPieConfederaciones(void);
 
 #endif

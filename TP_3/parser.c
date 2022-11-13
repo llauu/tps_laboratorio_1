@@ -9,7 +9,7 @@
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  */
 int parser_JugadorFromText(FILE* pFile , LinkedList* pArrayListJugador)
 {
@@ -52,7 +52,7 @@ int parser_JugadorFromText(FILE* pFile , LinkedList* pArrayListJugador)
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
 int parser_ConvocadoFromBinary(FILE* pFile , LinkedList* pArrayListJugador)
@@ -90,7 +90,7 @@ int parser_ConvocadoFromBinary(FILE* pFile , LinkedList* pArrayListJugador)
  *
  * \param path char*
  * \param pArrayListSeleccion LinkedList*
- * \return int
+ * \return int -1 si salio mal, 1 si todo ok
  *
  */
 int parser_SeleccionFromText(FILE* pFile , LinkedList* pArrayListSeleccion)
@@ -128,7 +128,13 @@ int parser_SeleccionFromText(FILE* pFile , LinkedList* pArrayListSeleccion)
     return rtn;
 }
 
-
+/**
+ * @brief Parsea el ultimo id guardado en modo binario en el archivo .bin
+ *
+ * @param pFile
+ * @param lastId
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int parser_LastIdFromBinary(FILE* pFile, int* lastId){
 	int rtn = -1;
 

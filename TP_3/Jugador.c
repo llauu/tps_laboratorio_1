@@ -2,8 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Jugador.h"
+#include "input-output.h"
 
-
+/**
+ * @brief Constructor de jugador
+ *
+ * @return Jugador*
+ */
 Jugador* jug_new(){
 	Jugador* miJugador;
 
@@ -12,7 +17,17 @@ Jugador* jug_new(){
 	return miJugador;
 }
 
-
+/**
+ * @brief Constructor de jugador parametrizado
+ *
+ * @param idStr char*
+ * @param nombreCompletoStr char*
+ * @param edadStr char*
+ * @param posicionStr char*
+ * @param nacionalidadStr char*
+ * @param idSeleccionStr char*
+ * @return Jugador*
+ */
 Jugador* jug_newParametros(char* idStr, char* nombreCompletoStr, char* edadStr, char* posicionStr, char* nacionalidadStr, char* idSeleccionStr){
 	Jugador* miJugador;
 	miJugador = jug_new();
@@ -31,30 +46,24 @@ Jugador* jug_newParametros(char* idStr, char* nombreCompletoStr, char* edadStr, 
 	return miJugador;
 }
 
-
-Jugador jug_cargarjugador(void){//todo
-	Jugador jugadorAux;
-
-//	getString(nombreAux, 100, "\nNombre: ", "\nERROR");
-//	getStringNumeric(edadAux, 100, "\nEdad: ", "\nERROR");
-//	getString(posicionAux, 100, "\nPosicion: ", "\nERROR");
-//	getString(nacionalidadAux, 100, "\nNacionalidad: ", "\nERROR");
-//
-//	FirstToUppercase(nombreAux, 100);
-//	FirstToUppercase(posicionAux, 100);
-//	FirstToUppercase(nacionalidadAux, 100);
-
-	return jugadorAux;
-}
-
-
+/**
+ * @brief Borra un jugador de memoria dinamica
+ *
+ * @param this
+ */
 void jug_delete(Jugador* this){
 	if(this != NULL){
 		free(this);
 	}
 }
 
-
+/**
+ * @brief setter de id de jugador
+ *
+ * @param this
+ * @param id
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int jug_setId(Jugador* this, int id){
 	int rtn = -1;
 
@@ -67,7 +76,13 @@ int jug_setId(Jugador* this, int id){
 	return rtn;
 }
 
-
+/**
+ * @brief getter de id de jugador
+ *
+ * @param this
+ * @param id
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int jug_getId(Jugador* this, int* id){
 	int rtn = -1;
 
@@ -80,7 +95,13 @@ int jug_getId(Jugador* this, int* id){
 	return rtn;
 }
 
-
+/**
+ * @brief setter del nombre de jugador
+ *
+ * @param this
+ * @param nombreCompleto
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int jug_setNombreCompleto(Jugador* this, char* nombreCompleto){
 	int rtn = -1;
 
@@ -93,6 +114,13 @@ int jug_setNombreCompleto(Jugador* this, char* nombreCompleto){
 	return rtn;
 }
 
+/**
+ * @brief getter del nombre de jugador
+ *
+ * @param this
+ * @param nombreCompleto
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int jug_getNombreCompleto(Jugador* this, char* nombreCompleto){
 	int rtn = -1;
 
@@ -105,7 +133,13 @@ int jug_getNombreCompleto(Jugador* this, char* nombreCompleto){
 	return rtn;
 }
 
-
+/**
+ * @brief setter de posicion
+ *
+ * @param this
+ * @param posicion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int jug_setPosicion(Jugador* this, char* posicion){
 	int rtn = -1;
 
@@ -118,6 +152,13 @@ int jug_setPosicion(Jugador* this, char* posicion){
 	return rtn;
 }
 
+/**
+ * @brief getter de posicion
+ *
+ * @param this
+ * @param posicion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int jug_getPosicion(Jugador* this, char* posicion){
 	int rtn = -1;
 
@@ -130,7 +171,13 @@ int jug_getPosicion(Jugador* this, char* posicion){
 	return rtn;
 }
 
-
+/**
+ * @brief setter de nacionalidad
+ *
+ * @param this
+ * @param nacionalidad
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int jug_setNacionalidad(Jugador* this, char* nacionalidad){
 	int rtn = -1;
 
@@ -143,6 +190,13 @@ int jug_setNacionalidad(Jugador* this, char* nacionalidad){
 	return rtn;
 }
 
+/**
+ * @brief getter de nacionalidad
+ *
+ * @param this
+ * @param nacionalidad
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int jug_getNacionalidad(Jugador* this, char* nacionalidad){
 	int rtn = -1;
 
@@ -155,7 +209,13 @@ int jug_getNacionalidad(Jugador* this, char* nacionalidad){
 	return rtn;
 }
 
-
+/**
+ * @brief setter de edad
+ *
+ * @param this
+ * @param edad
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int jug_setEdad(Jugador* this, int edad){
 	int rtn = -1;
 
@@ -168,6 +228,13 @@ int jug_setEdad(Jugador* this, int edad){
 	return rtn;
 }
 
+/**
+ * @brief getter de edad
+ *
+ * @param this
+ * @param edad
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int jug_getEdad(Jugador* this, int* edad){
 	int rtn = -1;
 
@@ -180,7 +247,13 @@ int jug_getEdad(Jugador* this, int* edad){
 	return rtn;
 }
 
-
+/**
+ * @brief setter de id seleccion
+ *
+ * @param this
+ * @param idSeleccion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int jug_setIdSeleccion(Jugador* this, int idSeleccion){
 	int rtn = -1;
 
@@ -193,6 +266,13 @@ int jug_setIdSeleccion(Jugador* this, int idSeleccion){
 	return rtn;
 }
 
+/**
+ * @brief getter de id seleccion
+ *
+ * @param this
+ * @param idSeleccion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int jug_getIdSeleccion(Jugador* this, int* idSeleccion){
 	int rtn = -1;
 
@@ -205,7 +285,12 @@ int jug_getIdSeleccion(Jugador* this, int* idSeleccion){
 	return rtn;
 }
 
-
+/**
+ * @brief muestra un solo jugador
+ *
+ * @param jugador
+ * @return int -1 si salio mal, 1 si todo ok
+ */
 int jug_mostrarJugador(Jugador* jugador){
 	int rtn = -1;
 	int idAux;
@@ -228,6 +313,131 @@ int jug_mostrarJugador(Jugador* jugador){
 
 	return rtn;
 }
+
+/**
+ * @brief permite ordenar por nacionalidad 2 jugadores
+ *
+ * @param pJugadorUno
+ * @param pJugadorDos
+ * @return 1 si se hace swap, 0 si son iguales
+ */
+int jug_OrdenarPorNacionalidad(void* pJugadorUno, void* pJugadorDos){
+	int rtn = -1;
+	int comparacion;
+	char nacionalidadUno[100];
+	char nacionalidadDos[100];
+
+	Jugador* jugadorUno;
+	Jugador* jugadorDos;
+
+	jugadorUno = (Jugador*) pJugadorUno;
+	jugadorDos = (Jugador*) pJugadorDos;
+
+	jug_getNacionalidad(jugadorUno, nacionalidadUno);
+	jug_getNacionalidad(jugadorDos, nacionalidadDos);
+
+	StringUpper(nacionalidadUno, 100);
+	StringUpper(nacionalidadDos, 100);
+
+	comparacion = strcmp(nacionalidadUno, nacionalidadDos);
+
+	if(comparacion > 0){
+		rtn = 1;
+	}
+	else{
+		if(comparacion == 0){
+			rtn = 0;
+		}
+	}
+
+	return rtn;
+}
+
+/**
+ * @brief permite ordenar por edad 2 jugadores
+ *
+ * @param pJugadorUno
+ * @param pJugadorDos
+ * @return 1 si se hace swap, 0 si son iguales
+ */
+int jug_OrdenarPorEdad(void* pJugadorUno, void* pJugadorDos){
+	int rtn = -1;
+	int edadUno;
+	int edadDos;
+
+	Jugador* jugadorUno;
+	Jugador* jugadorDos;
+
+	jugadorUno = (Jugador*) pJugadorUno;
+	jugadorDos = (Jugador*) pJugadorDos;
+
+	jug_getEdad(jugadorUno, &edadUno);
+	jug_getEdad(jugadorDos, &edadDos);
+
+	if(edadUno > edadDos){
+		rtn = 1;
+	}
+	else{
+		if(edadUno == edadDos){
+			rtn = 0;
+		}
+	}
+
+	return rtn;
+}
+
+/**
+ * @brief permite ordenar por nombre 2 jugadores
+ *
+ * @param pJugadorUno
+ * @param pJugadorDos
+ * @return 1 si se hace swap, 0 si son iguales
+ */
+int jug_OrdenarPorNombre(void* pJugadorUno, void* pJugadorDos){
+	int rtn = -1;
+	int comparacion;
+	char nombreUno[100];
+	char nombreDos[100];
+
+	Jugador* jugadorUno;
+	Jugador* jugadorDos;
+
+	jugadorUno = (Jugador*) pJugadorUno;
+	jugadorDos = (Jugador*) pJugadorDos;
+
+	jug_getNombreCompleto(jugadorUno, nombreUno);
+	jug_getNombreCompleto(jugadorDos, nombreDos);
+
+	StringUpper(nombreUno, 100);
+	StringUpper(nombreDos, 100);
+
+	comparacion = strcmp(nombreUno, nombreDos);
+
+	if(comparacion > 0){
+		rtn = 1;
+	}
+	else{
+		if(comparacion == 0){
+			rtn = 0;
+		}
+	}
+
+	return rtn;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
