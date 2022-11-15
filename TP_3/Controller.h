@@ -23,7 +23,7 @@ int controller_cargarUltimoIDJugador(char* path, int* ultimoId);
 int controller_listarJugadoresConvocados(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);
 
 int controller_listarJugadoresConSelecciones(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);
-int mostrarJugadorConSeleccion(Jugador* jugador, LinkedList* pArrayListSeleccion);
+int controller_mostrarJugadorConSeleccion(Jugador* jugador, LinkedList* pArrayListSeleccion);
 
 int controller_menuListados(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);
 

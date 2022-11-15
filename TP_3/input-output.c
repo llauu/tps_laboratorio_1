@@ -59,8 +59,10 @@ int getInt(int* pResultado, char* mensaje, char* mensajeError, int min, int max)
 
 	if(pResultado != NULL && mensaje != NULL && mensaje != NULL && min < max){
 		do{
-			printf("%s", mensaje);
-			scanf("%s", buffer);
+//			printf("%s", mensaje);
+//			scanf("%s", buffer);
+//			fgets(buffer, 4096, stdin);
+			PedirTexto(buffer, mensaje);
 
 			if(esNumerica(buffer)){
 				numero = atoi(buffer);
@@ -92,8 +94,9 @@ int getFloat(float* pResultado, char* mensaje, char* mensajeError, float min, fl
 
 	if(pResultado != NULL && mensaje != NULL && mensaje != NULL && min < max){
 		do{
-			printf("%s", mensaje);
-			scanf("%s", buffer);
+//			printf("%s", mensaje);
+//			scanf("%s", buffer);
+			PedirTexto(buffer, mensaje);
 
 			if(esNumerica(buffer)){
 				numero = atof(buffer);
@@ -211,8 +214,9 @@ int getShort(short* pResultado, char* mensaje, char* mensajeError, short min, sh
 
 	if(pResultado != NULL && mensaje != NULL && mensaje != NULL && min < max){
 		do{
-			printf("%s", mensaje);
-			scanf("%s", buffer);
+//			printf("%s", mensaje);
+//			scanf("%s", buffer);
+			PedirTexto(buffer, mensaje);
 
 			if(esNumerica(buffer)){
 				numero = atoi(buffer);
@@ -239,10 +243,13 @@ int PedirTexto(char buffer[], char* mensaje){
 	int retorno = -1;
 
 	if(buffer != NULL && mensaje != NULL){
-		__fpurge(stdin);// El %[^\n] marca que va a leer hasta q detecte un salto de linea
+		__fpurge(stdin);
 		printf("%s", mensaje);
+		fgets(buffer, 4096, stdin);
 
-		scanf("%[^\n]", buffer);
+		if(buffer[strlen(buffer) - 1] == '\n'){
+			buffer[strlen(buffer) - 1] = '\0';
+		}
 
 		retorno = 0;
 	}

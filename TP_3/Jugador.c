@@ -426,6 +426,23 @@ int jug_OrdenarPorNombre(void* pJugadorUno, void* pJugadorDos){
 }
 
 
+int jug_PedirDatos(char* nombre, char* edad, char* posicion, char* nacionalidad, int maxTam){
+	int rtn = -1;
+
+	if(getString(nombre, maxTam, "\nIngrese el nombre: \n> ", "\n[ERROR] Nombre no valido.") == 0 &&
+	   getStringNumeric(edad, maxTam, "\nIngrese la edad: \n> ", "\n[ERROR] Edad no valida.") == 0 &&
+	   getString(posicion, maxTam, "\nIngrese la posicion: \n> ", "\n[ERROR] Posicion no valida.") == 0 &&
+	   getString(nacionalidad, maxTam, "\nIngrese la nacionalidad: \n> ", "\n[ERROR] Nacionalidad no valida.") == 0)
+	{
+		FirstToUppercase(nombre, maxTam);
+		FirstToUppercase(posicion, maxTam);
+		FirstToUppercase(nacionalidad, maxTam);
+
+		rtn = 1;
+	}
+
+	return rtn;
+}
 
 
 

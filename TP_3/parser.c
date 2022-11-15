@@ -23,13 +23,6 @@ int parser_JugadorFromText(FILE* pFile , LinkedList* pArrayListJugador)
 		char nacionalidad[30];
 		char idSeleccion[10];
 		Jugador* jugadorAux;
-		int estadoLista;
-
-		estadoLista = ll_isEmpty(pArrayListJugador);
-
-		if(!estadoLista){
-			ll_clear(pArrayListJugador);
-		}
 
 		// Lectura fantasma
 		fscanf(pFile, "%[^,], %[^,], %[^,], %[^,], %[^,], %[^\n]\n", id, nombre, edad, posicion, nacionalidad, idSeleccion);

@@ -43,4 +43,6 @@ int jug_OrdenarPorNacionalidad(void* pJugadorUno, void* pJugadorDos);
 int jug_OrdenarPorEdad(void* pJugadorUno, void* pJugadorDos);
 int jug_OrdenarPorNombre(void* pJugadorUno, void* pJugadorDos);
 
+int jug_PedirDatos(char* nombre, char* edad, char* posicion, char* nacionalidad, int maxTam);
+
 #endif // jug_H_INCLUDED

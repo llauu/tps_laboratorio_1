@@ -61,6 +61,7 @@ int getInt(int* pResultado, char* mensaje, char* mensajeError, int min, int max)
 		do{
 			printf("%s", mensaje);
 			scanf("%s", buffer);
+			fgets(buffer, 4096, stdin);
 
 			if(esNumerica(buffer)){
 				numero = atoi(buffer);
@@ -215,8 +216,8 @@ int PedirTexto(char buffer[], char* mensaje){
 	if(buffer != NULL && mensaje != NULL){
 		__fpurge(stdin);// El %[^\n] marca que va a leer hasta q detecte un salto de linea
 		printf("%s", mensaje);
-
-		scanf("%[^\n]", buffer);
+		fgets(buffer, 4096, stdin);
+//		scanf("%[^\n]", buffer); todo
 
 		retorno = 0;
 	}

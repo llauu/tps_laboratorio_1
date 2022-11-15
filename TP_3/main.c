@@ -104,12 +104,9 @@ int main()
 
                 case 11: // SALIR:
                 	if(flagGuardoCambios == 0 && realizoCambios == 1){
-                		printf("\nSe realizaron cambios y no fueron guardados, si sale del programa se perderan los datos que no fueron guardados.");
-                		confirmoSalir = ConfirmarSalida();
+                		printf("\n[CUIDADO] Se realizaron cambios y no fueron guardados, si sale del programa se perderan los datos no guardados.");
                 	}
-                	else{
-                    	confirmoSalir = ConfirmarSalida();
-                	}
+                	confirmoSalir = ConfirmarSalida();
 
                 	break;
             }
