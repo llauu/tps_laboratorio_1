@@ -36,13 +36,17 @@ int jug_getEdad(Jugador* this, int* edad);
 int jug_setIdSeleccion(Jugador* this, int idSeleccion);
 int jug_getIdSeleccion(Jugador* this, int* idSeleccion);
 
+int jug_PedirDatos(char* nombre, char* edad, char* posicion, char* nacionalidad, int maxTam);
+
 int jug_mostrarJugador(Jugador* jugador);
+int jug_mostrarJugadorConSeleccion(Jugador* jugador, LinkedList* pArrayListSeleccion);
+
+Jugador* jug_ObtenerJugadorDeseado(LinkedList* pArrayListJugador, int* indiceElegido);
 
 // Ordenamientos
 int jug_OrdenarPorNacionalidad(void* pJugadorUno, void* pJugadorDos);
 int jug_OrdenarPorEdad(void* pJugadorUno, void* pJugadorDos);
 int jug_OrdenarPorNombre(void* pJugadorUno, void* pJugadorDos);
 
-int jug_PedirDatos(char* nombre, char* edad, char* posicion, char* nacionalidad, int maxTam);
 
 #endif // jug_H_INCLUDED

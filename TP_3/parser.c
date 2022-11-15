@@ -32,7 +32,9 @@ int parser_JugadorFromText(FILE* pFile , LinkedList* pArrayListJugador)
 
 			jugadorAux = jug_newParametros(id, nombre, edad, posicion, nacionalidad, idSeleccion);
 
-			ll_add(pArrayListJugador, jugadorAux);
+			if(jugadorAux != NULL){
+				ll_add(pArrayListJugador, jugadorAux);
+			}
 		}
 
 		rtn = 1;

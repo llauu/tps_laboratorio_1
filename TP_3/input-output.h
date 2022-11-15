@@ -122,6 +122,8 @@ int ConfirmarSalida(void);
 
 //========== Salidas =========================================================================================
 void MostrarMenuPrincipal(void);
+void MostrarMenuModificacion(void);
+void MostrarMenuConvocados(void);
 
 void MostrarCabeceraJugadores(void);
 void MostrarPieJugadores(void);
@@ -131,5 +133,11 @@ void MostrarPieConSeleccion(void);
 
 void MostrarCabeceraConfederaciones(void);
 void MostrarPieConfederaciones(void);
+
+void MostrarAltaExitosa(void);
+void MostrarBajaExitosa(void);
+void MostrarModificacionExitosa(void);
+
+void MostrarConfederaciones(void);
 
 #endif

@@ -59,9 +59,6 @@ int getInt(int* pResultado, char* mensaje, char* mensajeError, int min, int max)
 
 	if(pResultado != NULL && mensaje != NULL && mensaje != NULL && min < max){
 		do{
-//			printf("%s", mensaje);
-//			scanf("%s", buffer);
-//			fgets(buffer, 4096, stdin);
 			PedirTexto(buffer, mensaje);
 
 			if(esNumerica(buffer)){
@@ -69,7 +66,7 @@ int getInt(int* pResultado, char* mensaje, char* mensajeError, int min, int max)
 
 				if(numero >= min && numero <= max){
 					*pResultado = numero;
-					retorno = 0;
+					retorno = 1;
 				}
 				else{
 					printf("%s", mensajeError);
@@ -94,8 +91,6 @@ int getFloat(float* pResultado, char* mensaje, char* mensajeError, float min, fl
 
 	if(pResultado != NULL && mensaje != NULL && mensaje != NULL && min < max){
 		do{
-//			printf("%s", mensaje);
-//			scanf("%s", buffer);
 			PedirTexto(buffer, mensaje);
 
 			if(esNumerica(buffer)){
@@ -103,7 +98,7 @@ int getFloat(float* pResultado, char* mensaje, char* mensajeError, float min, fl
 
 				if(numero >= min && numero <= max){
 					*pResultado = numero;
-					retorno = 0;
+					retorno = 1;
 				}
 				else{
 					printf("%s", mensajeError);
@@ -133,7 +128,7 @@ int getChar(char* pCaracter, char* mensaje, char* mensajeError, char min, char m
 
 			if(buffer >= min && buffer <= max){
 				*pCaracter = buffer;
-				retorno = 0;
+				retorno = 1;
 			}
 			else{
 				printf("%s", mensajeError);
@@ -162,11 +157,10 @@ int getString(char string[], int sizeString, char* mensaje, char* mensajeError){
 				PedirTexto(buffer, mensaje);
 			}
 
-
 			if(strlen(buffer) < sizeString){
 				if(esTexto(buffer, sizeString) != 0){
 					strcpy(string, buffer);
-					retorno = 0;
+					retorno = 1;
 				}
 				else{
 					printf("%s", mensajeError);
@@ -192,7 +186,7 @@ int getStringNumeric(char string[], int sizeString, char* mensaje, char* mensaje
 			if(strlen(buffer) < sizeString){
 				if(esNumerica(buffer)){
 					strcpy(string, buffer);
-					retorno = 0;
+					retorno = 1;
 				}
 				else{
 					printf("%s", mensajeError);
@@ -214,8 +208,6 @@ int getShort(short* pResultado, char* mensaje, char* mensajeError, short min, sh
 
 	if(pResultado != NULL && mensaje != NULL && mensaje != NULL && min < max){
 		do{
-//			printf("%s", mensaje);
-//			scanf("%s", buffer);
 			PedirTexto(buffer, mensaje);
 
 			if(esNumerica(buffer)){
@@ -223,7 +215,7 @@ int getShort(short* pResultado, char* mensaje, char* mensajeError, short min, sh
 
 				if(numero >= min && numero <= max){
 					*pResultado = numero;
-					retorno = 0;
+					retorno = 1;
 				}
 				else{
 					printf("%s", mensajeError);
@@ -344,6 +336,26 @@ void MostrarMenuPrincipal(void){
 		   "\n+---------------------------+\n");
 }
 
+void MostrarMenuModificacion(void){
+	printf("\n+---------------------------+"
+		   "\n|     MENU MODIFICACION     |"
+		   "\n+---------------------------+"
+		   "\n| 1.NOMBRE                  |"
+		   "\n| 2.EDAD                    |"
+		   "\n| 3.POSICION                |"
+		   "\n| 4.NACIONALIDAD            |"
+		   "\n+---------------------------+\n");
+}
+
+void MostrarMenuConvocados(void){
+	printf("\n+----------------------------+"
+		   "\n|      MENU CONVOCADOS       |"
+		   "\n+----------------------------+"
+		   "\n| 1.CONVOCAR                 |"
+		   "\n| 2.QUITAR DE LA SELECCION   |"
+		   "\n| 3.SALIR                    |"
+		   "\n+----------------------------+\n");
+}
 
 void MostrarCabeceraJugadores(void){
 	printf("\n+------+--------------------------------+---------------------------+----------------------+------+------+"
@@ -376,6 +388,35 @@ void MostrarCabeceraConfederaciones(void){
 void MostrarPieConfederaciones(void){
 	printf("\n+------+--------------------------------+---------------------------+--------------+\n");
 }
+
+void MostrarAltaExitosa(void){
+	printf("\n+---------------------------+"
+		   "\n| ALTA REALIZADA CON EXITO! |"
+		   "\n+---------------------------+\n");
+}
+
+void MostrarBajaExitosa(void){
+	printf("\n+---------------------------+"
+		   "\n| BAJA REALIZADA CON EXITO! |"
+		   "\n+---------------------------+\n");
+}
+
+void MostrarModificacionExitosa(void){
+	printf("\n+-----------------------------------+"
+		   "\n| MODIFICACION REALIZADA CON EXITO! |"
+		   "\n+-----------------------------------+\n");
+}
+
+void MostrarConfederaciones(void){
+	printf("\n+------------+"
+		   "\n| 1.AFC      |"
+		   "\n| 2.CAF      |"
+		   "\n| 3.CONCACAF |"
+ 		   "\n| 4.CONMEBOL |"
+ 		   "\n| 5.UEFA     |"
+		   "\n+------------+\n");
+}
+
 
 
 

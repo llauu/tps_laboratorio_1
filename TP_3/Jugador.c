@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Jugador.h"
+#include "Seleccion.h"
+#include "Controller.h"
 #include "input-output.h"
 
 /**
@@ -286,6 +288,34 @@ int jug_getIdSeleccion(Jugador* this, int* idSeleccion){
 }
 
 /**
+ * @brief Permite pedir los datos necesarios para cargar un jugador
+ *
+ * @param nombre
+ * @param edad
+ * @param posicion
+ * @param nacionalidad
+ * @param maxTam
+ * @return int -1 si salio mal, 1 si todo ok
+ */
+int jug_PedirDatos(char* nombre, char* edad, char* posicion, char* nacionalidad, int maxTam){
+	int rtn = -1;
+
+	if(getString(nombre, maxTam, "\nIngrese el nombre: \n> ", "\n[ERROR] Nombre no valido.") == 1 &&
+	   getStringNumeric(edad, maxTam, "\nIngrese la edad: \n> ", "\n[ERROR] Edad no valida.") == 1 &&
+	   getString(posicion, maxTam, "\nIngrese la posicion: \n> ", "\n[ERROR] Posicion no valida.") == 1 &&
+	   getString(nacionalidad, maxTam, "\nIngrese la nacionalidad: \n> ", "\n[ERROR] Nacionalidad no valida.") == 1)
+	{
+		FirstToUppercase(nombre, maxTam);
+		FirstToUppercase(posicion, maxTam);
+		FirstToUppercase(nacionalidad, maxTam);
+
+		rtn = 1;
+	}
+
+	return rtn;
+}
+
+/**
  * @brief muestra un solo jugador
  *
  * @param jugador
@@ -312,6 +342,67 @@ int jug_mostrarJugador(Jugador* jugador){
 	rtn = 1;
 
 	return rtn;
+}
+
+/**
+ * @brief Muestra un solo jugador con el nombre de su seleccion
+ *
+ * @param jugador
+ * @param pArrayListSeleccion
+ * @return int -1 si salio mal, 1 si todo ok
+ */
+int jug_mostrarJugadorConSeleccion(Jugador* jugador, LinkedList* pArrayListSeleccion){
+	int rtn = -1;
+	int idAux;
+	char nombreAux[100];
+	char posicionAux[100];
+	char nacionalidadAux[100];
+	int edadAux;
+	int idSeleccionAux;
+	char nombreSeleccion[100];
+	int indiceSeleccion;
+	Seleccion* seleccionAux;
+
+	if(jugador != NULL && pArrayListSeleccion != NULL){
+		strcpy(nombreSeleccion, "No convocado");
+		jug_getIdSeleccion(jugador, &idSeleccionAux);
+
+		if(idSeleccionAux > 0){
+			indiceSeleccion = controller_buscarSeleccionPorID(pArrayListSeleccion, idSeleccionAux);
+			seleccionAux = (Seleccion*) ll_get(pArrayListSeleccion, indiceSeleccion);
+
+			selec_getPais(seleccionAux, nombreSeleccion);
+		}
+
+		jug_getId(jugador, &idAux);
+		jug_getNombreCompleto(jugador, nombreAux);
+		jug_getPosicion(jugador, posicionAux);
+		jug_getNacionalidad(jugador, nacionalidadAux);
+		jug_getEdad(jugador, &edadAux);
+
+		printf("\n| %4d | %-30s | %-25s | %-20s | %-4d | %-20s |", idAux, nombreAux, posicionAux, nacionalidadAux, edadAux, nombreSeleccion);
+		rtn = 1;
+	}
+
+	return rtn;
+}
+
+/**
+ * @brief Permite obtener un jugador a partir del ingreso de su id, devolviendo este Jugador en caso de que se encuentre en la Linkedlist
+ *
+ * @param pArrayListJugador
+ * @param indiceElegido
+ * @return NULL si no se encontro el jugador, sino Jugador* jugador encontrado
+ */
+Jugador* jug_ObtenerJugadorDeseado(LinkedList* pArrayListJugador, int* indiceElegido){
+	Jugador* jugadorAux = NULL;
+
+	if(pArrayListJugador != NULL && indiceElegido != NULL){
+		*indiceElegido = controller_solicitarYValidarIdJugador(pArrayListJugador);
+		jugadorAux = (Jugador*) ll_get(pArrayListJugador, *indiceElegido);
+	}
+
+	return jugadorAux;
 }
 
 /**
@@ -424,32 +515,6 @@ int jug_OrdenarPorNombre(void* pJugadorUno, void* pJugadorDos){
 
 	return rtn;
 }
-
-
-int jug_PedirDatos(char* nombre, char* edad, char* posicion, char* nacionalidad, int maxTam){
-	int rtn = -1;
-
-	if(getString(nombre, maxTam, "\nIngrese el nombre: \n> ", "\n[ERROR] Nombre no valido.") == 0 &&
-	   getStringNumeric(edad, maxTam, "\nIngrese la edad: \n> ", "\n[ERROR] Edad no valida.") == 0 &&
-	   getString(posicion, maxTam, "\nIngrese la posicion: \n> ", "\n[ERROR] Posicion no valida.") == 0 &&
-	   getString(nacionalidad, maxTam, "\nIngrese la nacionalidad: \n> ", "\n[ERROR] Nacionalidad no valida.") == 0)
-	{
-		FirstToUppercase(nombre, maxTam);
-		FirstToUppercase(posicion, maxTam);
-		FirstToUppercase(nacionalidad, maxTam);
-
-		rtn = 1;
-	}
-
-	return rtn;
-}
-
-
-
-
-
-
-
 
 
 

@@ -28,10 +28,9 @@ Seleccion* selec_new(){
  */
 Seleccion* selec_newParametros(char* idStr, char* paisStr, char* confederacionStr, char* convocadosStr){
 	Seleccion* miSeleccion;
+	miSeleccion = selec_new();
 
-	if(idStr != NULL && paisStr != NULL && confederacionStr != NULL && convocadosStr != NULL){
-		miSeleccion = selec_new();
-
+	if(miSeleccion != NULL && idStr != NULL && paisStr != NULL && confederacionStr != NULL && convocadosStr != NULL){
 		miSeleccion->id = atoi(idStr);
 		strcpy(miSeleccion->pais, paisStr);
 		strcpy(miSeleccion->confederacion, confederacionStr);

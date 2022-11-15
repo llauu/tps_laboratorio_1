@@ -17,13 +17,11 @@ int controller_listarSelecciones(LinkedList* pArrayListSeleccion);
 int controller_ordenarSelecciones(LinkedList* pArrayListSeleccion);
 int controller_guardarSeleccionesModoTexto(char* path, LinkedList* pArrayListSeleccion);
 
-// FUNCIONES Q HICE YO
 int controller_cargarUltimoIDJugador(char* path, int* ultimoId);
 
 int controller_listarJugadoresConvocados(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);
 
 int controller_listarJugadoresConSelecciones(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);
-int controller_mostrarJugadorConSeleccion(Jugador* jugador, LinkedList* pArrayListSeleccion);
 
 int controller_menuListados(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);
 
@@ -38,8 +36,6 @@ int controller_buscarSeleccionPorID(LinkedList* pArrayListSeleccion, int idIngre
 int controller_solicitarYValidarIdSeleccion(LinkedList* pArrayListSeleccion);
 
 int controller_menuOrdenamientos(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);
-
-
 
 
 
