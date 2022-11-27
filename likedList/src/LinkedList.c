@@ -221,9 +221,8 @@ int ll_set(LinkedList* this, int index, void* pElement)
 
 		if(auxNode != NULL){
 			auxNode->pElement = pElement;
+			returnAux = 0;
 		}
-
-		returnAux = 0;
     }
 
     return returnAux;
@@ -550,42 +549,28 @@ LinkedList* ll_clone(LinkedList* this)
  * \return int Retorna  (-1) Error: si el puntero a la listas es NULL
                                 ( 0) Si ok
  */
-int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
+int ll_sort(LinkedList* this, int (*pFunc)(void*, void*), int order)
 {
     int returnAux = -1;
     int size;
 
-    void* firstElement;
-    void* secondElement;
-    void* auxElement;
+    void* firstElement = NULL;
+    void* secondElement = NULL;
+    void* auxElement = NULL;
 
     if(this != NULL && pFunc != NULL){
     	if(order == 0 || order == 1){
     		size = ll_len(this);
 
 			for(int i = 0; i < size; i++){
-				firstElement = ll_get(this, i);
-
 				for(int j = i+1; j < size; j++){
+					firstElement = ll_get(this, i);
 					secondElement = ll_get(this, j);
 
-
-					if(pFunc(firstElement, secondElement) == 1){
-						if(order == 1){
-							auxElement = firstElement;
-							firstElement = secondElement;
-							secondElement = auxElement;
-
-							ll_set(this, i, firstElement);
-							ll_set(this, j, secondElement);
-						}
-						else{
-							auxElement = secondElement;
-							secondElement = firstElement;
-							firstElement = auxElement;
-							ll_set(this, i, firstElement);
-							ll_set(this, j, secondElement);
-						}
+					if((order == 1 && pFunc(firstElement, secondElement) == 1) || (order == 0 && pFunc(firstElement, secondElement) == -1)){
+						auxElement = firstElement;
+						ll_set(this, i, secondElement);
+						ll_set(this, j, auxElement);
 					}
 				}
 			}

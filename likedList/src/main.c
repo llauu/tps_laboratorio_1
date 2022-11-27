@@ -42,9 +42,10 @@ int main(void)
 //	startTesting(14); // ll_pop (OK)
 //	startTesting(15); // ll_contains (OK)
 //	startTesting(16); // ll_containsAll (OK)
-//	startTesting(17); // ll_subList
-//	startTesting(18); // ll_clone
-//	startTesting(19); // ll_sort
+//	startTesting(17); // ll_subList (OK)
+//	startTesting(18); // ll_clone (OK)
+	startTesting(19); // ll_sort (OK)
+
     return 0;
 }
 
